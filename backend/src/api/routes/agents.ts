@@ -51,9 +51,8 @@ router.patch('/:id/draft', control(async (req, res) => {
 router.post('/:id/validate', control(async (req, res) => { res.json({ success: true, data: await agentVersionService.validate(req.orgId!, String(req.params.id)) }) }))
 router.post('/:id/test', control(async (req, res) => {
   const body = revisionSchema.parse(req.body)
-  const validation = await agentVersionService.validate(req.orgId!, String(req.params.id))
   const draft = await agentVersionService.draft(req.orgId!, String(req.params.id))
-  const checks=await mandatoryStudioChecks(req.orgId!,String(req.params.id),draft.revision)
+  const checks=await mandatoryStudioChecks(req.orgId!,String(req.params.id),body.expectedRevision,draft)
   const result = await agentVersionService.mutate(req.orgId!, req.auth!.userId, String(req.params.id), 'test', body)
   res.json({ success: true, data: { ...result,...checks } })
 }, true))

@@ -22,7 +22,7 @@ const read=async(table)=>{const r=await admin.from(table).select('*').eq('org_id
 const call=async(path,method='GET',body)=>{
  const start=performance.now(),r=await fetch(base+path,{method,headers:headers??{origin:base,'content-type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(45000)})
  const payload=await r.json().catch(()=>null)
- if(!r.ok||!payload?.success)throw Error('Hosted operation failed: '+r.status+' '+path+' '+(payload?.error?.code??''))
+ if(!r.ok||!payload||payload.success===false)throw Error('Hosted operation failed: '+r.status+' '+path+' '+(payload?.error?.code??''))
  return {data:payload.data,elapsedMs:Math.round(performance.now()-start),response:r}
 }
 try{
@@ -44,7 +44,7 @@ try{
  if(process.argv.includes('--publish')){
   check('No owner draft edits would be overwritten',hash(current.config)===hash(published.config)||hash(current.config)===hash(concise))
   const payload={expectedRevision:current.revision,expectedPublishedVersionId:scoped.data.published_version_id,config:concise}
-  const saved=(await call('/api/agents/'+agent+'/draft','PATCH',payload)).data
+  const saved=hash(current.config)===hash(concise)?{draft:current}:(await call('/api/agents/'+agent+'/draft','PATCH',payload)).data
   const checked=(await call('/api/agents/'+agent+'/test','POST',{expectedRevision:saved.draft?.revision??saved.revision,expectedPublishedVersionId:scoped.data.published_version_id})).data
   check('All mandatory draft checks pass',checked.tests?.every(t=>t.passed)&&checked.providerCalls===0&&checked.whatsappSends===0)
   const released=(await call('/api/agents/'+agent+'/publish','POST',{expectedRevision:saved.draft?.revision??saved.revision,expectedPublishedVersionId:scoped.data.published_version_id})).data

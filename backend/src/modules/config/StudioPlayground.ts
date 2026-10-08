@@ -7,6 +7,7 @@ import {
   ConfigError,
   databaseError,
   type AgentConfig,
+  type AgentDraft,
 } from "./AgentVersionService.js";
 import {
   compileAgentInstructions,
@@ -117,8 +118,10 @@ export async function runStudioPlayground(
   dialogue?: DialogueState,
   history: ReplyContext['history'] = [],
   priorLanguage?: 'en'|'ar',
+  prepared?: {draft:AgentDraft;company:Awaited<ReturnType<typeof runtimeConfigResolver.resolveCompany>>},
 ) {
-  const draft = await agentVersionService.draft(org, agent);
+  const draft = prepared?.draft??await agentVersionService.draft(org, agent);
+  if(draft.org_id!==org||draft.agent_id!==agent||prepared&&prepared.company.orgId!==org)throw new ConfigError(404,'DRAFT_NOT_FOUND','Draft was not found');
   if (draft.revision !== revision)
     throw new ConfigError(
       409,
@@ -126,8 +129,8 @@ export async function runStudioPlayground(
       "Draft changed; reload before testing",
     );
   const config = agentConfigSchema.parse(draft.config);
-  await agentVersionService.references(org, config);
-  const company = await runtimeConfigResolver.resolveCompany(org),
+  if(!prepared)await agentVersionService.references(org, config);
+  const company = prepared?.company??await runtimeConfigResolver.resolveCompany(org),
     plan = studioPlan(config, message, state),
     policy = config.propertyPolicy ?? defaultPropertyPolicy;
   if(config.studioVersion && config.modelPolicy.provider==='groq') {
@@ -150,7 +153,7 @@ export async function runStudioPlayground(
       }})
       if(mode==='preview'&&hits.length)reply.reply=(reply.lang==='ar'?'مقتطفات موثقة للمعاينة:\n':'Verified preview excerpts:\n')+hits.map(h=>h.content).join('\n\n')
       executionTrace.reply(reply)
-      if((await agentVersionService.draft(org,agent)).revision!==revision)throw new ConfigError(409,'DRAFT_CONFLICT','Draft changed during testing; retry')
+      if(!prepared&&(await agentVersionService.draft(org,agent)).revision!==revision)throw new ConfigError(409,'DRAFT_CONFLICT','Draft changed during testing; retry')
       return {mode,draftRevision:revision,agentVersion:'draft:'+revision,configSHA256:createHash('sha256').update(JSON.stringify(config)).digest('hex'),
         detectedLanguage:plan.detectedLanguage,responseLanguage:reply.lang,detectedIntent:reply.lane,extractedEntities:plan.entities,
         conversationState:{criteria:context.state.criteria,shownRefs:reply.shownPropertyRefs??[],dialogue:context.dialogue},
@@ -325,7 +328,7 @@ export async function runStudioPlayground(
       validation.push("unverified action claim rejected");
     }
   }
-  if ((await agentVersionService.draft(org, agent)).revision !== revision)
+  if (!prepared&&(await agentVersionService.draft(org, agent)).revision !== revision)
     throw new ConfigError(
       409,
       "DRAFT_CONFLICT",
@@ -389,9 +392,12 @@ export async function mandatoryStudioChecks(
   org: string,
   agent: string,
   revision: number,
+  preparedDraft?:AgentDraft,
 ) {
-  const draft = await agentVersionService.draft(org, agent),
+  const draft = preparedDraft??await agentVersionService.draft(org, agent),
     config = agentConfigSchema.parse(draft.config);
+  if(draft.org_id!==org||draft.agent_id!==agent)throw new ConfigError(404,'DRAFT_NOT_FOUND','Draft was not found');
+  if(draft.revision!==revision)throw new ConfigError(409,'DRAFT_CONFLICT','Draft changed; reload before testing');
   await agentVersionService.references(org, config);
   const company = await runtimeConfigResolver.resolveCompany(org),
     prompt = compileAgentInstructions({
@@ -423,7 +429,7 @@ export async function mandatoryStudioChecks(
   ]) {
     const result = await runStudioPlayground(org, agent, revision, message, {
       excludeRefs: [],
-    });
+    },'preview',undefined,[],undefined,{draft,company});
     tests.push({
       name: "Safe draft fixture: " + message,
       passed:
@@ -437,6 +443,7 @@ export async function mandatoryStudioChecks(
       "MANDATORY_TEST_FAILED",
       "Mandatory draft tests failed",
     );
+  if((await agentVersionService.draft(org,agent)).revision!==revision)throw new ConfigError(409,'DRAFT_CONFLICT','Draft changed during testing; retry');
   return {
     tests,
     promptPreview: prompt,

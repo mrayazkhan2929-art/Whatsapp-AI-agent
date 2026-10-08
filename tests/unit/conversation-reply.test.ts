@@ -1,5 +1,7 @@
 import { afterEach, expect, it, vi } from 'vitest'
-import { defaultAgentConfig } from '../../backend/src/modules/config/AgentVersionService'
+import { defaultAgentConfig, agentVersionService } from '../../backend/src/modules/config/AgentVersionService'
+import { runtimeConfigResolver } from '../../backend/src/modules/config/RuntimeConfigResolver'
+import { mandatoryStudioChecks } from '../../backend/src/modules/config/StudioPlayground'
 import { directDecision, decisionSchema, interpretConversation, requestedResultCount } from '../../backend/src/modules/ai/ConversationDecision'
 import { applyDecision, companyFieldAnswer, compactPropertyCards, generateContextReply } from '../../backend/src/modules/ai/ConversationReplyEngine'
 import { dialogueSchema, type ReplyContext } from '../../backend/src/modules/ai/ReplyContext'
@@ -80,4 +82,15 @@ it('a rejected model action claim becomes an honest clarification in the real re
  const c=context(),decision={...directDecision('hello',c)!,intent:'general' as const}
  const reply=await generateContextReply(c,'please book it',{readOnly:true,decision})
  expect(reply.replyMode).toBe('fallback');expect(reply.reply).toContain('Could you clarify');expect(reply.reply).not.toContain('preview')
+})
+it('publication fixtures reuse the validated draft/profile and still reject a revision change',async()=>{
+ const c=context(),draft={org_id:'a',agent_id:'agent',revision:1,config:c.runtime.config} as any
+ const read=vi.spyOn(agentVersionService,'draft').mockResolvedValue(draft)
+ const references=vi.spyOn(agentVersionService,'references').mockResolvedValue(undefined)
+ const company=vi.spyOn(runtimeConfigResolver,'resolveCompany').mockResolvedValue({orgId:'a',companyProfile:c.runtime.companyProfile,companyConfigured:true})
+ const checked=await mandatoryStudioChecks('a','agent',1,draft)
+ expect(checked.tests.every(test=>test.passed)).toBe(true);expect(checked.providerCalls).toBe(0)
+ expect(read).toHaveBeenCalledTimes(1);expect(references).toHaveBeenCalledTimes(1);expect(company).toHaveBeenCalledTimes(1)
+ read.mockResolvedValue({...draft,revision:2})
+ await expect(mandatoryStudioChecks('a','agent',1,draft)).rejects.toMatchObject({code:'DRAFT_CONFLICT'})
 })
