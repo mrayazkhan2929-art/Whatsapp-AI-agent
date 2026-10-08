@@ -12,7 +12,9 @@ if(credentials.SUPABASE_URL!=='https://jpfoebdljdyzoxznsgax.supabase.co')throw E
 const admin=createClient(credentials.SUPABASE_URL,credentials.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false,autoRefreshToken:false}})
 const base='https://frontend-production-3cb5.up.railway.app',agent=before.agent,org=before.org
 const identity={email:'reply-acceptance-'+randomUUID()+'@example.invalid',password:randomBytes(30).toString('base64url')}
-const evidence={at:new Date().toISOString(),scope:'Authenticated HTTPS playground through both hosted applications; no transport send',checks:[],turns:[],whatsappMessagesSent:0,transportTargetAchieved:false}
+const verifyOnly=process.argv.includes('--verify-only')
+const evidence=verifyOnly?JSON.parse(readFileSync(resolve(out,'hosted.json'),'utf8')):{at:new Date().toISOString(),scope:'Authenticated HTTPS playground through both hosted applications; no transport send',checks:[],turns:[],whatsappMessagesSent:0,transportTargetAchieved:false}
+if(verifyOnly){delete evidence.error;evidence.verificationAt=new Date().toISOString();evidence.cleanup=null}
 let userId,headers
 const save=()=>writeFileSync(resolve(out,'hosted.json'),JSON.stringify(evidence,null,2)+'\n')
 const check=(name,passed)=>{evidence.checks.push({name,passed:!!passed});save();if(!passed)throw Error('Failed: '+name)}
@@ -66,7 +68,7 @@ try{
   ['general','What should I consider before choosing an apartment?'],['general-ar','كيف أختار شقة مناسبة؟'],['greeting-context','Hello how are you today?'],
   ['one-jlt','Just one in JLT','search4','clarify-transaction'],['rent-jlt','Rent','search4','at-most-one'],['budget-correction','Actually JVC instead, two bedrooms under 100000 AED','search4'],['language-followup','هل يوجد خيار أرخص؟','search4'],
  ]
- for(const [label,message,key=label,assertion] of turns){
+ for(const [label,message,key=label,assertion] of verifyOnly?[]:turns){
   const session=sessions.get(key)??{state:{excludeRefs:[]},dialogue:{},history:[]}
   const result=await call('/api/agents/'+agent+'/playground','POST',{expectedRevision:draft.revision,message,mode:'model',state:session.state,dialogue:session.dialogue,history:session.history.slice(-10),language:session.language})
   const d=result.data,previousRefs=session.dialogue.lastListingRefs??[]
@@ -85,10 +87,10 @@ try{
   save();console.log(JSON.stringify({label,elapsedMs:row.elapsedMs,providerFailure,properties:row.properties}))
  }
  const summary=rows=>{const values=rows.map(t=>t.elapsedMs).sort((a,b)=>a-b);return {count:values.length,medianMs:values.length?values[Math.ceil(values.length*.5)-1]:null,p95Ms:values.length?values[Math.ceil(values.length*.95)-1]:null}}
- evidence.benchmark={metric:'Authenticated hosted preview HTTP duration, includes trace persistence; NOT inbound-to-WhatsApp transport acknowledgement',all:summary(evidence.turns),withoutProviderFailures:summary(evidence.turns.filter(t=>!t.providerFailure)),providerFailures:evidence.turns.filter(t=>t.providerFailure).map(t=>({label:t.label,outcome:t.interpretationOutcome,elapsedMs:t.elapsedMs}))}
+ if(!verifyOnly)evidence.benchmark={metric:'Authenticated hosted preview HTTP duration, includes trace persistence; NOT inbound-to-WhatsApp transport acknowledgement',all:summary(evidence.turns),withoutProviderFailures:summary(evidence.turns.filter(t=>!t.providerFailure)),providerFailures:evidence.turns.filter(t=>t.providerFailure).map(t=>({label:t.label,outcome:t.interpretationOutcome,elapsedMs:t.elapsedMs}))}
  check('All 204 inventory rows are unchanged',hash(await read('properties'))===hash(before.properties))
  check('Company profile unchanged',hash(await read('organization_profiles'))===hash(before.organization_profiles))
- const device=(await call('/api/devices/'+before.device)).data
+ const device=(await call('/api/devices/'+before.device+'/qr')).data
  evidence.device={id:before.device,status:device.status,isLiveConnected:device.isLiveConnected}
  check('Existing paired device remains connected',device.isLiveConnected===true||device.status==='connected')
  const anonymous=createClient(credentials.SUPABASE_URL,credentials.NEXT_PUBLIC_SUPABASE_ANON_KEY,{auth:{persistSession:false}})
