@@ -15,6 +15,19 @@ const server = createServer(async (req,res) => {
   res.setHeader('Cache-Control','no-store')
   res.setHeader('Content-Security-Policy',"default-src 'none'; form-action 'self'; style-src 'unsafe-inline'")
   res.setHeader('Content-Type','text/html; charset=utf-8')
+  if(address.pathname==='/screenshot') {
+    if(req.method==='POST') {
+      if(req.headers.origin!==base){res.writeHead(403);res.end();return}
+      let body='';for await(const chunk of req){body+=chunk;if(body.length>6000000){res.writeHead(413);res.end();return}}
+      const values=new URLSearchParams(body)
+      if(values.get('csrf')!==csrf){res.writeHead(403);res.end();return}
+      const bytes=Buffer.from(values.get('image')??'','base64')
+      if(bytes[0]!==255||bytes[1]!==216){res.writeHead(400);res.end('Expected JPEG screenshot');return}
+      writeFileSync(resolve(root,'docs/deployment/hosted-login.jpg'),bytes)
+      res.end('<h1>Public login screenshot saved</h1>');return
+    }
+    res.end(`<h1>Save public login evidence</h1><form method="post" action="/screenshot"><input type="hidden" name="csrf" value="${csrf}"><label>Screenshot JPEG base64 <textarea name="image"></textarea></label><button>Save screenshot</button></form>`);return
+  }
   if (req.method==='POST' && address.pathname==='/credentials') {
     if (req.headers.origin!==base) {res.writeHead(403); res.end('Invalid origin');return}
     let body=''; for await(const chunk of req) {body+=chunk;if(body.length>16000){res.writeHead(413);res.end();return}}

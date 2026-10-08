@@ -1,0 +1,92 @@
+[
+  {
+    "table": "organizations",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "users",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "devices",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "agents",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "properties",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "contacts",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "conversations",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "messages",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "knowledge_bases",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "knowledge_chunks",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "team_members",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "contact_memory",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "baileys_sessions",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "audit_logs",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "whatsapp_devices",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "ai_agents",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "conversation_flows",
+    "status": 401,
+    "protected": true
+  },
+  {
+    "table": "wa_session_keys",
+    "status": 401,
+    "protected": true
+  }
+]

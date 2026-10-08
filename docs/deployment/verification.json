@@ -1,0 +1,274 @@
+{
+  "at": "2026-10-08T11:36:00.267Z",
+  "sourceRuntimeCommit": "0575f147c14b4a32809975c24ddcd33143276e43",
+  "url": "https://frontend-production-3cb5.up.railway.app/login",
+  "migrationFiles": 32,
+  "publicTables": 50,
+  "tablesWithoutRLS": 0,
+  "smoke": {
+    "at": "2026-10-08T11:32:10.219Z",
+    "checks": [
+      {
+        "name": "Controlled test identity created",
+        "passed": true
+      },
+      {
+        "name": "HTTPS onboarding through both applications",
+        "passed": true
+      },
+      {
+        "name": "Authenticated cookies are Secure and HttpOnly",
+        "passed": true
+      },
+      {
+        "name": "Canonical tenant membership",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/agents",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/devices",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/properties",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/contacts",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/conversations",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/knowledge-bases",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/team",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/settings",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/settings/company-profile",
+        "passed": true
+      },
+      {
+        "name": "Authenticated GET /api/auth/onboarding",
+        "passed": true
+      },
+      {
+        "name": "Forged identity rejected through private backend",
+        "passed": true
+      },
+      {
+        "name": "Foreign Origin rejected",
+        "passed": true
+      },
+      {
+        "name": "Device created with forged org ignored",
+        "passed": true
+      },
+      {
+        "name": "Server organization owns the device",
+        "passed": true
+      },
+      {
+        "name": "Real hosted WhatsApp connection started",
+        "passed": true
+      },
+      {
+        "name": "Real WhatsApp QR returned from Railway through HTTPS",
+        "passed": true
+      },
+      {
+        "name": "Unpaired probe disconnected",
+        "passed": true
+      },
+      {
+        "name": "Own probe device removed",
+        "passed": true
+      },
+      {
+        "name": "Disposable probe membership disabled",
+        "passed": true
+      },
+      {
+        "name": "Only disposable probe identity removed",
+        "passed": true
+      }
+    ],
+    "realQR": true,
+    "whatsappMessagesSent": 0,
+    "cleanup": true,
+    "auditTenantRetained": true
+  },
+  "services": [
+    {
+      "id": "c00145fe-f4b1-4c8d-b1cd-46bad4d3fc33",
+      "name": "backend",
+      "isLinked": false,
+      "source": {
+        "repo": "mrayazkhan2929-art/Whatsapp-AI-agent",
+        "image": null
+      },
+      "status": "SUCCESS",
+      "deploymentStopped": false,
+      "deploymentId": "0e96c507-d8ea-488c-90e7-925e7c70420f",
+      "latestDeployment": {
+        "id": "0e96c507-d8ea-488c-90e7-925e7c70420f",
+        "status": "SUCCESS",
+        "createdAt": "2026-10-08T11:23:44.823Z",
+        "deploymentStopped": false
+      },
+      "url": null,
+      "volumes": [],
+      "regions": [
+        {
+          "name": "iad",
+          "location": null,
+          "configured": 1
+        }
+      ],
+      "replicas": {
+        "configured": 1,
+        "running": 1,
+        "crashed": 0,
+        "exited": 0,
+        "total": 1
+      },
+      "volumeMigrating": false
+    },
+    {
+      "id": "e6c73bf5-fd98-4719-ba61-cba10eb06173",
+      "name": "frontend",
+      "isLinked": true,
+      "source": {
+        "repo": "mrayazkhan2929-art/Whatsapp-AI-agent",
+        "image": null
+      },
+      "status": "SUCCESS",
+      "deploymentStopped": false,
+      "deploymentId": "f4af1fe8-41ef-4e54-92a1-7154a34f0a66",
+      "latestDeployment": {
+        "id": "f4af1fe8-41ef-4e54-92a1-7154a34f0a66",
+        "status": "SUCCESS",
+        "createdAt": "2026-10-08T11:23:44.824Z",
+        "deploymentStopped": false
+      },
+      "url": "https://frontend-production-3cb5.up.railway.app",
+      "volumes": [],
+      "regions": [
+        {
+          "name": "iad",
+          "location": null,
+          "configured": 1
+        }
+      ],
+      "replicas": {
+        "configured": 1,
+        "running": 1,
+        "crashed": 0,
+        "exited": 0,
+        "total": 1
+      },
+      "volumeMigrating": false
+    },
+    {
+      "id": "3b25b6cd-6430-4660-8304-55bd618b2827",
+      "name": "Redis",
+      "isLinked": false,
+      "source": {
+        "repo": null,
+        "image": "redis:8.2"
+      },
+      "status": "SUCCESS",
+      "deploymentStopped": false,
+      "deploymentId": "325a9a3d-e0d8-43e2-82b4-8909295f7c24",
+      "latestDeployment": {
+        "id": "325a9a3d-e0d8-43e2-82b4-8909295f7c24",
+        "status": "SUCCESS",
+        "createdAt": "2026-10-08T11:15:57.051Z",
+        "deploymentStopped": false
+      },
+      "url": null,
+      "volumes": [
+        {
+          "name": "redis-volume",
+          "mountPath": "/data",
+          "currentSizeMb": 0,
+          "sizeMb": 500,
+          "state": "READY"
+        }
+      ],
+      "regions": [
+        {
+          "name": "iad",
+          "location": null,
+          "configured": 1
+        }
+      ],
+      "replicas": {
+        "configured": 1,
+        "running": 1,
+        "crashed": 0,
+        "exited": 0,
+        "total": 1
+      },
+      "volumeMigrating": false
+    }
+  ],
+  "runtimePolicies": {
+    "data": {
+      "backend": {
+        "numReplicas": 1,
+        "restartPolicyType": "ALWAYS",
+        "sleepApplication": false
+      },
+      "frontend": {
+        "numReplicas": 1,
+        "restartPolicyType": "ALWAYS",
+        "sleepApplication": false
+      }
+    }
+  },
+  "commands": {
+    "typecheck": 0,
+    "testTypecheck": 0,
+    "lint": 0,
+    "strict": {
+      "exitCode": 0,
+      "passed": 323,
+      "expectedFailures": 0
+    },
+    "preservation": {
+      "exitCode": 0,
+      "passed": 11
+    },
+    "backendDockerBuild": 0,
+    "frontendDockerBuild": 0,
+    "realHostedSmoke": 0,
+    "anonymousREST": {
+      "exitCode": 0,
+      "passed": 18
+    }
+  },
+  "productionAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 3,
+    "high": 0,
+    "critical": 0,
+    "total": 3
+  },
+  "localRuntimeStopped": true,
+  "physicalHostedPairingVerified": false,
+  "realHostedMessageRoundtripVerified": false
+}
