@@ -44,7 +44,9 @@ export class StructuredIntentClassifier {
     })
     if (area) patch.area = AREA_ALIASES[area]
     const bed = raw.match(/\b(\d+)\s*(?:br|bhk|beds?|bedrooms?)\b/) ?? raw.match(/(\d+)\s*(?:غرف|غرفة|غرف نوم)/)
+    const wordBed=raw.match(/\b(one|two|three|four|five)\s*[- ]?\s*(?:beds?|bedrooms?)\b/)
     if (bed) patch.bedrooms = bed[1]
+    else if(wordBed)patch.bedrooms=String(({one:1,two:2,three:3,four:4,five:5} as Record<string,number>)[wordBed[1]])
     else if (/غرفتين|غرفتان/.test(raw)) patch.bedrooms = '2'
     else if (/غرفة واحدة|غرفه واحده/.test(raw)) patch.bedrooms = '1'
     else if (/ثلاث غرف/.test(raw)) patch.bedrooms = '3'

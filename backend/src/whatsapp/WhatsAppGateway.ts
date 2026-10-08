@@ -13,7 +13,7 @@ import { MessageRouter } from './MessageRouter.js'
 function extractPropertyRefs(text: string): string[] {
   const refs: string[] = []
   const patterns = [
-    /\bRef:\s*([A-Za-z0-9/_-]{2,})\b/g,
+    /(?:\bRef|المرجع):\s*([A-Za-z0-9/_-]{2,})\b/g,
     /\b🏷\s*Ref:\s*([A-Za-z0-9/_-]{2,})\b/g,
   ]
   for (const pattern of patterns) {
@@ -355,8 +355,9 @@ export class WhatsAppGateway {
               missing,
               error: error?.message ?? null,
             })
-            outboundText =
-              "I couldn't verify those listings in our database right now. Let me connect you with our sales team to assist you immediately."
+            // Preserve the saved reply and mark delivery for review. Never replace
+            // it with an unexecuted promise to contact or connect the sales team.
+            throw new Error('OUTBOUND_REFERENCE_UNVERIFIED')
           }
         }
       }

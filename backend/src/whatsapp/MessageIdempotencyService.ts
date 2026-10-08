@@ -31,6 +31,14 @@ export class MessageIdempotencyService {
     })
   }
 
+  async admit(input: Parameters<MessageIdempotencyService['receive']>[0]): Promise<{message:TransportMessage;token:string|null}> {
+    const token=randomUUID()
+    const result=await this.rpc<{message:TransportMessage;claimed:boolean}>('admit_whatsapp_execution',{
+      p_org_id:input.orgId,p_device_id:input.deviceId,p_wa_message_id:input.waMessageId,p_jid:input.jid,p_phone:input.phone,p_name:input.name??null,p_content:input.content,p_type:input.type,p_token:token,
+    })
+    return {message:result.message,token:result.claimed?token:null}
+  }
+
   async claim(message: TransportMessage): Promise<string | null> {
     const token = randomUUID()
     const result = await this.rpc<TransportMessage | null>('claim_whatsapp_execution', {

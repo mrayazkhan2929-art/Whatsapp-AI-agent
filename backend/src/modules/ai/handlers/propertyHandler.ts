@@ -42,11 +42,10 @@ export async function queryProperties(params: PropertyQueryParams): Promise<Prop
         category:criteria.transactionType==='SALE'?'sale':criteria.transactionType==='RENT'?'rent':undefined,status:criteria.status,distressDeal:criteria.distressOnly},
       directCount:result.directCount,indirectCount:result.indirectCount,usedFallback:result.usedFallback})
     if (!result.properties.length) return { found:false,message:buildNoPropertiesMessage('en',criteria.area,result.reason),source:'none',matchQuality:'none',directCount:0,indirectCount:0,usedFallback:false,noResultReason:result.reason,trace:result.trace,criteria }
-    const properties: Record<string,unknown>[] = []
-    for (const property of result.properties) {
+    const properties: Record<string,unknown>[] = await Promise.all(result.properties.map(async property => {
       const media = params.mediaRequested ? await new PropertyMediaService().list(params.orgId,property.id) : undefined
-      properties.push({ ...property,...(media ? { media } : {}) })
-    }
+      return { ...property,...(media ? { media } : {}) }
+    }))
     return { ...result,found:true,message:'',properties,count:properties.length,criteria }
   } catch {
     return { found:false,message:'Listings could not be checked right now. Please try again.',source:'none',matchQuality:'none',noResultReason:'db_error',criteria }

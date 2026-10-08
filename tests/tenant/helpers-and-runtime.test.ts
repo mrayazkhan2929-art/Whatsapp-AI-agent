@@ -38,6 +38,13 @@ it('runtime health summaries include only authorized device IDs', () => {
   expect(gateway.getRuntimeSnapshotSummary([]).trackedDevices).toBe(0)
 })
 
+it('transport blocks unverified English and Arabic cards instead of promising a sales follow-up',async()=>{
+ const gateway=new WhatsAppGateway(),manager={isConnected:()=>true,sendText:vi.fn()}
+ for(const label of ['Ref','المرجع'])await expect((gateway as any).sendOwnedText({deviceId:'device',orgId:'a',manager},{orgId:'a',deviceId:'device',messageId:'saved',jid:'fixture@s.whatsapp.net',text:`AED 50,000 · ${label}: FOREIGN-1`})).rejects.toThrow('OUTBOUND_REFERENCE_UNVERIFIED')
+ expect(manager.sendText).not.toHaveBeenCalled()
+ expect(dependencies.db.queries.every((q:any)=>q.filters.some((f:any[])=>f[0]==='eq'&&f[1]==='org_id'&&f[2]==='a'))).toBe(true)
+})
+
 it('knowledge helpers reject foreign KB references before embeddings or writes', async () => {
   const rag = new HybridRAG()
   await expect(rag.addKnowledgeChunk('kb-b','a','fixture',{})).rejects.toThrow('Related resource was not found')

@@ -14,7 +14,7 @@ type Run = {
   responseLanguage: string;
   detectedIntent: string;
   extractedEntities: unknown;
-  conversationState: { criteria: unknown };
+  conversationState: { criteria: unknown; dialogue?: unknown };
   toolsSelected: unknown;
   propertyQuery: unknown;
   retrievedProperties: unknown;
@@ -38,6 +38,8 @@ export function PlaygroundPanel({
   const cache = useQueryClient(),
     [message, setMessage] = useState(""),
     [state, setState] = useState<unknown>({ excludeRefs: [] }),
+    [dialogue, setDialogue] = useState<unknown>(),
+    [history, setHistory] = useState<Array<{role:'user'|'assistant';content:string}>>([]),
     [mode, setMode] = useState("preview"),
     [run, setRun] = useState<Run | null>(null),
     [busy, setBusy] = useState(false),
@@ -51,9 +53,14 @@ export function PlaygroundPanel({
         message,
         state,
         mode,
+        dialogue,
+        history,
+        language:run?.responseLanguage,
       });
       setRun(result);
       setState(result.conversationState.criteria);
+      setDialogue(result.conversationState.dialogue);
+      setHistory(previous=>[...previous,{role:'user' as const,content:message},{role:'assistant' as const,content:result.finalResponse}].slice(-12));
       void cache.invalidateQueries({ queryKey: ["studio-traces", id] });
     } catch (e) {
       setError((e as Error).message);
@@ -119,7 +126,9 @@ export function PlaygroundPanel({
             type="button"
             variant="outline"
             onClick={() => {
-              setState({ excludeRefs: [] });
+               setState({ excludeRefs: [] });
+               setDialogue(undefined);
+               setHistory([]);
               setRun(null);
             }}
           >

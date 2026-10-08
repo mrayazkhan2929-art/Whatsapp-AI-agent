@@ -50,7 +50,13 @@ beforeAll(async()=>{
  await new Promise<void>((done,reject)=>{const timeout=setTimeout(()=>reject(Error('Next startup timeout')),60000);const read=(c:Buffer)=>{const text=c.toString();logs.push(text);const url=text.match(/http:\/\/127\.0\.0\.1:\d+/);if(url)frontendUrl=url[0];if(/Ready in/.test(text)){clearTimeout(timeout);done()}};next.stdout!.on('data',read);next.stderr!.on('data',read);next.on('exit',code=>{clearTimeout(timeout);reject(Error('Next exit '+code))})})
  browser=await chromium.launch({headless:true});mkdirSync((process.env.PHASE_TRANSPORT_REPORT_DIR ?? 'docs/phase5/artifacts/transport'),{recursive:true})
 })
-beforeEach(async()=>{beforeB=await snapshotB();execute.mockClear();send.mockReset();send.mockImplementation(async input=>({deviceId:input.deviceId,messageId:input.messageId}))})
+beforeEach(async()=>{
+ // Fault-injection scenarios deliberately leave unfinished work. Quarantine it
+ // between tests so the new conversation execution fence does not join scenarios.
+ const isolated=await admin.from('messages').update({processing_status:'needs_review',failure_code:'TEST_SCENARIO_ENDED'}).eq('org_id',a).in('processing_status',['received','processing','prepared','sending'])
+ if(isolated.error)throw isolated.error
+ beforeB=await snapshotB();execute.mockClear();send.mockReset();send.mockImplementation(async input=>({deviceId:input.deviceId,messageId:input.messageId}))
+})
 afterEach(async()=>{expect(await snapshotB()).toEqual(beforeB);expect(nonlocalRequests).toBe(0);checks++;writeFileSync(resolve(stack.directory,'message-progress.json'),JSON.stringify({checks,requests}))})
 afterAll(async()=>{for(const c of children)c.kill();await browser?.close();next?.kill();server?.closeAllConnections();if(server)await new Promise<void>(done=>server.close(()=>done()));writeFileSync(resolve(stack.directory,'message-http-evidence.json'),JSON.stringify({tenantBSnapshotChecks:checks,snapshotTables:tables,requests,nonlocalRequests,browserErrors,scenarios,providerAndWhatsApp:'stubbed at the existing orchestration/transport boundaries; real database/Auth/REST and child processes',appliedToLiveProject:false},null,2));writeFileSync(resolve(stack.directory,'message-process.log'),logs.join(''));vi.unstubAllGlobals()})
 
@@ -122,6 +128,7 @@ it('a mismatched transport receipt is uncertain and cannot redirect the saved de
 })
 it('recovery drains more than one REST batch without skipping saved responses',async()=>{
  const saved=await received(),inbound=Array.from({length:105},()=>({id:randomUUID(),org_id:a,device_id:device,conversation_id:saved.conversation_id,direction:'inbound',sender_type:'contact',content:'Backlog fixture',wa_message_id:randomUUID(),processing_status:'prepared'}))
+ await admin.from('messages').update({processing_status:'ignored'}).eq('org_id',a).eq('id',saved.id)
  await insert('messages',inbound)
  await insert('messages',inbound.map(m=>({...m,id:randomUUID(),direction:'outbound',sender_type:'ai',wa_message_id:randomUUID(),reply_to_message_id:m.id,metadata:{replyJid:'971500009999@s.whatsapp.net'}})))
  await router().resumePending(device,a);expect(send).toHaveBeenCalledTimes(105);expect(execute).not.toHaveBeenCalled()
@@ -131,7 +138,7 @@ it('lost execution claim never grants business processing to a replay',async()=>
  const saved=await received();expect(await persistence.claim(saved)).toBeTruthy();await router().routeMessage(device,a,event(saved.wa_message_id));expect(execute).not.toHaveBeenCalled();expect(send).not.toHaveBeenCalled();expect(await rows(saved.wa_message_id)).toHaveLength(1)
 })
 it('one provider error saves and sends one localized fallback',async()=>{
- execute.mockRejectedValueOnce(Error('Provider unavailable'));const input=event();await router().routeMessage(device,a,input);await router().routeMessage(device,a,input);expect(execute).toHaveBeenCalledTimes(1);expect(send).toHaveBeenCalledTimes(1);expect(send.mock.calls[0][0].text).toContain('temporary issue');expect(await rows(input.key.id)).toHaveLength(2)
+ execute.mockRejectedValueOnce(Error('Provider unavailable'));const input=event();await router().routeMessage(device,a,input);await router().routeMessage(device,a,input);expect(execute).toHaveBeenCalledTimes(1);expect(send).toHaveBeenCalledTimes(1);expect(send.mock.calls[0][0].text).toContain('Could you clarify');expect(send.mock.calls[0][0].text).not.toMatch(/team will follow up/i);expect(await rows(input.key.id)).toHaveLength(2)
 })
 it('deleted logical message history retains its durable receipt and blocks replay',async()=>{
  const input=event(randomUUID(),'971500001234');await router().routeMessage(device,a,input);const first=(await rows(input.key.id)).find(r=>r.direction==='inbound')
@@ -147,7 +154,7 @@ it('deleting a device preserves its transport history and rejects later stale ev
 })
 it('new duplicate inbound/outbound writes and foreign device/reply links fail at the database',async()=>{
  const input=event();await router().routeMessage(device,a,input);const saved=await rows(input.key.id),inbound=saved.find(r=>r.direction==='inbound'),outbound=saved.find(r=>r.direction==='outbound')
- const clone={...inbound,id:randomUUID()};expect((await admin.from('messages').insert(clone)).error?.code).toBe('23505')
+ const clone={...inbound,id:randomUUID()};delete clone.execution_order;delete outbound.execution_order;expect((await admin.from('messages').insert(clone)).error?.code).toBe('23505')
  expect((await admin.from('messages').insert({...outbound,id:randomUUID(),wa_message_id:randomUUID()})).error?.code).toBe('23505')
  expect((await admin.from('messages').insert({...clone,device_id:bDevice,wa_message_id:randomUUID()})).error?.code).toBe('23503')
  expect((await admin.from('messages').insert({...clone,conversation_id:bConversation,wa_message_id:randomUUID()})).error?.code).toBe('23503')

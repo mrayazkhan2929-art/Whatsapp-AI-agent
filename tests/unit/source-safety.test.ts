@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { expect, it } from 'vitest'
-const liveAllowed = new Set<string>([...JSON.parse(readFileSync('docs/live-validation/change-allowlist.json', 'utf8')), ...JSON.parse(readFileSync('docs/deployment/change-allowlist.json', 'utf8')), ...JSON.parse(readFileSync('docs/property-launch/change-allowlist.json', 'utf8'))])
+const liveAllowed = new Set<string>([...JSON.parse(readFileSync('docs/reply-upgrade/change-allowlist.json', 'utf8')), ...JSON.parse(readFileSync('docs/live-validation/change-allowlist.json', 'utf8')), ...JSON.parse(readFileSync('docs/deployment/change-allowlist.json', 'utf8')), ...JSON.parse(readFileSync('docs/property-launch/change-allowlist.json', 'utf8'))])
 it('preserves the Phase 10 checkpoint outside the explicit Phase 11 allowlist',()=>{
  expect(createHash('sha256').update(readFileSync('docs/phase11/source-manifest.json')).digest('hex')).toBe('7541f3cb102ceb5b17408a7a7e10f99fb75f5d979a36d197b27759b727cb0487')
  const manifest=JSON.parse(readFileSync('docs/phase11/source-manifest.json','utf8')) as Record<string,string>

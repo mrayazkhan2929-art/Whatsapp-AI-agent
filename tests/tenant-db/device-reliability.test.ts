@@ -16,7 +16,7 @@ const admin=createClient(stack.url,stack.serviceKey,{auth:{persistSession:false,
 const sql=new pg.Client({connectionString:stack.dbUrl})
 const a=randomUUID(),b=randomUUID(),device=randomUUID(),bDevice=randomUUID(),sqlDevice=randomUUID(),kb=randomUUID()
 const children=new Set<ChildProcess>(),logs:string[]=[],scenarios:Array<Record<string,unknown>>=[]
-let token:string,bToken:string,next:ChildProcess,browser:Browser,frontendUrl:string,beforeB:unknown,checks=0,requests=0,externalRequests=0
+let token:string,bToken:string,bActor:string,next:ChildProcess,browser:Browser,frontendUrl:string,beforeB:any,checks=0,requests=0,externalRequests=0,deniedAuditCount=0
 const output=resolve(process.env.PHASE_RELIABILITY_REPORT_DIR??'docs/phase10/artifacts/reliability')
 type Replica={child:ChildProcess;url:string;run:(command:string,input?:Record<string,unknown>)=>Promise<any>;kill:()=>Promise<void>}
 let owner:Replica,peer:Replica,ownerFence:{ownerId:string;generation:number},afterTakeover:{ownerId:string;generation:number}
@@ -46,6 +46,7 @@ beforeAll(async()=>{
  await sql.connect();await sql.query('create table phase10_test_physical_sends(org_id uuid,device_id uuid,wa_id text,owner_id uuid,generation bigint,replica text,jid text,content text);create table phase10_test_embedding_calls(replica text,chunk_count int);revoke all on phase10_test_physical_sends,phase10_test_embedding_calls from public,anon,authenticated;alter table phase10_test_physical_sends enable row level security;alter table phase10_test_embedding_calls enable row level security')
  await insert('organizations',[{id:a,name:'Reliability A',slug:'phase10-a'},{id:b,name:'Private Reliability B',slug:'phase10-b'}]);await insert('devices',[{id:device,org_id:a,name:'Replica device'},{id:sqlDevice,org_id:a,name:'SQL fence device'},{id:bDevice,org_id:b,name:'Private B device'}]);await insert('knowledge_bases',{id:kb,org_id:a,name:'Queued knowledge'})
  token=await identity('runtime-a',a);bToken=await identity('runtime-b',b)
+ bActor=(await admin.auth.getUser(bToken)).data.user!.id
  await rpc('device_runtime_lease',params('acquire',randomUUID(),null,bDevice,b,120));await queued('PRIVATE-B-JOB',bDevice,b)
  owner=await replica('A');peer=await replica('B');await owner.run('connect');await until(()=>owner.run('snapshot'),v=>v.snapshot?.connected===true);ownerFence=(await owner.run('snapshot')).fence
  next=spawn(process.execPath,[resolve('node_modules/next/dist/bin/next'),'start','-p','0','-H','127.0.0.1'],{cwd:resolve('frontend'),env:{...process.env,NODE_ENV:'production',BACKEND_URL:owner.url},stdio:['ignore','pipe','pipe'],windowsHide:true});children.add(next)
@@ -53,7 +54,20 @@ beforeAll(async()=>{
  browser=await chromium.launch({headless:true});mkdirSync(output,{recursive:true})
 })
 beforeEach(async()=>{beforeB=await snapshotB()})
-afterEach(async context=>{expect(await snapshotB()).toEqual(beforeB);checks++;scenarios.push({name:context.task.name,tenantBUnchanged:true})})
+afterEach(async context=>{
+ const after=await snapshotB() as Record<string,any[]>,previousIds=new Set(beforeB.audit_logs.map((item:any)=>item.row.id))
+ const added=after.audit_logs.filter((item:any)=>!previousIds.has(item.row.id))
+ // B's own denied A-device request creates a legitimate B security audit. The
+ // finish listener may persist it after the HTTP response; admit only these two
+ // exact backend/frontend denial events, never arbitrary B writes.
+ for(const {row} of added){
+  expect(row).toMatchObject({org_id:b,actor_id:bActor,action:'post.devices',resource_id:device,resource_type:'devices',outcome:'denied',details:{method:'POST',statusCode:404,changedFields:[]}})
+  expect(row.details).toEqual({method:'POST',statusCode:404,changedFields:[]})
+  expect(++deniedAuditCount).toBeLessThanOrEqual(2)
+ }
+ after.audit_logs=after.audit_logs.filter((item:any)=>previousIds.has(item.row.id))
+ expect(after).toEqual(beforeB);checks++;scenarios.push({name:context.task.name,tenantBUnchanged:true,verifiedOwnDenialAudits:added.length})
+})
 afterAll(async()=>{
  for(const child of children){if(child.exitCode===null&&child.signalCode===null){const exited=new Promise<void>(done=>child.once('exit',()=>done()));child.kill('SIGKILL');await exited}}children.clear()
  await browser?.close();await sql.end();vi.unstubAllGlobals()

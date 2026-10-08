@@ -66,5 +66,6 @@ prompt
 server.log
 # Skills directory
 /skills/
+/supabase/.temp/
 
 .vercel

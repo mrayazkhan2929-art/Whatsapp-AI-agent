@@ -7,6 +7,7 @@ import { sendApiError } from '../http.js'
 import type { AuthenticatedRequest } from '../types.js'
 import {mandatoryStudioChecks,runStudioPlayground,redactStudioValue} from '../../modules/config/StudioPlayground.js'
 import {propertySearchCriteriaSchema} from '../../properties/PropertySearchCriteria.js'
+import { dialogueSchema } from '../../modules/ai/ReplyContext.js'
 
 const router = Router()
 const revisionSchema = z.object({ expectedRevision: z.number().int().positive(), expectedPublishedVersionId: z.string().uuid().nullable() })
@@ -58,8 +59,8 @@ router.post('/:id/test', control(async (req, res) => {
 }, true))
 router.post('/:id/playground',control(async(req,res)=>{
  await agentVersionService.agent(req.orgId!,String(req.params.id))
- const body=z.object({expectedRevision:z.number().int().positive(),message:z.string().trim().min(1).max(2000),state:propertySearchCriteriaSchema.default({excludeRefs:[]}),mode:z.enum(['preview','model']).default('preview')}).parse(req.body)
- const result=await runStudioPlayground(req.orgId!,String(req.params.id),body.expectedRevision,body.message,body.state,body.mode)
+ const body=z.object({expectedRevision:z.number().int().positive(),message:z.string().trim().min(1).max(2000),state:propertySearchCriteriaSchema.default({excludeRefs:[]}),mode:z.enum(['preview','model']).default('preview'),dialogue:dialogueSchema.optional(),history:z.array(z.object({role:z.enum(['user','assistant']),content:z.string().max(4000)})).max(12).optional(),language:z.enum(['en','ar']).optional()}).parse(req.body)
+ const result=await runStudioPlayground(req.orgId!,String(req.params.id),body.expectedRevision,body.message,body.state,body.mode,body.dialogue,body.history,body.language)
  const {data,error}=await getSupabaseAdmin().from('agent_playground_runs').insert({org_id:req.orgId,agent_id:req.params.id,actor_id:req.auth!.userId,draft_revision:result.draftRevision,config_sha256:result.configSHA256,summary:redactStudioValue(result)}).select('id').single()
  if(error)databaseError(error)
  res.json({success:true,data:{traceId:data!.id,...result}})

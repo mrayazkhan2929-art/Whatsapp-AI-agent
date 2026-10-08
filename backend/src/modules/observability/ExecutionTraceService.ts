@@ -25,6 +25,23 @@ export interface TraceContext extends TraceScope {
 }
 const storage = new AsyncLocalStorage<TraceContext>();
 export class ExecutionTraceService {
+  separate<T>(handler: () => Promise<T>): Promise<T> { return storage.exit(handler) }
+  async measure<T>(stage: 'admission'|'context'|'interpretation'|'retrieval'|'generation'|'preparation'|'transport', handler: () => Promise<T>): Promise<T> {
+    const started = performance.now()
+    try { return await handler() }
+    finally {
+      const context = this.current()
+      if (context) {
+        const durations = (context.evidence.stageDurationsMs ?? {}) as Record<string, number>
+        durations[stage] = (durations[stage] ?? 0) + Math.round(performance.now() - started)
+        context.evidence.stageDurationsMs = durations
+      }
+    }
+  }
+  transportAcknowledged() {
+    const context = this.current()
+    if (context) this.patch({ inboundToTransportAckMs: Date.now() - context.started })
+  }
   current() {
     return storage.getStore();
   }
@@ -98,6 +115,7 @@ export class ExecutionTraceService {
       started: Date.now(),
       status: "completed",
       evidence: {
+        stageDurationsMs: { admission:0, context:0, interpretation:0, retrieval:0, generation:0, preparation:0, transport:0 },
         toolCalls: [],
         providerAttempts: [],
         validationGates: [],

@@ -22,7 +22,7 @@ vi.mock('../../backend/src/api/middleware/rateLimit',()=>({apiRateLimit:(_r:unkn
 const stack=JSON.parse(readFileSync(process.env.PHASE1_TEST_CONFIG!,'utf8')),admin=createClient(stack.url,stack.serviceKey,{auth:{persistSession:false,autoRefreshToken:false}}),sql=new pg.Client({connectionString:stack.dbUrl})
 const a=randomUUID(),b=randomUUID(),bContact=randomUUID(),bDevice=randomUUID(),aContact=randomUUID(),aConversation=randomUUID(),bConversation=randomUUID()
 const manualReview=process.env.PHASE11_MANUAL_REVIEW==='1'
-const output=manualReview?resolve(stack.directory,'manual-artifacts'):resolve('docs/phase11/artifacts/hardening'),password='Phase11-local-password-123!'
+const output=manualReview?resolve(stack.directory,'manual-artifacts'):resolve(process.env.PHASE_HARDENING_REPORT_DIR??'docs/phase11/artifacts/hardening'),password='Phase11-local-password-123!'
 let server:Server,next:ChildProcess,browser:Browser,backendUrl:string,frontendUrl:string,token:string,viewer:string,actor:string,tenantTables:string[],beforeB:unknown
 let workspace:string,newToken:string,agent:string,device:string,context:BrowserContext,page:Page
 let requests=0,bChecks=0,external=0

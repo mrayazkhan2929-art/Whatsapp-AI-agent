@@ -8,7 +8,7 @@ vi.mock('../../backend/src/config/supabase', () => ({ isSupabaseConfigured: () =
 vi.mock('../../backend/src/modules/ai/aiService', () => ({ generateReply: dependencies.reply }))
 // Stub the transport seam before its dynamic gateway import, including concurrent calls.
 const newRouter = () => {
-  const router = new MessageRouter()
+  const router = new MessageRouter({generateReply:dependencies.reply})
   vi.spyOn(router as any, 'sendTextViaGateway').mockImplementation(dependencies.send)
   return router
 }

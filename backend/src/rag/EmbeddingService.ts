@@ -18,13 +18,13 @@ export class EmbeddingService {
     return this.openaiClient
   }
 
-  static async embed(text: string): Promise<number[]> {
+  static async embed(text: string, timeout?: number): Promise<number[]> {
     try {
       const response = await this.getClient().embeddings.create({
         model: this.MODEL,
         input: text,
         dimensions: this.DIMENSIONS,
-      })
+      }, timeout ? { timeout, maxRetries: 0 } : undefined)
 
       const embedding = response.data[0]?.embedding
       if (!embedding || !this.valid(embedding)) {

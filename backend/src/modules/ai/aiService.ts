@@ -8,6 +8,8 @@ import { buildPrompt } from './promptBuilder.js'
 import { routeMessage, type RouteResult } from './router.js'
 import { routeByIntent, type DirectResponse, type QueryResponse } from './intentRouter.js'
 import { formatVerifiedProperties } from '../../properties/PropertyMediaService.js'
+import { generateContextReply } from './ConversationReplyEngine.js'
+import type { ReplyContext, ReplyDialogueUpdate } from './ReplyContext.js'
 
 
 function buildSafeFallback(route: RouteResult): string {
@@ -31,6 +33,7 @@ function logRoutingAssertion(event: string, details: Record<string, unknown>): v
 }
 
 export interface ReplyResult {
+  dialogueUpdate?: ReplyDialogueUpdate
   reply: string
   executionTraceId?: string
   agentVersionId?: string
@@ -58,7 +61,9 @@ async function generateReplyInternal(params: {
   conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }>
   memory: Record<string, unknown>
   sock?: unknown
+  replyContext?: ReplyContext
 }): Promise<ReplyResult> {
+  if (params.replyContext) return generateContextReply(params.replyContext, params.message, {deferPersistence:true})
   if (params.conversationId) await new HandoffCoordinator().assertAIAllowed(params.orgId, params.conversationId)
   executionTrace.memory(params.memory, 'memoryBefore')
   executionTrace.memory(params.memory, 'memoryAfter')

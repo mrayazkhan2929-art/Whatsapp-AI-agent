@@ -32,6 +32,10 @@ import {
   type KnowledgeHit,
 } from "../../rag/HybridRAG.js";
 import type { PropertySearchCriteria } from "../../properties/PropertySearchCriteria.js";
+import { generateContextReply } from '../ai/ConversationReplyEngine.js'
+import { directDecision } from '../ai/ConversationDecision.js'
+import { dialogueSchema, type DialogueState, type ReplyContext } from '../ai/ReplyContext.js'
+import { executionTrace } from '../observability/ExecutionTraceService.js'
 export function redactStudioText(value: string) {
   return value
     .replace(
@@ -110,6 +114,9 @@ export async function runStudioPlayground(
   message: string,
   state: PropertySearchCriteria,
   mode: "preview" | "model" = "preview",
+  dialogue?: DialogueState,
+  history: ReplyContext['history'] = [],
+  priorLanguage?: 'en'|'ar',
 ) {
   const draft = await agentVersionService.draft(org, agent);
   if (draft.revision !== revision)
@@ -123,6 +130,38 @@ export async function runStudioPlayground(
   const company = await runtimeConfigResolver.resolveCompany(org),
     plan = studioPlan(config, message, state),
     policy = config.propertyPolicy ?? defaultPropertyPolicy;
+  if(config.studioVersion && config.modelPolicy.provider==='groq') {
+    return executionTrace.run({orgId:org,source:'http'},async()=>{
+      const context:ReplyContext={runtime:{...company,config,agentId:agent,publishedVersionId:null,versionNumber:null,deviceId:null},
+        conversation:{id:'preview',org_id:org,contact_id:'preview',handoff_state:'AI_ACTIVE',handled_by:'ai'},
+        contact:{id:'preview',org_id:org,phone:'',name:null,language:dialogue?plan.detectedLanguage:config.identity.defaultLanguage??'en',contact_memory:{}},
+        history,state:{conversationId:'preview',contactId:'preview',criteria:state,shownRefs:state.excludeRefs,language:priorLanguage??config.identity.defaultLanguage??'en',revision:0},dialogue:dialogueSchema.parse(dialogue??{})}
+      const decision=mode==='preview'?(directDecision(message,context)??{...directDecision('hello',context)!,intent:plan.tools.includes('knowledge.search')?'general' as const:'clarify' as const,clarification:plan.tools.includes('knowledge.search')?'none' as const:'understanding' as const}):undefined
+      const hits:KnowledgeHit[]=[],quarantined:string[]=[]
+      const reply=await generateContextReply(context,message,{readOnly:true,preview:mode==='preview',decision,retrieveKnowledge:async()=>{
+        const results=await Promise.all(config.knowledgeBaseIds.map(async kb=>{
+          const r=await getSupabaseAdmin().rpc('search_draft_knowledge',{p_org:org,p_agent:agent,p_revision:revision,p_kb:kb,p_query:message})
+          if(r.error)throw databaseError(r.error)
+          return (r.data??[]).map((h:KnowledgeHit)=>({...h,metadata:null,knowledgeBaseId:kb})) as KnowledgeHit[]
+        }))
+        hits.push(...results.flat().filter(h=>{if(unsafeKnowledge(h.content)){quarantined.push(h.id);return false}return true}).sort((a,b)=>b.score-a.score).slice(0,5))
+        executionTrace.tool('knowledge.search',{knowledgeBaseIds:config.knowledgeBaseIds,draftRevision:revision},{count:hits.length,quarantinedChunkIds:quarantined})
+        return {context:hits.length?knowledgeDataMessage(hits):''}
+      }})
+      if(mode==='preview'&&hits.length)reply.reply=(reply.lang==='ar'?'مقتطفات موثقة للمعاينة:\n':'Verified preview excerpts:\n')+hits.map(h=>h.content).join('\n\n')
+      executionTrace.reply(reply)
+      if((await agentVersionService.draft(org,agent)).revision!==revision)throw new ConfigError(409,'DRAFT_CONFLICT','Draft changed during testing; retry')
+      return {mode,draftRevision:revision,agentVersion:'draft:'+revision,configSHA256:createHash('sha256').update(JSON.stringify(config)).digest('hex'),
+        detectedLanguage:plan.detectedLanguage,responseLanguage:reply.lang,detectedIntent:reply.lane,extractedEntities:plan.entities,
+        conversationState:{criteria:context.state.criteria,shownRefs:reply.shownPropertyRefs??[],dialogue:context.dialogue},
+        toolsSelected:((executionTrace.current()?.evidence.toolCalls??[]) as Array<{name:string}>).map(call=>({name:call.name,status:'read-only'})),deniedTools:plan.deniedTools,
+        propertyQuery:executionTrace.current()?.evidence.propertyQuery??null,retrievedProperties:(executionTrace.current()?.evidence.propertyMatches??[]) as Array<{id:unknown;reference:unknown;area:unknown;price:unknown;source:unknown}>,knowledgeSources:hits.map(h=>({knowledgeBaseId:h.knowledgeBaseId,documentId:h.document_id,versionId:h.version_id,versionNumber:h.version_number,chunkId:h.id})),quarantinedChunkIds:quarantined,
+        model:config.modelPolicy.model??'automatic',provider:mode==='model'?'groq':'none',validation:['tenant resources validated','shared production reply engine','all outbound actions simulated'],
+        finalResponse:redactStudioText(reply.reply).slice(0,12000),sideEffects:{whatsappSends:0,contactWrites:0,conversationWrites:0,bookings:0},profileConfigured:company.companyConfigured,
+        executionEvidence:executionTrace.current()?.evidence??{},executionTraceId:executionTrace.current()?.id,
+      }
+    })
+  }
   const language = config.languages.includes(plan.detectedLanguage)
     ? plan.detectedLanguage
     : (config.identity.defaultLanguage ?? config.languages[0]);

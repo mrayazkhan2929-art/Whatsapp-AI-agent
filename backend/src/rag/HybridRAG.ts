@@ -5,6 +5,7 @@ import {checkTenantReferences} from '../api/tenant.js'
 import {KnowledgeIngestion} from './KnowledgeIngestion.js'
 import {executionTrace} from '../modules/observability/ExecutionTraceService.js'
 import {textDigest} from '../modules/observability/TracePrivacy.js'
+import type { EffectiveAgentRuntimeConfig } from '../modules/config/RuntimeConfigResolver.js'
 
 export interface KnowledgeHit{ id:string;content:string;metadata:Record<string,unknown>|null;document_id:string;version_id:string;version_number:number;chunk_index:number;score:number;knowledgeBaseId:string }
 export interface RetrievalTrace{agentVersionId:string;knowledgeBaseIds:string[];hits:Array<{knowledgeBaseId:string;documentId:string;versionId:string;versionNumber:number;chunkId:string;chunkIndex:number;score:number}>;quarantinedChunkIds:string[];mode:'hybrid'|'lexical';degraded:boolean}
@@ -15,6 +16,28 @@ export function knowledgeDataMessage(hits:KnowledgeHit[]):string{return 'UNTRUST
 export class HybridRAG{
  private readonly db:SupabaseClient|null
  constructor(db?:SupabaseClient,private readonly embed=(text:string)=>EmbeddingService.embed(text)){this.db=db??(isSupabaseConfigured()?getSupabaseAdmin():null)}
+ // Internal callers already hold a tenant-validated published snapshot. The SQL
+ // search RPC still revalidates the live pointer, KB and every document parent.
+ async retrieveVerified(query:string,runtime:EffectiveAgentRuntimeConfig,limit=5){
+  const org=runtime.orgId,version=runtime.publishedVersionId,ids=runtime.config?.knowledgeBaseIds??[]
+  if(!this.db||!version||!ids.length)return {context:'',trace:undefined,hits:[] as KnowledgeHit[]}
+  const trace:RetrievalTrace={agentVersionId:version,knowledgeBaseIds:[...ids],hits:[],quarantinedChunkIds:[],mode:'lexical',degraded:false}
+  const read=async(kb:string,embedding:number[]|null)=>{
+   const result=await this.db!.rpc('search_knowledge_documents',{p_org:org,p_version:version,p_kb:kb,p_query:query.slice(0,2000),p_embedding:embedding,p_limit:Math.min(limit*2,50)})
+   if(result.error){trace.degraded=true;return [] as KnowledgeHit[]}
+   return (result.data??[]).filter((hit:KnowledgeHit)=>{if(unsafeKnowledge(hit.content)){trace.quarantinedChunkIds.push(hit.id);return false}return true}).map((hit:KnowledgeHit)=>({...hit,knowledgeBaseId:kb})) as KnowledgeHit[]
+  }
+  const [lexical,embedding]=await Promise.all([
+   Promise.all(ids.map(kb=>read(kb,null))),
+   EmbeddingService.isAvailable()?EmbeddingService.embed(query,1500).catch(()=>{trace.degraded=true;return null}):Promise.resolve(null),
+  ])
+  const semantic=embedding&&EmbeddingService.valid(embedding)?await Promise.all(ids.map(kb=>read(kb,embedding))):[]
+  if(semantic.length)trace.mode='hybrid'
+  const hits=fuseKnowledge(semantic.flat(),lexical.flat(),limit)
+  trace.hits=hits.map(h=>({knowledgeBaseId:h.knowledgeBaseId,documentId:h.document_id,versionId:h.version_id,versionNumber:h.version_number,chunkId:h.id,chunkIndex:h.chunk_index,score:h.score}))
+  executionTrace.tool('knowledge.search',{knowledgeBaseIds:ids,agentVersionId:version,querySHA256:textDigest(query)},{sources:trace.hits,mode:trace.mode,degraded:trace.degraded})
+  return {context:hits.length?knowledgeDataMessage(hits):'',trace,hits}
+ }
  async retrieve(query:string,org:string,version:string,kbIds:string[],limit=5){
   const trace:RetrievalTrace={agentVersionId:version,knowledgeBaseIds:[...kbIds],hits:[],quarantinedChunkIds:[],mode:'lexical',degraded:false}
   if(!this.db||!version||!kbIds.length)return{context:'',trace,hits:[] as KnowledgeHit[]}
