@@ -1,0 +1,120 @@
+{
+  "passed": 28,
+  "expectedFailures": 0,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "roundtrips the current API pagination cursor",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > Hi routes to general",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > office address routes to company",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > 2BR Dubai Marina under AED 2M routes to property",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > Connect me with an agent routes to agent",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses AED 2M",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses AED 750k",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses 1,900,000",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > extracts English Marina, bedrooms and budget",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > keeps prior area and bedrooms when the user supplies a budget",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves the Phase 0 checkpoint outside explicitly authorized phase paths",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves the Phase 1 source checkpoint outside the Phase 2 change allowlist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "resolves only the supplied server tenant, with no global default",
+      "outcome": "PASS"
+    },
+    {
+      "name": "strips forged IDs and timestamps at the service write boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "does not share cached company configuration and applies the next saved change",
+      "outcome": "PASS"
+    },
+    {
+      "name": "does not substitute legacy domains or office locations in the sanitizer",
+      "outcome": "PASS"
+    },
+    {
+      "name": "uses only configured leadership facts, with no hardcoded CEO fallback",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"logo_url\":\"javascript:alert(1)\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"website\":\"file:///private\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"timezone\":\"Invalid/Zone\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"email\":\"invalid\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"service_areas\":[\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\"]}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"social_links\":{\"social\":\"data:image/png,x\"}}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "surfaces database failures instead of returning fabricated facts",
+      "outcome": "PASS"
+    },
+    {
+      "name": "both prompt builders consume tenant company facts",
+      "outcome": "PASS"
+    },
+    {
+      "name": "company CEO, logo and Arabic contact questions use company facts while property searches retain their lane",
+      "outcome": "PASS"
+    },
+    {
+      "name": "existing login form labels are usable and exposes server errors inline",
+      "outcome": "PASS"
+    }
+  ]
+}

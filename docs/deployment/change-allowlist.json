@@ -1,0 +1,4 @@
+[
+  ".env.example",
+  "tests/unit/source-safety.test.ts"
+]

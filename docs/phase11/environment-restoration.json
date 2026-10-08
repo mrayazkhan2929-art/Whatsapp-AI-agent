@@ -1,0 +1,26 @@
+{
+  "verifiedAt": "2026-10-08T10:11:34.772Z",
+  "appliedToLiveProject": false,
+  "userContainers": [
+    {
+      "id": "403da014bcdcc029fff4b92e0b68106b42122114370e25227ada7b5b76b343da",
+      "startedAt": "2026-10-08T08:34:35.516155327Z",
+      "name": "iere-redis"
+    },
+    {
+      "id": "4d9f47f74e88dc7e1f4e2e99e221f94d4bea39e65db47bf8b4d20c80307d3852",
+      "startedAt": "2026-10-08T08:34:35.523294442Z",
+      "name": "iere-supabase-db"
+    }
+  ],
+  "comparison": "Phase 10 container IDs and the Phase 11 pre-edit checkpoint; current Docker StartedAt must predate Phase 11",
+  "phase10StartTimesMatch": false,
+  "userContainerIdentitiesAndStartTimesUnchanged": true,
+  "phase11CheckpointCreatedAt": "2026-10-08T12:37:56.8657450+04:00",
+  "remainingPhase11Containers": [],
+  "remainingPhase11Volumes": [],
+  "remainingPhase11Networks": [],
+  "developmentServicesInitiallyRunning": false,
+  "developmentServicesRunningAfter": false,
+  "developmentListeners": []
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "command": "npm --workspace frontend run typecheck",
+    "exitCode": 0
+  },
+  {
+    "command": "npm run typecheck:tests",
+    "exitCode": 0
+  },
+  {
+    "command": "npm --workspace frontend exec -- eslint src/components/pages/AIStudio.tsx",
+    "exitCode": 0
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0
+  },
+  {
+    "command": "node scripts/phase3-db.mjs tests/tenant-db/agent-versions.test.ts -t browser",
+    "exitCode": 0,
+    "passed": 2,
+    "filteredOut": 42
+  },
+  {
+    "command": "node scripts/phase3-files.mjs",
+    "exitCode": 0
+  },
+  {
+    "command": "npm run test:unit (final preservation check)",
+    "exitCode": 0,
+    "passed": 38
+  }
+]

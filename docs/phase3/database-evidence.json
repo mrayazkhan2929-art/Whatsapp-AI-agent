@@ -1,0 +1,166 @@
+{
+  "fullRun": "test-results/phase3-db-1791366696405",
+  "distribution": {
+    "distribution": "self-hosted/v0.8.2",
+    "bootstrapBase": "https://raw.githubusercontent.com/supabase/supabase/self-hosted/v0.8.2/docker/volumes/db/",
+    "images": {
+      "db": "supabase/postgres:17.6.1.136@sha256:f371b5f3f2ac0a05703f33d6e6134515fb2498cab708fb948a0aeb7481467c00",
+      "auth": "supabase/gotrue:v2.196.0@sha256:c0c25187a6b835e65a6f6e6c6b39d090e832d40e6de5186f2c038e0411944232",
+      "rest": "postgrest/postgrest:v14.17@sha256:c9dc201e555f5d8e37e7f39cdd4df0229774996e213bfd7de8d10ac609030f2c"
+    },
+    "loopbackOnly": true
+  },
+  "migrations": {
+    "applied": [
+      "001_initial_schema.sql",
+      "002_pgvector.sql",
+      "003_properties_seed.sql",
+      "004_team_members_seed.sql",
+      "005_rls_policies.sql",
+      "006_vector_functions.sql",
+      "007_nudge_functions.sql",
+      "008_sentiment_functions.sql",
+      "009_alert_functions.sql",
+      "010_indirect_properties_inventory_gaps.sql",
+      "011_message_deduplication.sql",
+      "011_properties_distress_deal.sql",
+      "012_agent_assignment.sql",
+      "013_contact_memory_and_cleanup.sql",
+      "014_ai_pipeline_cleanup.sql",
+      "015_runtime_routing_and_data_cleanup.sql",
+      "016_fix_conversations_unique_constraint.sql",
+      "017_tenant_data_api_guard.sql",
+      "018_organization_profiles.sql",
+      "019_agent_versions.sql",
+      "020_agent_runtime_links.sql"
+    ],
+    "productionMigrationsAdded": 2,
+    "appliedToLiveProject": false
+  },
+  "agentUpgrade": {
+    "legacyColumnsPreserved": true,
+    "everyExistingAgentBackfilled": true,
+    "existingAgents": 3,
+    "appliedToLiveProject": false
+  },
+  "channelUpgrade": {
+    "ambiguousOrganizationLinks": 0,
+    "singleAgentOrganizationLinks": 1,
+    "arbitraryFallback": false
+  },
+  "suites": {
+    "tenant": {
+      "requests": 106,
+      "tenantBSnapshotChecks": 76,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "agents",
+        "devices",
+        "properties",
+        "contacts",
+        "conversations",
+        "messages",
+        "knowledge_bases",
+        "knowledge_chunks",
+        "team_members",
+        "flows",
+        "flow_steps",
+        "bookings",
+        "nudge_jobs",
+        "handoff_events",
+        "inventory_gaps",
+        "contact_flows",
+        "lead_assignments",
+        "lead_scores",
+        "baileys_sessions",
+        "notifications",
+        "notification_preferences",
+        "contact_memory",
+        "alerts",
+        "sentiment_history"
+      ],
+      "productionMigrationsAdded": 1,
+      "appliedToLiveProject": false
+    },
+    "company": {
+      "requests": 69,
+      "tenantBSnapshotChecks": 41,
+      "snapshotTables": [
+        "organization_profiles",
+        "users",
+        "organizations",
+        "contacts",
+        "conversations",
+        "messages"
+      ],
+      "browserErrors": [],
+      "providerCalls": 0,
+      "whatsAppCalls": 0,
+      "externalBackendRequests": 0,
+      "frontendProviderCredentials": "removed by harness",
+      "appliedToLiveProject": false
+    },
+    "agent": {
+      "requests": 180,
+      "tenantBSnapshotChecks": 44,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_config_events",
+        "agent_version_tools",
+        "agent_version_knowledge_bases",
+        "agent_channel_links",
+        "devices",
+        "knowledge_bases",
+        "flows",
+        "contacts",
+        "conversations",
+        "messages"
+      ],
+      "externalRequests": 0,
+      "browserErrors": [],
+      "providerAndGateway": "stubbed in backend; frontend provider credentials removed",
+      "appliedToLiveProject": false
+    }
+  },
+  "aggregate": {
+    "authenticatedHttpRequests": 355,
+    "tenantBSnapshotChecks": 161,
+    "crossTenantReads": 0,
+    "crossTenantWrites": 0,
+    "arbitraryAgentOrOrganizationFallback": 0
+  },
+  "supplementalBrowserRun": {
+    "directory": "test-results/phase3-db-1791367080840",
+    "evidence": {
+      "requests": 6,
+      "tenantBSnapshotChecks": 2,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_config_events",
+        "agent_version_tools",
+        "agent_version_knowledge_bases",
+        "agent_channel_links",
+        "devices",
+        "knowledge_bases",
+        "flows",
+        "contacts",
+        "conversations",
+        "messages"
+      ],
+      "externalRequests": 0,
+      "browserErrors": [],
+      "providerAndGateway": "stubbed in backend; frontend provider credentials removed",
+      "appliedToLiveProject": false
+    }
+  },
+  "appliedToLiveProject": false
+}

@@ -1,0 +1,94 @@
+{
+  "reason": "Windows EPERM from workspace development servers; Next auto-install drift restored from checkpoint",
+  "validTestResults": false,
+  "commands": [
+    {
+      "command": "npm ci",
+      "exitCode": 4294963248,
+      "seconds": 2.6,
+      "log": "docs/phase4/logs/npm-ci.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 1,
+      "seconds": 0.7,
+      "log": "docs/phase4/logs/npm-run-typecheck.log"
+    },
+    {
+      "command": "npm run typecheck:tests",
+      "exitCode": 1,
+      "seconds": 0.3,
+      "log": "docs/phase4/logs/npm-run-typecheck-tests.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 1,
+      "seconds": 0.6,
+      "log": "docs/phase4/logs/npm-run-lint.log"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 1,
+      "seconds": 0.6,
+      "log": "docs/phase4/logs/npm-run-build.log"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 1,
+      "seconds": 0.3,
+      "log": "docs/phase4/logs/npm-run-test-unit.log"
+    },
+    {
+      "command": "npm run test:integration",
+      "exitCode": 1,
+      "seconds": 0.3,
+      "log": "docs/phase4/logs/npm-run-test-integration.log"
+    },
+    {
+      "command": "npm run test:tenant",
+      "exitCode": 1,
+      "seconds": 0.3,
+      "log": "docs/phase4/logs/npm-run-test-tenant.log"
+    },
+    {
+      "command": "npm run test:tenant:strict",
+      "exitCode": 1,
+      "seconds": 0.6,
+      "log": "docs/phase4/logs/npm-run-test-tenant-strict.log"
+    },
+    {
+      "command": "npm run test:ai-regression",
+      "exitCode": 1,
+      "seconds": 0.3,
+      "log": "docs/phase4/logs/npm-run-test-ai-regression.log"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 1,
+      "seconds": 0.3,
+      "log": "docs/phase4/logs/npm-run-test-e2e.log"
+    },
+    {
+      "command": "npm run test:all",
+      "exitCode": 1,
+      "seconds": 0.6,
+      "log": "docs/phase4/logs/npm-run-test-all.log"
+    },
+    {
+      "command": "npm run test:strict",
+      "exitCode": 1,
+      "seconds": 0.6,
+      "log": "docs/phase4/logs/npm-run-test-strict.log"
+    },
+    {
+      "command": "npm run test:properties:db",
+      "exitCode": 1,
+      "seconds": 0.4,
+      "log": "docs/phase4/logs/npm-run-test-properties-db.log"
+    }
+  ],
+  "restoredFiles": [
+    "frontend/package.json",
+    "package-lock.json"
+  ]
+}

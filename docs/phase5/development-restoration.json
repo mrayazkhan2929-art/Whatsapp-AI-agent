@@ -1,0 +1,15 @@
+{
+  "BackendProcessId": 10880,
+  "FrontendProcessId": 5652,
+  "commandsRestored": true,
+  "healthChecks": [
+    {
+      "url": "http://127.0.0.1:3001/healthz",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3000/login",
+      "status": 200
+    }
+  ]
+}

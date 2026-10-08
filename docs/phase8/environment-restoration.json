@@ -1,0 +1,23 @@
+{
+  "verifiedAt": "2026-10-07T14:38:11.865Z",
+  "appliedToLiveProject": false,
+  "userContainers": [
+    {
+      "id": "403da014bcdcc029fff4b92e0b68106b42122114370e25227ada7b5b76b343da",
+      "startedAt": "2026-10-07T09:57:47.139276786Z",
+      "name": "iere-redis"
+    },
+    {
+      "id": "4d9f47f74e88dc7e1f4e2e99e221f94d4bea39e65db47bf8b4d20c80307d3852",
+      "startedAt": "2026-10-07T09:57:48.361109099Z",
+      "name": "iere-supabase-db"
+    }
+  ],
+  "userContainerIdentitiesAndStartTimesUnchanged": true,
+  "remainingPhase8Containers": [],
+  "remainingPhase8Volumes": [],
+  "remainingPhase8Networks": [],
+  "developmentServicesInitiallyRunning": false,
+  "developmentServicesRunningAfter": false,
+  "developmentListeners": []
+}

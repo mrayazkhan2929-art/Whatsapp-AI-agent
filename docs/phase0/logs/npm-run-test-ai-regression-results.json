@@ -1,0 +1,77 @@
+{
+  "passed": 6,
+  "expectedFailures": 9,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "real MessageRouter persists text, invokes AI and sends through its gateway abstraction",
+      "outcome": "PASS"
+    },
+    {
+      "name": "image inbound is persisted without generating a text reply",
+      "outcome": "PASS"
+    },
+    {
+      "name": "[XFAIL] P5 inbound persistence must carry the original WhatsApp ID",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected undefined to be 'fixture-wa-123' // Object.is equality"
+    },
+    {
+      "name": "[XFAIL] P5 duplicate inbound twice must execute and send once",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { executions: 2, sends: 2 } to deeply equal { executions: 1, sends: 1 }"
+    },
+    {
+      "name": "[XFAIL] P5 duplicate inbound 10 concurrently must execute and send once",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { executions: 10, sends: 10 } to deeply equal { executions: 1, sends: 1 }"
+    },
+    {
+      "name": "[XFAIL] P5 duplicate inbound after new router instance must execute and send once",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { executions: 2, sends: 2 } to deeply equal { executions: 1, sends: 1 }"
+    },
+    {
+      "name": "[XFAIL] P6 handoff flag must persist a real handoff lifecycle event",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected [] to have a length of 1 but got +0"
+    },
+    {
+      "name": "Hi enters the existing general AI path",
+      "outcome": "PASS"
+    },
+    {
+      "name": "office address uses the real company handler without property search",
+      "outcome": "PASS"
+    },
+    {
+      "name": "2BR Dubai Marina under AED 2M forwards current structured criteria",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Connect me with an agent returns the existing handoff flag",
+      "outcome": "PASS"
+    },
+    {
+      "name": "[XFAIL] P4 exact REF-123 request must reach an exact lookup before area clarification",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { type: 'defer_to_ai', language: 'en' } to match object { type: 'query', …(1) }\n(1 matching property omitted from actual)"
+    },
+    {
+      "name": "[XFAIL] P4 another option must stay in the property lane with existing criteria",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { type: 'defer_to_ai', language: 'en' } to match object { Object (type, data) }\n(1 matching property omitted from actual)"
+    },
+    {
+      "name": "[XFAIL] P4 Arabic property request must extract area, bedrooms, budget and transaction",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { shouldSearch: true, …(6) } to match object { area: 'Marina', bedrooms: '2', …(3) }\n(2 matching properties omitted from actual)"
+    },
+    {
+      "name": "[XFAIL] P2 company facts must differ between independently configured tenants",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected '🏢 *Investment Experts Real Estate*\\n…' to not deeply equal '🏢 *Investment Experts Real Estate*\\n…'"
+    }
+  ]
+}

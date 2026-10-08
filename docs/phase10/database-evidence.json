@@ -1,0 +1,1583 @@
+{
+  "localStackDirectory": "F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\test-results\\phase10-db-1791388909871",
+  "appliedToLiveProject": false,
+  "distribution": {
+    "distribution": "self-hosted/v0.8.2",
+    "bootstrapBase": "https://raw.githubusercontent.com/supabase/supabase/self-hosted/v0.8.2/docker/volumes/db/",
+    "images": {
+      "redis": "redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952",
+      "db": "supabase/postgres:17.6.1.136@sha256:f371b5f3f2ac0a05703f33d6e6134515fb2498cab708fb948a0aeb7481467c00",
+      "auth": "supabase/gotrue:v2.196.0@sha256:c0c25187a6b835e65a6f6e6c6b39d090e832d40e6de5186f2c038e0411944232",
+      "rest": "postgrest/postgrest:v14.17@sha256:c9dc201e555f5d8e37e7f39cdd4df0229774996e213bfd7de8d10ac609030f2c"
+    },
+    "loopbackOnly": true
+  },
+  "migrations": {
+    "applied": [
+      "001_initial_schema.sql",
+      "002_pgvector.sql",
+      "003_properties_seed.sql",
+      "004_team_members_seed.sql",
+      "005_rls_policies.sql",
+      "006_vector_functions.sql",
+      "007_nudge_functions.sql",
+      "008_sentiment_functions.sql",
+      "009_alert_functions.sql",
+      "010_indirect_properties_inventory_gaps.sql",
+      "011_message_deduplication.sql",
+      "011_properties_distress_deal.sql",
+      "012_agent_assignment.sql",
+      "013_contact_memory_and_cleanup.sql",
+      "014_ai_pipeline_cleanup.sql",
+      "015_runtime_routing_and_data_cleanup.sql",
+      "016_fix_conversations_unique_constraint.sql",
+      "017_tenant_data_api_guard.sql",
+      "018_organization_profiles.sql",
+      "019_agent_versions.sql",
+      "020_agent_runtime_links.sql",
+      "021_conversation_state.sql",
+      "022_property_identity_and_media.sql",
+      "023_message_idempotency.sql",
+      "024_agent_routing_rules.sql",
+      "025_handoff_lifecycle.sql",
+      "026_knowledge_documents.sql",
+      "027_agent_studio.sql",
+      "028_ai_observability.sql",
+      "029_audit_logs.sql",
+      "030_device_runtime_leases.sql"
+    ],
+    "productionMigrationsAdded": 1,
+    "appliedToLiveProject": false
+  },
+  "observabilityUpgrade": {
+    "historicalRowsPreserved": true,
+    "appliedToLiveProject": false
+  },
+  "reliabilityUpgrade": {
+    "historicalRowsPreserved": true,
+    "appliedToLiveProject": false
+  },
+  "affectedSuitesRechecked": {
+    "command": "node scripts/phase10-db.mjs tests/tenant-db/knowledge-lifecycle.test.ts tests/tenant-db/device-reliability.test.ts",
+    "exitCode": 0,
+    "seconds": 150,
+    "log": "docs/phase10/logs/indexing-recheck.log",
+    "directory": "F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\test-results\\phase10-db-1791389856227",
+    "tests": {
+      "passed": 103,
+      "failed": 0,
+      "total": 103,
+      "pending": 0
+    }
+  },
+  "http": {
+    "http-evidence": {
+      "requests": 106,
+      "tenantBSnapshotChecks": 76,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "agents",
+        "devices",
+        "properties",
+        "contacts",
+        "conversations",
+        "messages",
+        "knowledge_bases",
+        "knowledge_chunks",
+        "team_members",
+        "flows",
+        "flow_steps",
+        "bookings",
+        "nudge_jobs",
+        "handoff_events",
+        "inventory_gaps",
+        "contact_flows",
+        "lead_assignments",
+        "lead_scores",
+        "baileys_sessions",
+        "notifications",
+        "notification_preferences",
+        "contact_memory",
+        "alerts",
+        "sentiment_history"
+      ],
+      "productionMigrationsAdded": 1,
+      "appliedToLiveProject": false
+    },
+    "company-http-evidence": {
+      "requests": 69,
+      "tenantBSnapshotChecks": 41,
+      "snapshotTables": [
+        "organization_profiles",
+        "users",
+        "organizations",
+        "contacts",
+        "conversations",
+        "messages"
+      ],
+      "browserErrors": [],
+      "providerCalls": 0,
+      "whatsAppCalls": 0,
+      "externalBackendRequests": 0,
+      "frontendProviderCredentials": "removed by harness",
+      "appliedToLiveProject": false
+    },
+    "agent-http-evidence": {
+      "requests": 180,
+      "tenantBSnapshotChecks": 44,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_config_events",
+        "agent_version_tools",
+        "agent_version_knowledge_bases",
+        "agent_channel_links",
+        "devices",
+        "knowledge_bases",
+        "flows",
+        "contacts",
+        "conversations",
+        "messages"
+      ],
+      "externalRequests": 0,
+      "browserErrors": [],
+      "providerAndGateway": "stubbed in backend; frontend provider credentials removed",
+      "appliedToLiveProject": false
+    },
+    "property-http-evidence": {
+      "requests": 140,
+      "tenantBSnapshotChecks": 52,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "properties",
+        "property_media",
+        "contacts",
+        "contact_memory",
+        "conversations",
+        "conversation_states",
+        "messages",
+        "inventory_gaps",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_config_events",
+        "agent_channel_links"
+      ],
+      "exactReferenceAssertions": 53,
+      "externalRequests": 0,
+      "browserErrors": [],
+      "providerAndWhatsApp": "stubbed; provider configured with a local dummy key and no calls expected",
+      "appliedToLiveProject": false
+    },
+    "message-http-evidence": {
+      "tenantBSnapshotChecks": 28,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "devices",
+        "contacts",
+        "contact_memory",
+        "conversations",
+        "conversation_states",
+        "messages",
+        "message_receipts",
+        "handoff_events"
+      ],
+      "requests": 6,
+      "nonlocalRequests": 0,
+      "browserErrors": [],
+      "scenarios": [
+        {
+          "mode": "twice",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        },
+        {
+          "mode": "10 concurrently",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        },
+        {
+          "mode": "two independent router replicas",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        },
+        {
+          "mode": "actual process restart",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        },
+        {
+          "mode": "two actual processes, 10 concurrent",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        }
+      ],
+      "providerAndWhatsApp": "stubbed at the existing orchestration/transport boundaries; real database/Auth/REST and child processes",
+      "appliedToLiveProject": false
+    },
+    "handoff-http-evidence": {
+      "tenantBSnapshotChecks": 43,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "team_members",
+        "agent_routing_rules",
+        "contacts",
+        "conversations",
+        "conversation_states",
+        "messages",
+        "handoff_events",
+        "handoff_notifications",
+        "devices"
+      ],
+      "requests": 50,
+      "externalRequests": 0,
+      "browserErrors": [],
+      "scenarios": [
+        {
+          "text": "Connect me with an agent",
+          "detected": true,
+          "providerCalls": 0
+        },
+        {
+          "text": "أريد التحدث مع موظف",
+          "detected": true,
+          "providerCalls": 0
+        },
+        {
+          "case": "human active",
+          "AIExecutions": 0,
+          "AISends": 0,
+          "AIInserts": 0
+        },
+        {
+          "case": "two actual restarted processes",
+          "AIExecutions": 0,
+          "AISends": 0
+        }
+      ],
+      "explicitDetection": "English and Arabic fixture corpus plus real WhatsApp router",
+      "AIOutboundWhileHumanActive": 0,
+      "WhatsAppAndProviders": "stubbed",
+      "appliedToLiveProject": false
+    },
+    "knowledge-http-evidence": {
+      "tenantBSnapshotChecks": 61,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "knowledge_bases",
+        "knowledge_chunks",
+        "knowledge_documents",
+        "knowledge_document_versions",
+        "knowledge_document_chunks",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_version_knowledge_bases"
+      ],
+      "requests": 110,
+      "externalRequests": 0,
+      "browserErrors": [],
+      "traces": [
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "f469fd0c-e475-43ed-98e9-4fff43c78aac",
+              "versionId": "a35134a6-f925-47f4-b3fa-91971bfd17a7",
+              "versionNumber": 1,
+              "chunkId": "7b04190f-ee61-41f1-b78c-e8ab148d551a",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "f469fd0c-e475-43ed-98e9-4fff43c78aac",
+              "versionId": "a35134a6-f925-47f4-b3fa-91971bfd17a7",
+              "versionNumber": 1,
+              "chunkId": "7b04190f-ee61-41f1-b78c-e8ab148d551a",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "d1339252-1c1c-4dd5-a385-6961d94227ca",
+              "versionId": "0b5d4cdd-739d-4b36-83c6-6048029d3452",
+              "versionNumber": 1,
+              "chunkId": "36030c98-9bac-4736-be7b-8ecf529605e1",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "b185f5ed-e90a-461b-9f9f-fb6270ad637b",
+              "versionId": "d683a47a-e344-44be-9dea-617601d6b9a5",
+              "versionNumber": 1,
+              "chunkId": "796be162-da3c-47c5-86aa-df8d67bbcce2",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "b185f5ed-e90a-461b-9f9f-fb6270ad637b",
+              "versionId": "d683a47a-e344-44be-9dea-617601d6b9a5",
+              "versionNumber": 1,
+              "chunkId": "796be162-da3c-47c5-86aa-df8d67bbcce2",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "194944b3-233d-4c57-b0f4-9f850711a9e9",
+              "versionId": "842c231e-9794-4563-b3b5-795bffc69457",
+              "versionNumber": 1,
+              "chunkId": "5cd5dc7d-eec6-44a1-90c1-76f1117e5e7d",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "693443ae-ddea-4da0-9156-b6ff2ab7d3e4",
+              "versionId": "4be57c5c-e417-4635-a499-9f60af6f6387",
+              "versionNumber": 1,
+              "chunkId": "92b33c66-190a-45fa-96fc-941ec0703294",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "dd48aa3a-e876-4288-8c4c-948c167fba32",
+              "versionId": "195d9fce-85bb-440a-8eee-e68848532159",
+              "versionNumber": 1,
+              "chunkId": "7e0e1ba8-fd2b-4c69-ad9a-593546dc7f4c",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [
+            "70a143ff-28f8-413a-bdfc-d41a44543961",
+            "a445ea79-64fe-466d-974d-3d0e08490697"
+          ],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "f0d546e7-eeb3-4518-9323-b27cb6211229",
+          "knowledgeBaseIds": [
+            "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "0ca00ff4-4a26-4b4a-b9c9-b2beba521dd2",
+              "documentId": "7be9de90-41fb-413e-9978-ad5dd5afe6cb",
+              "versionId": "daa00a76-e34c-4dde-b814-8e91b53829f0",
+              "versionNumber": 2,
+              "chunkId": "1a731450-798a-4878-b2f3-7ae744e6453b",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        }
+      ],
+      "providersAndEmbedding": "stubbed",
+      "realAuthHttpSqlAndBrowsers": true,
+      "appliedToLiveProject": false
+    },
+    "studio-http-evidence": {
+      "requests": 296,
+      "tenantBSnapshotChecks": 32,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_config_events",
+        "agent_version_tools",
+        "agent_version_knowledge_bases",
+        "agent_channel_links",
+        "devices",
+        "knowledge_bases",
+        "flows",
+        "contacts",
+        "conversations",
+        "messages",
+        "properties",
+        "inventory_gaps",
+        "knowledge_chunks",
+        "knowledge_documents",
+        "knowledge_document_versions",
+        "knowledge_document_chunks",
+        "agent_playground_runs",
+        "team_members",
+        "bookings"
+      ],
+      "externalRequests": 0,
+      "browserErrors": [],
+      "providerAndGateway": "stubbed in backend; frontend provider credentials removed",
+      "appliedToLiveProject": false
+    },
+    "observability-http-evidence": {
+      "requests": 88,
+      "tenantBSnapshotChecks": 56,
+      "snapshotTables": [
+        "execution_traces",
+        "audit_logs",
+        "conversation_states",
+        "organizations",
+        "users",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_config_events",
+        "agent_version_tools",
+        "agent_version_knowledge_bases",
+        "agent_channel_links",
+        "devices",
+        "knowledge_bases",
+        "flows",
+        "contacts",
+        "conversations",
+        "messages",
+        "properties",
+        "inventory_gaps",
+        "knowledge_chunks",
+        "knowledge_documents",
+        "knowledge_document_versions",
+        "knowledge_document_chunks",
+        "agent_playground_runs",
+        "team_members",
+        "bookings"
+      ],
+      "externalRequests": 0,
+      "browserErrors": [],
+      "evaluationCases": [
+        {
+          "category": "greeting",
+          "passed": true,
+          "traceId": "b1cfb7ce-5a1f-403b-985d-3ba92f6159b7",
+          "lane": "CHAT",
+          "language": "en"
+        },
+        {
+          "category": "company info",
+          "passed": true,
+          "traceId": "ec6cabc6-68ff-48c0-b5c7-089f45094979",
+          "lane": "COMPANY",
+          "language": "en"
+        },
+        {
+          "category": "exact property",
+          "passed": true,
+          "traceId": "cd31133a-2b9b-4520-bbc1-8fe01d7772e9",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "area search",
+          "passed": true,
+          "traceId": "8127d2a2-c563-44fc-bb90-59e12724c07b",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "budget",
+          "passed": true,
+          "traceId": "fb19d3f9-8db7-4396-a754-31455c9207ff",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "bedrooms",
+          "passed": true,
+          "traceId": "01daa753-00f2-46e8-9627-0eedcf1771fa",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "multi-constraint",
+          "passed": true,
+          "traceId": "1f99d680-60bb-4511-b4d8-fa54b3b470d7",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "no match",
+          "passed": true,
+          "traceId": "a911d23a-fd9a-452f-8433-a2d75af2bf65",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "alternative",
+          "passed": true,
+          "traceId": "a0260b5c-eb1a-43f9-98f5-c96f43639508",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "another option",
+          "passed": true,
+          "traceId": "ec0398af-e3f0-4eb4-a718-259a2a31dd1a",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "show me more",
+          "passed": true,
+          "traceId": "1b517b49-534c-4b6e-a805-747fb68b0385",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "rejection",
+          "passed": true,
+          "traceId": "4e8c3157-232d-4702-86ad-5f135992138a",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "agent info",
+          "passed": true,
+          "traceId": "c38a53fa-ddb7-40ef-9217-15c254c9ebe9",
+          "lane": "AGENT",
+          "language": "en"
+        },
+        {
+          "category": "handoff",
+          "passed": true,
+          "traceId": "0dedb738-a018-4b48-9b23-7d48d3f59a15",
+          "lane": "AGENT",
+          "language": "en"
+        },
+        {
+          "category": "booking",
+          "passed": true,
+          "traceId": "4992b9da-b469-4648-84d4-e17c5acdc562",
+          "lane": "AGENT",
+          "language": "en"
+        },
+        {
+          "category": "media",
+          "passed": true,
+          "traceId": "91f6bd12-daae-42ea-906a-492fd7b184ab",
+          "lane": "PROPERTY",
+          "language": "en"
+        },
+        {
+          "category": "ROI",
+          "passed": true,
+          "traceId": "2a7e17f3-e35a-4196-9274-b841fa36cc44",
+          "lane": "FAQ",
+          "language": "en"
+        },
+        {
+          "category": "knowledge",
+          "passed": true,
+          "traceId": "64034466-06ce-4331-9080-63fb30e3adde",
+          "lane": "CHAT",
+          "language": "en"
+        },
+        {
+          "category": "Arabic",
+          "passed": true,
+          "traceId": "2fa44c3d-3d2a-43c6-b43a-cdb300d808ec",
+          "lane": "PROPERTY",
+          "language": "ar"
+        },
+        {
+          "category": "mixed Arabic/English",
+          "passed": true,
+          "traceId": "c3752830-c3e8-4a69-8a7f-adb6b1f4c64d",
+          "lane": "PROPERTY",
+          "language": "ar"
+        },
+        {
+          "category": "negative sentiment",
+          "passed": true,
+          "traceId": "0f7bd80a-74f3-4145-8e99-1c2588772b5a",
+          "lane": "AGENT",
+          "language": "en"
+        },
+        {
+          "category": "prompt injection",
+          "passed": true,
+          "traceId": "82853e4c-0f53-4f1a-8c92-4a0f1aafa1f9",
+          "lane": "CHAT",
+          "language": "en"
+        },
+        {
+          "category": "duplicate inbound",
+          "passed": true,
+          "traceIds": [
+            "0a8761bd-bac2-4d22-a5a3-815010becf10",
+            "e2592ce5-f443-42eb-9d6c-25d8e7e5eb01"
+          ]
+        }
+      ],
+      "providerAndGateway": "stubbed; local Auth/REST/HTTP/browser real",
+      "appliedToLiveProject": false
+    },
+    "reliability-http-evidence": {
+      "requests": 16,
+      "tenantBSnapshotChecks": 42,
+      "externalRequests": 0,
+      "transport": "local stub; real gateway, leases, encryption, Redis, Auth and REST",
+      "scenarios": [
+        {
+          "name": "reads the own device despite forged organization query",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects foreign read",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects foreign connect with a forged body",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects foreign disconnect",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects foreign delete",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects cross-tenant credentials for own device",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "requires authentication",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "reads the own device despite forged organization query",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects foreign read",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects foreign connect with a forged body",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects foreign disconnect",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects foreign delete",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "rejects cross-tenant credentials for own device",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "requires authentication",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "a second API replica returns a controlled conflict without clearing owner credentials",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "encrypts credentials and preserves Buffer roundtrip under ownership",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "browser displays the authenticated device workspace without application errors",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "concurrent first acquisitions admit exactly one owner",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "reacquisition advances generation and old renew cannot resurrect it",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "an expired lease cannot renew even if no successor exists",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "foreign organization cannot acquire or revoke a device",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "foreign parent links are rejected for private tables",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "stale generations cannot update state, credentials or claim sends",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "unfenced auth mutation cannot clear an active owner",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "authenticated and anonymous REST cannot read leases, jobs or execute lease RPCs",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "a non-owner relays through the actual owner exactly once",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "notifications without preferred device select only a tenant-owned relay",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "competing notifications claim one physical send and queue stores IDs only",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "expired queued requests are cancelled without any transport call",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "conflicting send identities are rejected without another row",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "lost acknowledgement enters review and cannot be automatically resent",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "two embedding replicas process one version with one provider call",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "completed indexing notification can be recreated after parsing lease expires",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "unavailable Redis fails publication promptly, preserves work and shuts down cleanly",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "database receipt validation quarantines a mismatched acknowledgement",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "paused owner stops sending and successor advances generation",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "a stale worker cannot send after takeover",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "owner crash triggers bootstrap takeover and saved AI reply sends once",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "database owner polling drains queued sends when Redis is absent",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "graceful shutdown releases ownership while preserving reconnect status",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "crash after physical delivery leaves an uncertain send quarantined across takeover",
+          "tenantBUnchanged": true
+        },
+        {
+          "name": "an operator on another replica revokes ownership without clearing credentials remotely",
+          "tenantBUnchanged": true
+        }
+      ],
+      "appliedToLiveProject": false
+    }
+  },
+  "earlierUpgrades": {
+    "upgrade-check": {
+      "migration": "017_tenant_data_api_guard.sql",
+      "populatedTables": [
+        "agents",
+        "alert_templates",
+        "alerts",
+        "baileys_sessions",
+        "bookings",
+        "contact_flows",
+        "contact_memory",
+        "contacts",
+        "conversations",
+        "devices",
+        "flow_steps",
+        "flows",
+        "handoff_events",
+        "inventory_gaps",
+        "knowledge_bases",
+        "knowledge_chunks",
+        "lead_assignments",
+        "lead_scores",
+        "message_locks",
+        "message_replies",
+        "messages",
+        "notification_preferences",
+        "notification_rules",
+        "notifications",
+        "nudge_jobs",
+        "organizations",
+        "properties",
+        "sentiment_history",
+        "team_members",
+        "users"
+      ],
+      "dataUnchanged": true,
+      "before": {
+        "agents": {
+          "count": 1,
+          "sha256": "4bfd16a26d5f5a126169f7c5437438688e20925f49672d86fbebb14d655d7d2f"
+        },
+        "alert_templates": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "alerts": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "baileys_sessions": {
+          "count": 1,
+          "sha256": "dcb50f2a5d01cb6ab3246dfc9e3176545f61121bbe60c9b46378594bbd465ed6"
+        },
+        "bookings": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_flows": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_memory": {
+          "count": 1,
+          "sha256": "a8ea78fc56ae8d9f4f6a30567505ad68358684cec81ef62a72e9f1767c3c17d0"
+        },
+        "contacts": {
+          "count": 1,
+          "sha256": "f61736b440fa1bbef71e1b113874727c82c36e81d8537d5b2e259b8e3bab5af8"
+        },
+        "conversations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "devices": {
+          "count": 1,
+          "sha256": "cf6113e1d260975409fa16662e29b01af5d429fedd7ffb7b0ba69ed79cba256a"
+        },
+        "flow_steps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "flows": {
+          "count": 1,
+          "sha256": "6e639b66d6d89babea97fdf2538aabd036b87e0b2bf0490cbf553f47723d3a93"
+        },
+        "handoff_events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inventory_gaps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_bases": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_chunks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_scores": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_locks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_replies": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "messages": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_preferences": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_rules": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notifications": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "nudge_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organizations": {
+          "count": 1,
+          "sha256": "975f320de0e49c993e1f8dd7a0c0664062bdf58499b3840fbc465302dd94c47d"
+        },
+        "properties": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sentiment_history": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "team_members": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "users": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "after": {
+        "agents": {
+          "count": 1,
+          "sha256": "4bfd16a26d5f5a126169f7c5437438688e20925f49672d86fbebb14d655d7d2f"
+        },
+        "alert_templates": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "alerts": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "baileys_sessions": {
+          "count": 1,
+          "sha256": "dcb50f2a5d01cb6ab3246dfc9e3176545f61121bbe60c9b46378594bbd465ed6"
+        },
+        "bookings": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_flows": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_memory": {
+          "count": 1,
+          "sha256": "a8ea78fc56ae8d9f4f6a30567505ad68358684cec81ef62a72e9f1767c3c17d0"
+        },
+        "contacts": {
+          "count": 1,
+          "sha256": "f61736b440fa1bbef71e1b113874727c82c36e81d8537d5b2e259b8e3bab5af8"
+        },
+        "conversations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "devices": {
+          "count": 1,
+          "sha256": "cf6113e1d260975409fa16662e29b01af5d429fedd7ffb7b0ba69ed79cba256a"
+        },
+        "flow_steps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "flows": {
+          "count": 1,
+          "sha256": "6e639b66d6d89babea97fdf2538aabd036b87e0b2bf0490cbf553f47723d3a93"
+        },
+        "handoff_events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inventory_gaps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_bases": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_chunks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_scores": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_locks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_replies": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "messages": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_preferences": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_rules": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notifications": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "nudge_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organizations": {
+          "count": 1,
+          "sha256": "975f320de0e49c993e1f8dd7a0c0664062bdf58499b3840fbc465302dd94c47d"
+        },
+        "properties": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sentiment_history": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "team_members": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "users": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      }
+    },
+    "profile-upgrade-check": {
+      "migration": "018_organization_profiles.sql",
+      "existingDataUnchanged": true,
+      "noUnverifiedBackfill": true,
+      "before": {
+        "agents": {
+          "count": 1,
+          "sha256": "4bfd16a26d5f5a126169f7c5437438688e20925f49672d86fbebb14d655d7d2f"
+        },
+        "alert_templates": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "alerts": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "baileys_sessions": {
+          "count": 1,
+          "sha256": "dcb50f2a5d01cb6ab3246dfc9e3176545f61121bbe60c9b46378594bbd465ed6"
+        },
+        "bookings": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_flows": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_memory": {
+          "count": 1,
+          "sha256": "a8ea78fc56ae8d9f4f6a30567505ad68358684cec81ef62a72e9f1767c3c17d0"
+        },
+        "contacts": {
+          "count": 1,
+          "sha256": "f61736b440fa1bbef71e1b113874727c82c36e81d8537d5b2e259b8e3bab5af8"
+        },
+        "conversations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "devices": {
+          "count": 1,
+          "sha256": "cf6113e1d260975409fa16662e29b01af5d429fedd7ffb7b0ba69ed79cba256a"
+        },
+        "flow_steps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "flows": {
+          "count": 1,
+          "sha256": "6e639b66d6d89babea97fdf2538aabd036b87e0b2bf0490cbf553f47723d3a93"
+        },
+        "handoff_events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inventory_gaps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_bases": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_chunks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_scores": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_locks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_replies": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "messages": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_preferences": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_rules": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notifications": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "nudge_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organizations": {
+          "count": 1,
+          "sha256": "975f320de0e49c993e1f8dd7a0c0664062bdf58499b3840fbc465302dd94c47d"
+        },
+        "properties": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sentiment_history": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "team_members": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "users": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "after": {
+        "agents": {
+          "count": 1,
+          "sha256": "4bfd16a26d5f5a126169f7c5437438688e20925f49672d86fbebb14d655d7d2f"
+        },
+        "alert_templates": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "alerts": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "baileys_sessions": {
+          "count": 1,
+          "sha256": "dcb50f2a5d01cb6ab3246dfc9e3176545f61121bbe60c9b46378594bbd465ed6"
+        },
+        "bookings": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_flows": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_memory": {
+          "count": 1,
+          "sha256": "a8ea78fc56ae8d9f4f6a30567505ad68358684cec81ef62a72e9f1767c3c17d0"
+        },
+        "contacts": {
+          "count": 1,
+          "sha256": "f61736b440fa1bbef71e1b113874727c82c36e81d8537d5b2e259b8e3bab5af8"
+        },
+        "conversations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "devices": {
+          "count": 1,
+          "sha256": "cf6113e1d260975409fa16662e29b01af5d429fedd7ffb7b0ba69ed79cba256a"
+        },
+        "flow_steps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "flows": {
+          "count": 1,
+          "sha256": "6e639b66d6d89babea97fdf2538aabd036b87e0b2bf0490cbf553f47723d3a93"
+        },
+        "handoff_events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inventory_gaps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_bases": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_chunks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_scores": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_locks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_replies": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "messages": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_preferences": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_rules": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notifications": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "nudge_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organization_profiles": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organizations": {
+          "count": 1,
+          "sha256": "975f320de0e49c993e1f8dd7a0c0664062bdf58499b3840fbc465302dd94c47d"
+        },
+        "properties": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sentiment_history": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "team_members": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "users": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      }
+    },
+    "agent-upgrade-check": {
+      "legacyColumnsPreserved": true,
+      "everyExistingAgentBackfilled": true,
+      "existingAgents": 3,
+      "appliedToLiveProject": false
+    },
+    "channel-upgrade-check": {
+      "ambiguousOrganizationLinks": 0,
+      "singleAgentOrganizationLinks": 1,
+      "arbitraryFallback": false
+    },
+    "state-upgrade-check": {
+      "legacyMemoryPreserved": true,
+      "statesBeforeLazyBackfill": 0,
+      "appliedToLiveProject": false
+    },
+    "property-upgrade-check": {
+      "legacyPropertiesPreserved": true,
+      "ambiguousAliasesRetained": true,
+      "audit": "Property identity audit: 1 ambiguous aliases; retained for manual reconciliation",
+      "backfilledMedia": [
+        {
+          "media_type": "image",
+          "url": "https://cdn.example.invalid/legacy.jpg"
+        }
+      ],
+      "appliedToLiveProject": false
+    },
+    "message-upgrade-check": {
+      "existingMessagesPreserved": true,
+      "historicalDuplicateIDsRetained": true,
+      "noHistoricalIDsInvented": true,
+      "receipts": 1,
+      "audit": "Message identity audit: 1 ambiguous historical identities retained without device inference",
+      "appliedToLiveProject": false
+    },
+    "handoff-upgrade-check": {
+      "businessColumnsPreserved": true,
+      "teamPreserved": true,
+      "legacyHumanState": "HUMAN_ACTIVE",
+      "legacyCompatibilityHandledBy": "human",
+      "cutoverEvents": 1,
+      "updatedAtMayReflectCutover": true,
+      "appliedToLiveProject": false
+    },
+    "knowledge-upgrade-check": {
+      "existingChunksAndEmbeddingsPreserved": true,
+      "linkedChunks": 2,
+      "expectedValidChunks": 2,
+      "appliedToLiveProject": false
+    },
+    "studio-upgrade-check": {
+      "immutableAgentHistoryPreserved": true,
+      "appliedToLiveProject": false
+    }
+  },
+  "screenshotsReviewed": [
+    "docs/phase10/artifacts/reliability/device-runtime-desktop.png"
+  ]
+}

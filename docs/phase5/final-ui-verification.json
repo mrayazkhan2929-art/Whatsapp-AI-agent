@@ -1,0 +1,62 @@
+[
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "seconds": 4.8,
+    "log": "docs/phase5/logs/final-ui-typecheck.log"
+  },
+  {
+    "command": "npm run typecheck:tests",
+    "exitCode": 0,
+    "seconds": 3.2,
+    "log": "docs/phase5/logs/final-ui-test-typecheck.log"
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "seconds": 17,
+    "log": "docs/phase5/logs/final-ui-build.log"
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "seconds": 2.2,
+    "log": "docs/phase5/logs/final-ui-unit.log",
+    "tests": {
+      "passed": 95,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:all",
+    "exitCode": 0,
+    "seconds": 6.3,
+    "log": "docs/phase5/logs/final-ui-all.log",
+    "tests": {
+      "passed": 153,
+      "expectedFailures": 1,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npx eslint frontend/src/components/inbox/TransportStatus.tsx frontend/src/components/inbox/MessageThread.tsx \"frontend/src/app/api/v1/messages/[id]/route.ts\" frontend/src/app/api/conversations/route.ts",
+    "exitCode": 0,
+    "seconds": 2.2,
+    "log": "docs/phase5/logs/final-ui-lint.log"
+  },
+  {
+    "command": "npm run test:messages:db -- tests/tenant-db/message-idempotency.test.ts -t \"shows clear delivery review\"",
+    "exitCode": 0,
+    "seconds": 13.7,
+    "log": "docs/phase5/logs/final-ui-browser.log",
+    "tests": {
+      "passed": 1,
+      "failed": 0,
+      "total": 28,
+      "pending": 27
+    }
+  }
+]

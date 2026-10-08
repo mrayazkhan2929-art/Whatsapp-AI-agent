@@ -1,0 +1,22 @@
+[
+  "backend/package.json",
+  "backend/src/api/app.ts",
+  "backend/src/api/routes/chat.ts",
+  "backend/src/index.ts",
+  "backend/src/modules/ai/aiService.ts",
+  "backend/src/modules/ai/promptBuilder.ts",
+  "backend/src/modules/ai/router.ts",
+  "backend/src/queue/workers/EmbeddingWorker.ts",
+  "backend/src/rag/EmbeddingService.ts",
+  "backend/src/rag/HybridRAG.ts",
+  "backend/src/rag/KnowledgeIngestion.ts",
+  "backend/src/whatsapp/MessageRouter.ts",
+  "backend/src/whatsapp/OutboundMessageService.ts",
+  "frontend/next-env.d.ts",
+  "frontend/src/app/api/knowledge-bases/route.ts",
+  "frontend/src/components/pages/KnowledgeBasePage.tsx",
+  "frontend/src/components/routes/KnowledgeBaseDetailRoute.tsx",
+  "package-lock.json",
+  "package.json",
+  "tests/unit/source-safety.test.ts"
+]

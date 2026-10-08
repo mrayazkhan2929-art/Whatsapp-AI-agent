@@ -1,0 +1,24 @@
+{
+  "applied": [
+    "001_initial_schema.sql",
+    "002_pgvector.sql",
+    "003_properties_seed.sql",
+    "004_team_members_seed.sql",
+    "005_rls_policies.sql",
+    "006_vector_functions.sql",
+    "007_nudge_functions.sql",
+    "008_sentiment_functions.sql",
+    "009_alert_functions.sql",
+    "010_indirect_properties_inventory_gaps.sql",
+    "011_message_deduplication.sql",
+    "011_properties_distress_deal.sql",
+    "012_agent_assignment.sql",
+    "013_contact_memory_and_cleanup.sql",
+    "014_ai_pipeline_cleanup.sql",
+    "015_runtime_routing_and_data_cleanup.sql",
+    "016_fix_conversations_unique_constraint.sql",
+    "017_tenant_data_api_guard.sql"
+  ],
+  "productionMigrationsAdded": 1,
+  "appliedToLiveProject": false
+}

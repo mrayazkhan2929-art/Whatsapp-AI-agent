@@ -1,0 +1,935 @@
+{
+  "relations": [
+    {
+      "relname": "agent_channel_links",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "agent_config_events",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "agent_drafts",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "agent_playground_runs",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "agent_routing_rules",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "agent_version_knowledge_bases",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "agent_version_tools",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "agent_versions",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "agents",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "ai_agents",
+      "relkind": "v",
+      "relrowsecurity": false,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "alert_templates",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "alerts",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "audit_logs",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "baileys_sessions",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "bookings",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "contact_flows",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "contact_memory",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "contacts",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "conversation_flows",
+      "relkind": "v",
+      "relrowsecurity": false,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "conversation_states",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "conversations",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": true,
+      "user_write": false
+    },
+    {
+      "relname": "device_outbound_jobs",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "device_runtime_leases",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "devices",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "execution_traces",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "flow_steps",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "flows",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "handoff_events",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "handoff_notifications",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "inventory_gaps",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "knowledge_bases",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "knowledge_chunks",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "knowledge_document_chunks",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "knowledge_document_versions",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "knowledge_documents",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "lead_assignments",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "lead_scores",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "message_locks",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "message_receipts",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "message_replies",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "messages",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": true,
+      "user_write": false
+    },
+    {
+      "relname": "notification_preferences",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "notification_rules",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "notifications",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "nudge_jobs",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "organization_profiles",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "organizations",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "properties",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "property_media",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "sentiment_history",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "team_members",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "users",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "wa_session_keys",
+      "relkind": "v",
+      "relrowsecurity": false,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    },
+    {
+      "relname": "whatsapp_devices",
+      "relkind": "v",
+      "relrowsecurity": false,
+      "anon_read": false,
+      "user_read": false,
+      "user_write": false
+    }
+  ],
+  "functions": [
+    {
+      "proname": "adopt_knowledge_chunk",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "analyze_sentiment_trend",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "begin_knowledge_version",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "calculate_agent_response_rate",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "cancel_device_send",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "claim_device_send",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "claim_handoff_notification",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "claim_knowledge_version",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "claim_whatsapp_execution",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "claim_whatsapp_send",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "current_org_id",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=pg_catalog, public, auth"
+      ],
+      "anon_exec": false,
+      "user_exec": true
+    },
+    {
+      "proname": "device_runtime_lease",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "enqueue_device_send",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "evaluate_notification_rules",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "fenced_device_state",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "fenced_session_write",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "finish_device_send",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "finish_knowledge_version",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "finish_whatsapp_send",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "get_agent_sentiment_workload",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "get_alert_stats",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "get_handoff_stats",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "get_nudge_effectiveness",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "get_nudge_report",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "get_nudge_stats",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "get_routing_stats",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "get_user_notification_preferences",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "guard_agent_snapshot_links",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "guard_audit_record",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "guard_execution_trace",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "guard_handoff_message",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "guard_knowledge_document_links",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "guard_property_identity",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "guard_studio_handoff_reference",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "guard_tenant_links",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=pg_catalog, public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "match_knowledge_chunks",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "monitor_escalation_risks",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "mutate_agent_config",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "normalize_knowledge_text",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "onboard_organization",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=pg_catalog, public, auth"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "prepare_whatsapp_response",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "receive_whatsapp_message",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "reject_agent_history_mutation",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "save_conversation_state",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "search_draft_knowledge",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "search_knowledge_documents",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "set_related_org_id",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "set_updated_at",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "stop_whatsapp_execution",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "sync_legacy_compatibility_fields",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "track_notification_delivery",
+      "prosecdef": false,
+      "proconfig": null,
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "transition_handoff",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "unlink_agent_channel",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "validate_agent_routing_rule",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "validate_handoff_notification",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "validate_message_receipt",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "validate_transport_message",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=public"
+      ],
+      "anon_exec": false,
+      "user_exec": false
+    },
+    {
+      "proname": "visible_inbox_parent",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=pg_catalog, public"
+      ],
+      "anon_exec": false,
+      "user_exec": true
+    },
+    {
+      "proname": "visible_message_device",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=pg_catalog, public"
+      ],
+      "anon_exec": false,
+      "user_exec": true
+    }
+  ]
+}

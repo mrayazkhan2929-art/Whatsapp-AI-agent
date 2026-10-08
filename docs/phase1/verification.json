@@ -1,0 +1,173 @@
+[
+  {
+    "command": "npm ci",
+    "exitCode": 0,
+    "seconds": 23,
+    "log": "docs/phase1/logs/npm-ci.log"
+  },
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0,
+    "seconds": 4.7,
+    "log": "docs/phase1/logs/npm-run-typecheck.log"
+  },
+  {
+    "command": "npm run typecheck:tests",
+    "exitCode": 0,
+    "seconds": 3,
+    "log": "docs/phase1/logs/npm-run-typecheck-tests.log"
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 1,
+    "seconds": 10.4,
+    "log": "docs/phase1/logs/npm-run-lint.log"
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 0,
+    "seconds": 19.9,
+    "log": "docs/phase1/logs/npm-run-build.log"
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "seconds": 2.2,
+    "log": "docs/phase1/logs/npm-run-test-unit.log",
+    "tests": {
+      "passed": 12,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:integration",
+    "exitCode": 0,
+    "seconds": 0.9,
+    "log": "docs/phase1/logs/npm-run-test-integration.log",
+    "tests": {
+      "passed": 5,
+      "expectedFailures": 6,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:tenant",
+    "exitCode": 0,
+    "seconds": 1.3,
+    "log": "docs/phase1/logs/npm-run-test-tenant.log",
+    "tests": {
+      "passed": 35,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:tenant:strict",
+    "exitCode": 0,
+    "seconds": 1.6,
+    "log": "docs/phase1/logs/npm-run-test-tenant-strict.log",
+    "tests": {
+      "passed": 35,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:ai-regression",
+    "exitCode": 0,
+    "seconds": 0.9,
+    "log": "docs/phase1/logs/npm-run-test-ai-regression.log",
+    "tests": {
+      "passed": 7,
+      "expectedFailures": 9,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:e2e",
+    "exitCode": 0,
+    "seconds": 5.4,
+    "log": "docs/phase1/logs/npm-run-test-e2e.log",
+    "e2e": {
+      "startTime": "2026-10-06T16:51:10.214Z",
+      "duration": 4671.625,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  {
+    "command": "npm run test:all",
+    "exitCode": 0,
+    "seconds": 6.5,
+    "log": "docs/phase1/logs/npm-run-test-all.log",
+    "tests": {
+      "passed": 56,
+      "expectedFailures": 10,
+      "failed": 0,
+      "moduleErrors": []
+    },
+    "e2e": {
+      "startTime": "2026-10-06T16:51:18.053Z",
+      "duration": 3366.487,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  {
+    "command": "npm run test:strict",
+    "exitCode": 1,
+    "seconds": 2.5,
+    "log": "docs/phase1/logs/npm-run-test-strict.log",
+    "tests": {
+      "passed": 56,
+      "expectedFailures": 10,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:tenant:db",
+    "exitCode": 0,
+    "seconds": 32.2,
+    "log": "docs/phase1/logs/npm-run-test-tenant-db.log",
+    "tests": {
+      "passed": 76,
+      "failed": 0,
+      "total": 76
+    }
+  },
+  {
+    "command": "npm run test:tenant:db (immutable image digest and final harness rerun)",
+    "exitCode": 0,
+    "log": "docs/phase1/logs/database-http-evidence.json",
+    "tests": {
+      "passed": 76,
+      "failed": 0,
+      "total": 76
+    }
+  },
+  {
+    "command": "npm run typecheck:tests (after final diagnostic update)",
+    "exitCode": 0
+  },
+  {
+    "command": "npm run test:unit (after final documentation allowlist update)",
+    "exitCode": 0,
+    "tests": {
+      "passed": 12,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  }
+]

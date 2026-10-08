@@ -1,0 +1,56 @@
+{
+  "passed": 12,
+  "expectedFailures": 0,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "preserves the Phase 0 checkpoint outside the explicitly authorized Phase 1 paths",
+      "outcome": "PASS"
+    },
+    {
+      "name": "roundtrips the current API pagination cursor",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > Hi routes to general",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > office address routes to company",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > 2BR Dubai Marina under AED 2M routes to property",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > Connect me with an agent routes to agent",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses AED 2M",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses AED 750k",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses 1,900,000",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > extracts English Marina, bedrooms and budget",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > keeps prior area and bedrooms when the user supplies a budget",
+      "outcome": "PASS"
+    },
+    {
+      "name": "existing login form labels are usable and exposes server errors inline",
+      "outcome": "PASS"
+    }
+  ]
+}

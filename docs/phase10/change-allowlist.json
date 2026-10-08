@@ -1,0 +1,18 @@
+[
+  "backend/src/whatsapp/DeviceLeaseService.ts",
+  "backend/src/whatsapp/BaileysManager.ts",
+  "backend/src/whatsapp/WhatsAppGateway.ts",
+  "backend/src/whatsapp/DBAuthState.ts",
+  "backend/src/modules/session/selfHealEngine.ts",
+  "backend/src/queue/QueueManager.ts",
+  "backend/src/queue/WorkerRuntime.ts",
+  "backend/src/queue/workers/MessageWorker.ts",
+  "backend/src/queue/workers/EmbeddingWorker.ts",
+  "backend/src/rag/KnowledgeIngestion.ts",
+  "backend/src/index.ts",
+  "backend/src/api/routes/devices.ts",
+  "frontend/next-env.d.ts",
+  "package.json",
+  "tests/unit/source-safety.test.ts",
+  "tests/unit/durable-transport-adapter.test.ts"
+]

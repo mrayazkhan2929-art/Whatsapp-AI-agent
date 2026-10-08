@@ -1,0 +1,2 @@
+# Preserve checkpoint and historical migration bytes across Windows/Linux checkouts.
+* -text

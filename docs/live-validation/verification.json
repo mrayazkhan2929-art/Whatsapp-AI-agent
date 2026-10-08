@@ -1,0 +1,204 @@
+{
+  "at": "2026-10-08T10:54:59.877Z",
+  "changed": [
+    "tests/unit/source-safety.test.ts",
+    "frontend/src/components/studio/StudioSections.tsx",
+    "backend/src/whatsapp/BaileysManager.ts",
+    "backend/src/modules/config/AgentVersionService.ts",
+    "backend/src/modules/config/AgentStudioPolicy.ts",
+    "backend/src/modules/ai/ModelGateway.ts",
+    "backend/src/index.ts",
+    "backend/src/config/env.ts"
+  ],
+  "removed": [],
+  "historicalPhaseEvidenceUnchanged": true,
+  "historicalSQLUnchanged": true,
+  "rollbackArchiveSHA256": "86734AD69D9E38579073FFE49F8314C58F9BF7E90513E36C5A7E984AA1159084",
+  "runtime": {
+    "status": "running",
+    "pid": 22932,
+    "project": "wa-live-local-1791455688726",
+    "frontendUrl": "http://127.0.0.1:59897",
+    "backendUrl": "http://127.0.0.1:59898",
+    "realWhatsapp": true,
+    "mockedServices": [],
+    "providersConfigured": true,
+    "configuredProviders": [
+      "GROQ_API_KEY"
+    ],
+    "realtimeAvailable": false,
+    "mailUrl": "http://127.0.0.1:59896"
+  },
+  "freshDatabase": {
+    "at": "2026-10-08T10:51:13.889Z",
+    "actualBackendEntry": "backend/dist/index.js",
+    "testRunnerUsed": false,
+    "loginStatus": 200,
+    "migrations": [
+      "001_initial_schema.sql",
+      "002_pgvector.sql",
+      "003_properties_seed.sql",
+      "004_team_members_seed.sql",
+      "005_rls_policies.sql",
+      "006_vector_functions.sql",
+      "007_nudge_functions.sql",
+      "008_sentiment_functions.sql",
+      "009_alert_functions.sql",
+      "010_indirect_properties_inventory_gaps.sql",
+      "011_message_deduplication.sql",
+      "011_properties_distress_deal.sql",
+      "012_agent_assignment.sql",
+      "013_contact_memory_and_cleanup.sql",
+      "014_ai_pipeline_cleanup.sql",
+      "015_runtime_routing_and_data_cleanup.sql",
+      "016_fix_conversations_unique_constraint.sql",
+      "017_tenant_data_api_guard.sql",
+      "018_organization_profiles.sql",
+      "019_agent_versions.sql",
+      "020_agent_runtime_links.sql",
+      "021_conversation_state.sql",
+      "022_property_identity_and_media.sql",
+      "023_message_idempotency.sql",
+      "024_agent_routing_rules.sql",
+      "025_handoff_lifecycle.sql",
+      "026_knowledge_documents.sql",
+      "027_agent_studio.sql",
+      "028_ai_observability.sql",
+      "029_audit_logs.sql",
+      "030_device_runtime_leases.sql",
+      "031_rls_integrity_hardening.sql"
+    ],
+    "physicalPhonePairingVerified": false,
+    "messageRoundTripVerified": false
+  },
+  "realQR": {
+    "at": "2026-10-08T10:54:56.079Z",
+    "testRunnerUsed": false,
+    "realQrPreviouslyReceived": true,
+    "physicalPairingVerified": false,
+    "messageRoundTripVerified": false,
+    "frontendLogin": 200,
+    "membership": 200,
+    "deviceId": "fec0016e-6289-4851-8334-2c7486c56dfe",
+    "alreadyConnected": true,
+    "unpairedProbeDisconnected": true
+  },
+  "browser": {
+    "at": "2026-10-08T10:54:59.485Z",
+    "actualApp": true,
+    "browserLoginStatus": 200,
+    "devicesPageLoaded": true,
+    "desktopScreenshot": true,
+    "mobileScreenshot": true,
+    "horizontalOverflow": false,
+    "pageErrors": [],
+    "transportChanged": false
+  },
+  "physical": {
+    "at": "2026-10-08T10:54:57.337Z",
+    "devices": [
+      {
+        "id": "d6d64f14-a481-439f-91ce-f2e81cbf993d",
+        "status": "disconnected",
+        "phone_saved": false,
+        "qr_cleared": true,
+        "session_rows": 0,
+        "not_plain_json": null,
+        "pairedCredentialsDecrypt": false,
+        "runtimeStatus": null,
+        "isLiveConnected": false,
+        "health": "unhealthy"
+      },
+      {
+        "id": "fec0016e-6289-4851-8334-2c7486c56dfe",
+        "status": "connected",
+        "phone_saved": true,
+        "qr_cleared": true,
+        "session_rows": 42,
+        "not_plain_json": true,
+        "pairedCredentialsDecrypt": true,
+        "runtimeStatus": "open",
+        "isLiveConnected": true,
+        "health": "healthy"
+      }
+    ],
+    "liveConnectedCount": 1,
+    "falseMissingSocketAlertsThisRun": 0
+  },
+  "userConfirmedPairing": true,
+  "pairedRestartVerified": true,
+  "groq": {
+    "at": "2026-10-08T10:52:21.735Z",
+    "agentId": "17a23461-ec77-4d77-8a37-3ee95fd89760",
+    "model": "openai/gpt-oss-120b",
+    "results": [
+      {
+        "language": "en",
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b",
+        "accepted": true,
+        "responseLength": 87,
+        "sideEffects": {
+          "whatsappSends": 0,
+          "contactWrites": 0,
+          "conversationWrites": 0,
+          "bookings": 0
+        }
+      },
+      {
+        "language": "ar",
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b",
+        "accepted": true,
+        "responseLength": 92,
+        "sideEffects": {
+          "whatsappSends": 0,
+          "contactWrites": 0,
+          "conversationWrites": 0,
+          "bookings": 0
+        }
+      }
+    ],
+    "mandatoryChecks": 10,
+    "published": true,
+    "channelDeviceId": "fec0016e-6289-4851-8334-2c7486c56dfe",
+    "whatsappMessagesSentByScript": 0,
+    "physicalMessageRoundTripVerified": false
+  },
+  "roundTrip": {
+    "at": "2026-10-08T10:53:45.459Z",
+    "marker": "LOCAL-TEST-1008",
+    "inboundCount": 0,
+    "messages": [],
+    "confirmedRoundTrips": 0
+  },
+  "commands": {
+    "node --check scripts/live-local.mjs": 0,
+    "npm run typecheck": 0,
+    "npm run typecheck:tests": 0,
+    "npm run lint": 0,
+    "npm run test:strict": {
+      "exitCode": 0,
+      "passed": 323,
+      "expectedFailures": 0
+    },
+    "targeted adapter and preservation tests": {
+      "exitCode": 0,
+      "passed": 19
+    },
+    "Groq compatibility, observability and studio tests": {
+      "exitCode": 0,
+      "passed": 55
+    },
+    "real production frontend/backend build": 0,
+    "node scripts/live-local-browser.mjs": 0,
+    "node scripts/live-local-check.mjs": 0,
+    "node scripts/live-local-groq.mjs": 0
+  },
+  "limitations": [
+    "Controlled real message roundtrip requires receipt evidence",
+    "Realtime not included in local stack",
+    "No online deployment or production migration",
+    "Initial probe mistakes corrected: missing frontend detail GET and incorrect QR image field; later 429 handled without resetting a session"
+  ]
+}

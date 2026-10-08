@@ -1,0 +1,80 @@
+{
+  "passed": 18,
+  "expectedFailures": 0,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "property handler preserves tenant scope, bedrooms and budget at the matcher boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 apartment criterion excludes same-area same-budget villas",
+      "outcome": "PASS"
+    },
+    {
+      "name": "empty verified inventory produces no fabricated properties",
+      "outcome": "PASS"
+    },
+    {
+      "name": "real MessageRouter persists text, invokes AI and sends through its gateway abstraction",
+      "outcome": "PASS"
+    },
+    {
+      "name": "image inbound is persisted without generating a text reply",
+      "outcome": "PASS"
+    },
+    {
+      "name": "history and conversation writes stay scoped when malformed foreign children exist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 inbound persistence carries original WhatsApp ID and tenant/device context",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate twice executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate 10 concurrently executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate after new router instance executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate two replicas executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "same text with distinct IDs executes twice",
+      "outcome": "PASS"
+    },
+    {
+      "name": "missing ID and own echoes never execute or persist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "transport failure saves one uncertain response and does not send a second fallback",
+      "outcome": "PASS"
+    },
+    {
+      "name": "persistence failures fail closed before business execution",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P6 handoff flag persists a real lifecycle event",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P6 explicit human requests bypass AI and persist a handoff",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P6 human-active conversations persist inbound without executing or sending AI",
+      "outcome": "PASS"
+    }
+  ]
+}

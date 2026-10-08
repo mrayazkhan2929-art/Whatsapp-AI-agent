@@ -1,0 +1,34 @@
+{
+  "passed": 4,
+  "expectedFailures": 2,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "missing token is denied before accessing tenant data",
+      "outcome": "PASS"
+    },
+    {
+      "name": "invalid token is denied",
+      "outcome": "PASS"
+    },
+    {
+      "name": "real auth/org middleware and agents route ignore a forged query organization",
+      "outcome": "PASS"
+    },
+    {
+      "name": "tenant A cannot read tenant B agent by ID at the application query boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "[XFAIL] P1 unmapped authenticated user must receive 403 instead of the first organization",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected 200 to be 403 // Object.is equality"
+    },
+    {
+      "name": "[XFAIL] P1 disabled application member must receive 403",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected 200 to be 403 // Object.is equality"
+    }
+  ]
+}

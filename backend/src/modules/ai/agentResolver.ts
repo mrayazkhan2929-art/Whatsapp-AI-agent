@@ -1,0 +1,7 @@
+import { TeamRoutingService, type RoutingMember } from '../agents/TeamRoutingService.js'
+export interface ResolvedAgent {id:string;name:string;role:string;phone:string;wa:string;areas:string[];minBudget?:number;isDefault:boolean;isClientFacing:boolean}
+function resolved(member:RoutingMember):ResolvedAgent{return{id:member.id,name:member.name,role:member.role,phone:member.whatsapp,wa:member.whatsapp.replace(/\D/g,''),areas:member.speciality_areas??member.area_speciality??[],minBudget:member.min_budget_aed??undefined,isDefault:false,isClientFacing:true}}
+export async function getResolvedClientFacingTeam(orgId:string):Promise<ResolvedAgent[]>{return(await new TeamRoutingService().members(orgId)).map(resolved)}
+export async function findResolvedAgentByName(orgId:string,nameHint:string):Promise<ResolvedAgent|null>{const norm=(s:string)=>s.normalize('NFKC').toLocaleLowerCase().trim();const matches=(await getResolvedClientFacingTeam(orgId)).filter(m=>norm(m.name)===norm(nameHint));return matches.length===1?matches[0]:null}
+export async function findBestResolvedAgent(orgId:string,area?:string,budget?:number):Promise<ResolvedAgent|null>{const member=await new TeamRoutingService().select(orgId,{area,budget});return member?resolved(member):null}
+export function resolvedAgentCard(agent:ResolvedAgent,lang:'en'|'ar'='en'):string{return `${agent.name}\n${agent.role}\n${lang==='ar'?'واتساب':'WhatsApp'}: ${agent.phone}`}

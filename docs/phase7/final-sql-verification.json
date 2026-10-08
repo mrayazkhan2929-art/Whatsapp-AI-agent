@@ -1,0 +1,11 @@
+{
+  "command": "node scripts/phase7-db.mjs tests/tenant-db/knowledge-lifecycle.test.ts",
+  "exitCode": 0,
+  "seconds": 83.7,
+  "tests": {
+    "passed": 61,
+    "failed": 0,
+    "total": 61
+  },
+  "log": "docs/phase7/logs/final-knowledge-db.log"
+}

@@ -1,0 +1,1513 @@
+{
+  "localStackDirectory": "F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\test-results\\phase7-db-1791380978962",
+  "appliedToLiveProject": false,
+  "distribution": {
+    "distribution": "self-hosted/v0.8.2",
+    "bootstrapBase": "https://raw.githubusercontent.com/supabase/supabase/self-hosted/v0.8.2/docker/volumes/db/",
+    "images": {
+      "db": "supabase/postgres:17.6.1.136@sha256:f371b5f3f2ac0a05703f33d6e6134515fb2498cab708fb948a0aeb7481467c00",
+      "auth": "supabase/gotrue:v2.196.0@sha256:c0c25187a6b835e65a6f6e6c6b39d090e832d40e6de5186f2c038e0411944232",
+      "rest": "postgrest/postgrest:v14.17@sha256:c9dc201e555f5d8e37e7f39cdd4df0229774996e213bfd7de8d10ac609030f2c"
+    },
+    "loopbackOnly": true
+  },
+  "migrations": {
+    "applied": [
+      "001_initial_schema.sql",
+      "002_pgvector.sql",
+      "003_properties_seed.sql",
+      "004_team_members_seed.sql",
+      "005_rls_policies.sql",
+      "006_vector_functions.sql",
+      "007_nudge_functions.sql",
+      "008_sentiment_functions.sql",
+      "009_alert_functions.sql",
+      "010_indirect_properties_inventory_gaps.sql",
+      "011_message_deduplication.sql",
+      "011_properties_distress_deal.sql",
+      "012_agent_assignment.sql",
+      "013_contact_memory_and_cleanup.sql",
+      "014_ai_pipeline_cleanup.sql",
+      "015_runtime_routing_and_data_cleanup.sql",
+      "016_fix_conversations_unique_constraint.sql",
+      "017_tenant_data_api_guard.sql",
+      "018_organization_profiles.sql",
+      "019_agent_versions.sql",
+      "020_agent_runtime_links.sql",
+      "021_conversation_state.sql",
+      "022_property_identity_and_media.sql",
+      "023_message_idempotency.sql",
+      "024_agent_routing_rules.sql",
+      "025_handoff_lifecycle.sql",
+      "026_knowledge_documents.sql"
+    ],
+    "productionMigrationsAdded": 1,
+    "appliedToLiveProject": false
+  },
+  "knowledgeUpgrade": {
+    "existingChunksAndEmbeddingsPreserved": true,
+    "linkedChunks": 2,
+    "expectedValidChunks": 2,
+    "appliedToLiveProject": false
+  },
+  "knowledgeHttp": {
+    "tenantBSnapshotChecks": 61,
+    "snapshotTables": [
+      "organizations",
+      "users",
+      "knowledge_bases",
+      "knowledge_chunks",
+      "knowledge_documents",
+      "knowledge_document_versions",
+      "knowledge_document_chunks",
+      "agents",
+      "agent_versions",
+      "agent_drafts",
+      "agent_version_knowledge_bases"
+    ],
+    "requests": 110,
+    "externalRequests": 0,
+    "browserErrors": [],
+    "traces": [
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "38236dfc-14b3-488d-a958-b6ca50508c6e",
+            "versionId": "cfe53eca-642c-4573-8211-171518f1a32b",
+            "versionNumber": 1,
+            "chunkId": "f5499c63-f6cc-470f-81f4-ab6c05b153ef",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "38236dfc-14b3-488d-a958-b6ca50508c6e",
+            "versionId": "cfe53eca-642c-4573-8211-171518f1a32b",
+            "versionNumber": 1,
+            "chunkId": "f5499c63-f6cc-470f-81f4-ab6c05b153ef",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "9c863734-2917-4b19-ba32-bf112477fd9e",
+            "versionId": "5f78154d-522a-404e-af5c-8e057832f2ec",
+            "versionNumber": 1,
+            "chunkId": "69800460-a94c-48fa-b498-38071b2733a9",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "cf696e94-cb47-42ef-b5cd-b2555dbafe4e",
+            "versionId": "78610228-e99f-4e71-b796-78037208d40c",
+            "versionNumber": 1,
+            "chunkId": "89a8af0d-312d-4b9f-bf07-b7fe312ac8c0",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "cf696e94-cb47-42ef-b5cd-b2555dbafe4e",
+            "versionId": "78610228-e99f-4e71-b796-78037208d40c",
+            "versionNumber": 1,
+            "chunkId": "89a8af0d-312d-4b9f-bf07-b7fe312ac8c0",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "6373f13c-14a3-4f19-a724-246b16f60238",
+            "versionId": "bee5c977-37e0-43ac-b5f9-516fc14e4e9c",
+            "versionNumber": 1,
+            "chunkId": "0068c92a-4919-4edd-80b3-0749bef98bc4",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "2c09e5be-5bdd-4d15-8cd3-174429543453",
+            "versionId": "19e7afa7-d754-4acb-affa-061e52411687",
+            "versionNumber": 1,
+            "chunkId": "43b135f9-d22f-4e17-8eb4-a7307c16540b",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "2921b70d-30ce-452a-9e1a-8c26c6a2aebd",
+            "versionId": "7e6a38aa-6c28-4de4-a32a-e3b2fdc9b42d",
+            "versionNumber": 1,
+            "chunkId": "e976c652-6809-4749-a865-9e86e5a255e9",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [
+          "361555f4-a73e-4b3f-a4d4-e8c53b1364c0",
+          "ebdcd1b8-0eb0-4408-9377-603d2dc7123f"
+        ],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      },
+      {
+        "agentVersionId": "de6f3b1f-5335-4246-af85-8a7c437684df",
+        "knowledgeBaseIds": [
+          "c2d3d954-1984-4907-be74-d2c9b470b0b7"
+        ],
+        "hits": [
+          {
+            "knowledgeBaseId": "c2d3d954-1984-4907-be74-d2c9b470b0b7",
+            "documentId": "f34eee3d-5b0c-4e54-8cae-2651ec042aa1",
+            "versionId": "21ba862a-d4e3-43f4-a4f5-e2b0d975105e",
+            "versionNumber": 2,
+            "chunkId": "e5e91c29-5518-4dca-8d0d-c07b912d193f",
+            "chunkIndex": 0,
+            "score": 0.01639344262295082
+          }
+        ],
+        "quarantinedChunkIds": [],
+        "mode": "lexical",
+        "degraded": true
+      }
+    ],
+    "providersAndEmbedding": "stubbed",
+    "realAuthHttpSqlAndBrowsers": true,
+    "appliedToLiveProject": false
+  },
+  "earlierUpgrades": {
+    "upgrade-check": {
+      "migration": "017_tenant_data_api_guard.sql",
+      "populatedTables": [
+        "agents",
+        "alert_templates",
+        "alerts",
+        "baileys_sessions",
+        "bookings",
+        "contact_flows",
+        "contact_memory",
+        "contacts",
+        "conversations",
+        "devices",
+        "flow_steps",
+        "flows",
+        "handoff_events",
+        "inventory_gaps",
+        "knowledge_bases",
+        "knowledge_chunks",
+        "lead_assignments",
+        "lead_scores",
+        "message_locks",
+        "message_replies",
+        "messages",
+        "notification_preferences",
+        "notification_rules",
+        "notifications",
+        "nudge_jobs",
+        "organizations",
+        "properties",
+        "sentiment_history",
+        "team_members",
+        "users"
+      ],
+      "dataUnchanged": true,
+      "before": {
+        "agents": {
+          "count": 1,
+          "sha256": "6c5bedcec0aea9b023f7d4b74f743be64f41b0b0746296531915a841d28ff28b"
+        },
+        "alert_templates": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "alerts": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "baileys_sessions": {
+          "count": 1,
+          "sha256": "3cb1c9629cd0dc8eaa6edcb0d6ed1abe8793cc8d8d5ba68f349d5c2495ba51dd"
+        },
+        "bookings": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_flows": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_memory": {
+          "count": 1,
+          "sha256": "fc0fdeb92854dec745a76f1fc56378bc24b67730e1384453633fc43e55799675"
+        },
+        "contacts": {
+          "count": 1,
+          "sha256": "49d4523104d5ed0b2107f5bea758fe24432d888a6bd779162bbff30ff08602a9"
+        },
+        "conversations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "devices": {
+          "count": 1,
+          "sha256": "27ed51745f5d9b4932a5202afc2786b31abe7c30836ea7fd62405b3cb79c429a"
+        },
+        "flow_steps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "flows": {
+          "count": 1,
+          "sha256": "ab9d838f0679e6bbf66590b17a02f43ca2a0fcfcdddc8e62d50779cebc6e795a"
+        },
+        "handoff_events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inventory_gaps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_bases": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_chunks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_scores": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_locks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_replies": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "messages": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_preferences": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_rules": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notifications": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "nudge_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organizations": {
+          "count": 1,
+          "sha256": "1e0fe63769abc9aeada439295f528f0f99b8c9208f99b07c2ef8387ee723265d"
+        },
+        "properties": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sentiment_history": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "team_members": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "users": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "after": {
+        "agents": {
+          "count": 1,
+          "sha256": "6c5bedcec0aea9b023f7d4b74f743be64f41b0b0746296531915a841d28ff28b"
+        },
+        "alert_templates": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "alerts": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "baileys_sessions": {
+          "count": 1,
+          "sha256": "3cb1c9629cd0dc8eaa6edcb0d6ed1abe8793cc8d8d5ba68f349d5c2495ba51dd"
+        },
+        "bookings": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_flows": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_memory": {
+          "count": 1,
+          "sha256": "fc0fdeb92854dec745a76f1fc56378bc24b67730e1384453633fc43e55799675"
+        },
+        "contacts": {
+          "count": 1,
+          "sha256": "49d4523104d5ed0b2107f5bea758fe24432d888a6bd779162bbff30ff08602a9"
+        },
+        "conversations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "devices": {
+          "count": 1,
+          "sha256": "27ed51745f5d9b4932a5202afc2786b31abe7c30836ea7fd62405b3cb79c429a"
+        },
+        "flow_steps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "flows": {
+          "count": 1,
+          "sha256": "ab9d838f0679e6bbf66590b17a02f43ca2a0fcfcdddc8e62d50779cebc6e795a"
+        },
+        "handoff_events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inventory_gaps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_bases": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_chunks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_scores": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_locks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_replies": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "messages": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_preferences": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_rules": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notifications": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "nudge_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organizations": {
+          "count": 1,
+          "sha256": "1e0fe63769abc9aeada439295f528f0f99b8c9208f99b07c2ef8387ee723265d"
+        },
+        "properties": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sentiment_history": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "team_members": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "users": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      }
+    },
+    "profile-upgrade-check": {
+      "migration": "018_organization_profiles.sql",
+      "existingDataUnchanged": true,
+      "noUnverifiedBackfill": true,
+      "before": {
+        "agents": {
+          "count": 1,
+          "sha256": "6c5bedcec0aea9b023f7d4b74f743be64f41b0b0746296531915a841d28ff28b"
+        },
+        "alert_templates": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "alerts": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "baileys_sessions": {
+          "count": 1,
+          "sha256": "3cb1c9629cd0dc8eaa6edcb0d6ed1abe8793cc8d8d5ba68f349d5c2495ba51dd"
+        },
+        "bookings": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_flows": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_memory": {
+          "count": 1,
+          "sha256": "fc0fdeb92854dec745a76f1fc56378bc24b67730e1384453633fc43e55799675"
+        },
+        "contacts": {
+          "count": 1,
+          "sha256": "49d4523104d5ed0b2107f5bea758fe24432d888a6bd779162bbff30ff08602a9"
+        },
+        "conversations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "devices": {
+          "count": 1,
+          "sha256": "27ed51745f5d9b4932a5202afc2786b31abe7c30836ea7fd62405b3cb79c429a"
+        },
+        "flow_steps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "flows": {
+          "count": 1,
+          "sha256": "ab9d838f0679e6bbf66590b17a02f43ca2a0fcfcdddc8e62d50779cebc6e795a"
+        },
+        "handoff_events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inventory_gaps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_bases": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_chunks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_scores": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_locks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_replies": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "messages": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_preferences": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_rules": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notifications": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "nudge_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organizations": {
+          "count": 1,
+          "sha256": "1e0fe63769abc9aeada439295f528f0f99b8c9208f99b07c2ef8387ee723265d"
+        },
+        "properties": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sentiment_history": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "team_members": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "users": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "after": {
+        "agents": {
+          "count": 1,
+          "sha256": "6c5bedcec0aea9b023f7d4b74f743be64f41b0b0746296531915a841d28ff28b"
+        },
+        "alert_templates": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "alerts": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "baileys_sessions": {
+          "count": 1,
+          "sha256": "3cb1c9629cd0dc8eaa6edcb0d6ed1abe8793cc8d8d5ba68f349d5c2495ba51dd"
+        },
+        "bookings": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_flows": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "contact_memory": {
+          "count": 1,
+          "sha256": "fc0fdeb92854dec745a76f1fc56378bc24b67730e1384453633fc43e55799675"
+        },
+        "contacts": {
+          "count": 1,
+          "sha256": "49d4523104d5ed0b2107f5bea758fe24432d888a6bd779162bbff30ff08602a9"
+        },
+        "conversations": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "devices": {
+          "count": 1,
+          "sha256": "27ed51745f5d9b4932a5202afc2786b31abe7c30836ea7fd62405b3cb79c429a"
+        },
+        "flow_steps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "flows": {
+          "count": 1,
+          "sha256": "ab9d838f0679e6bbf66590b17a02f43ca2a0fcfcdddc8e62d50779cebc6e795a"
+        },
+        "handoff_events": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "inventory_gaps": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_bases": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "knowledge_chunks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_assignments": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "lead_scores": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_locks": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "message_replies": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "messages": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_preferences": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notification_rules": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "notifications": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "nudge_jobs": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organization_profiles": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "organizations": {
+          "count": 1,
+          "sha256": "1e0fe63769abc9aeada439295f528f0f99b8c9208f99b07c2ef8387ee723265d"
+        },
+        "properties": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "sentiment_history": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "team_members": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        "users": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      }
+    },
+    "agent-upgrade-check": {
+      "legacyColumnsPreserved": true,
+      "everyExistingAgentBackfilled": true,
+      "existingAgents": 3,
+      "appliedToLiveProject": false
+    },
+    "channel-upgrade-check": {
+      "ambiguousOrganizationLinks": 0,
+      "singleAgentOrganizationLinks": 1,
+      "arbitraryFallback": false
+    },
+    "state-upgrade-check": {
+      "legacyMemoryPreserved": true,
+      "statesBeforeLazyBackfill": 0,
+      "appliedToLiveProject": false
+    },
+    "property-upgrade-check": {
+      "legacyPropertiesPreserved": true,
+      "ambiguousAliasesRetained": true,
+      "audit": "Property identity audit: 1 ambiguous aliases; retained for manual reconciliation",
+      "backfilledMedia": [
+        {
+          "media_type": "image",
+          "url": "https://cdn.example.invalid/legacy.jpg"
+        }
+      ],
+      "appliedToLiveProject": false
+    },
+    "message-upgrade-check": {
+      "existingMessagesPreserved": true,
+      "historicalDuplicateIDsRetained": true,
+      "noHistoricalIDsInvented": true,
+      "receipts": 1,
+      "audit": "Message identity audit: 1 ambiguous historical identities retained without device inference",
+      "appliedToLiveProject": false
+    },
+    "handoff-upgrade-check": {
+      "businessColumnsPreserved": true,
+      "teamPreserved": true,
+      "legacyHumanState": "HUMAN_ACTIVE",
+      "legacyCompatibilityHandledBy": "human",
+      "cutoverEvents": 1,
+      "updatedAtMayReflectCutover": true,
+      "appliedToLiveProject": false
+    }
+  },
+  "earlierHttp": {
+    "http-evidence": {
+      "requests": 106,
+      "tenantBSnapshotChecks": 76,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "agents",
+        "devices",
+        "properties",
+        "contacts",
+        "conversations",
+        "messages",
+        "knowledge_bases",
+        "knowledge_chunks",
+        "team_members",
+        "flows",
+        "flow_steps",
+        "bookings",
+        "nudge_jobs",
+        "handoff_events",
+        "inventory_gaps",
+        "contact_flows",
+        "lead_assignments",
+        "lead_scores",
+        "baileys_sessions",
+        "notifications",
+        "notification_preferences",
+        "contact_memory",
+        "alerts",
+        "sentiment_history"
+      ],
+      "productionMigrationsAdded": 1,
+      "appliedToLiveProject": false
+    },
+    "company-http-evidence": {
+      "requests": 69,
+      "tenantBSnapshotChecks": 41,
+      "snapshotTables": [
+        "organization_profiles",
+        "users",
+        "organizations",
+        "contacts",
+        "conversations",
+        "messages"
+      ],
+      "browserErrors": [],
+      "providerCalls": 0,
+      "whatsAppCalls": 0,
+      "externalBackendRequests": 0,
+      "frontendProviderCredentials": "removed by harness",
+      "appliedToLiveProject": false
+    },
+    "agent-http-evidence": {
+      "requests": 180,
+      "tenantBSnapshotChecks": 44,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_config_events",
+        "agent_version_tools",
+        "agent_version_knowledge_bases",
+        "agent_channel_links",
+        "devices",
+        "knowledge_bases",
+        "flows",
+        "contacts",
+        "conversations",
+        "messages"
+      ],
+      "externalRequests": 0,
+      "browserErrors": [],
+      "providerAndGateway": "stubbed in backend; frontend provider credentials removed",
+      "appliedToLiveProject": false
+    },
+    "property-http-evidence": {
+      "requests": 140,
+      "tenantBSnapshotChecks": 52,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "properties",
+        "property_media",
+        "contacts",
+        "contact_memory",
+        "conversations",
+        "conversation_states",
+        "messages",
+        "inventory_gaps",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_config_events",
+        "agent_channel_links"
+      ],
+      "exactReferenceAssertions": 53,
+      "externalRequests": 0,
+      "browserErrors": [],
+      "providerAndWhatsApp": "stubbed; provider configured with a local dummy key and no calls expected",
+      "appliedToLiveProject": false
+    },
+    "message-http-evidence": {
+      "tenantBSnapshotChecks": 28,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "devices",
+        "contacts",
+        "contact_memory",
+        "conversations",
+        "conversation_states",
+        "messages",
+        "message_receipts",
+        "handoff_events"
+      ],
+      "requests": 6,
+      "nonlocalRequests": 0,
+      "browserErrors": [],
+      "scenarios": [
+        {
+          "mode": "twice",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        },
+        {
+          "mode": "10 concurrently",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        },
+        {
+          "mode": "two independent router replicas",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        },
+        {
+          "mode": "actual process restart",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        },
+        {
+          "mode": "two actual processes, 10 concurrent",
+          "inbound": 1,
+          "executions": 1,
+          "outbound": 1,
+          "sends": 1
+        }
+      ],
+      "providerAndWhatsApp": "stubbed at the existing orchestration/transport boundaries; real database/Auth/REST and child processes",
+      "appliedToLiveProject": false
+    },
+    "handoff-http-evidence": {
+      "tenantBSnapshotChecks": 43,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "team_members",
+        "agent_routing_rules",
+        "contacts",
+        "conversations",
+        "conversation_states",
+        "messages",
+        "handoff_events",
+        "handoff_notifications",
+        "devices"
+      ],
+      "requests": 50,
+      "externalRequests": 0,
+      "browserErrors": [],
+      "scenarios": [
+        {
+          "text": "Connect me with an agent",
+          "detected": true,
+          "providerCalls": 0
+        },
+        {
+          "text": "أريد التحدث مع موظف",
+          "detected": true,
+          "providerCalls": 0
+        },
+        {
+          "case": "human active",
+          "AIExecutions": 0,
+          "AISends": 0,
+          "AIInserts": 0
+        },
+        {
+          "case": "two actual restarted processes",
+          "AIExecutions": 0,
+          "AISends": 0
+        }
+      ],
+      "explicitDetection": "English and Arabic fixture corpus plus real WhatsApp router",
+      "AIOutboundWhileHumanActive": 0,
+      "WhatsAppAndProviders": "stubbed",
+      "appliedToLiveProject": false
+    }
+  },
+  "finalKnowledgeFollowUp": {
+    "verification": {
+      "command": "node scripts/phase7-db.mjs tests/tenant-db/knowledge-lifecycle.test.ts",
+      "exitCode": 0,
+      "seconds": 84.6,
+      "tests": {
+        "passed": 61,
+        "failed": 0,
+        "total": 61
+      },
+      "log": "docs/phase7/logs/final-knowledge-db.log"
+    },
+    "uiVerification": [
+      {
+        "command": "npm run typecheck",
+        "exitCode": 0,
+        "seconds": 5.3,
+        "log": "docs/phase7/logs/final-ui-npm-run-typecheck.log"
+      },
+      {
+        "command": "npm run typecheck:tests",
+        "exitCode": 0,
+        "seconds": 3.6,
+        "log": "docs/phase7/logs/final-ui-npm-run-typecheck-tests.log"
+      },
+      {
+        "command": "npm run lint",
+        "exitCode": 1,
+        "seconds": 9.2,
+        "log": "docs/phase7/logs/final-ui-npm-run-lint.log"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "seconds": 17.4,
+        "log": "docs/phase7/logs/final-ui-npm-run-build.log"
+      },
+      {
+        "command": "npm run test:all",
+        "exitCode": 0,
+        "seconds": 8.3,
+        "log": "docs/phase7/logs/final-ui-npm-run-test-all.log"
+      },
+      {
+        "command": "npm run test:strict",
+        "exitCode": 0,
+        "seconds": 2.5,
+        "log": "docs/phase7/logs/final-ui-npm-run-test-strict.log"
+      },
+      {
+        "command": "node scripts/phase7-final-db.mjs",
+        "exitCode": 0,
+        "seconds": 84.6,
+        "log": "docs/phase7/logs/final-ui-node-scripts-phase7-final-db.mjs.log"
+      }
+    ],
+    "localStackDirectory": "F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\test-results\\phase7-db-1791381684841",
+    "knowledgeUpgrade": {
+      "existingChunksAndEmbeddingsPreserved": true,
+      "linkedChunks": 2,
+      "expectedValidChunks": 2,
+      "appliedToLiveProject": false
+    },
+    "knowledgeHttp": {
+      "tenantBSnapshotChecks": 61,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "knowledge_bases",
+        "knowledge_chunks",
+        "knowledge_documents",
+        "knowledge_document_versions",
+        "knowledge_document_chunks",
+        "agents",
+        "agent_versions",
+        "agent_drafts",
+        "agent_version_knowledge_bases"
+      ],
+      "requests": 110,
+      "externalRequests": 0,
+      "browserErrors": [],
+      "traces": [
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "475b2013-c7bf-4bdf-88d0-f1b162dd72de",
+              "versionId": "a5a98f25-9dca-4b95-b970-3c7839e473f5",
+              "versionNumber": 1,
+              "chunkId": "1f9ed29a-7cb7-4ca2-b2a4-68f245def462",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "475b2013-c7bf-4bdf-88d0-f1b162dd72de",
+              "versionId": "a5a98f25-9dca-4b95-b970-3c7839e473f5",
+              "versionNumber": 1,
+              "chunkId": "1f9ed29a-7cb7-4ca2-b2a4-68f245def462",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "5cbac7d8-2cb3-4796-a07e-aecd9400f8f9",
+              "versionId": "1a19fef7-5192-4234-bba5-667383777317",
+              "versionNumber": 1,
+              "chunkId": "074df01b-6c09-496e-9882-e0163574198c",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "7c3bae81-0e81-43d2-a02d-c0d1d0b86bd9",
+              "versionId": "759e6ee7-a184-4bab-aee6-fd53ada64c7c",
+              "versionNumber": 1,
+              "chunkId": "5e4633b9-6e1f-4b35-9097-1f6ca55f5991",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "7c3bae81-0e81-43d2-a02d-c0d1d0b86bd9",
+              "versionId": "759e6ee7-a184-4bab-aee6-fd53ada64c7c",
+              "versionNumber": 1,
+              "chunkId": "5e4633b9-6e1f-4b35-9097-1f6ca55f5991",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "3c832567-e26d-47b6-b79d-cbc7f01c7a8f",
+              "versionId": "717899b2-983a-4f5b-a863-50b1284a0d98",
+              "versionNumber": 1,
+              "chunkId": "e01fd792-f06f-4448-b52c-ba9e978a9a92",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "8826d0df-cb85-450b-bb8b-33d71e12258e",
+              "versionId": "7e692332-00b8-45e5-8468-6f039e16b1f9",
+              "versionNumber": 1,
+              "chunkId": "d987b128-6bf8-4a6f-805d-859c2ae31094",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "246e9e61-3beb-45b3-89e4-c6850ca3d966",
+              "versionId": "c8da7de9-31e2-40d0-8d4a-e4e94d1f7082",
+              "versionNumber": 1,
+              "chunkId": "4f8bf6bb-2257-45fa-8f0a-43c582703204",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [
+            "57ffd7eb-fe8d-4ae5-988c-51440a09bed2",
+            "77bf62e1-e753-4ce7-8f56-6fd2d2da67c2"
+          ],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        },
+        {
+          "agentVersionId": "a1612856-ecd3-4fa2-84ea-16cc24756202",
+          "knowledgeBaseIds": [
+            "cedd7226-5b1a-4835-9f35-20581916f89f"
+          ],
+          "hits": [
+            {
+              "knowledgeBaseId": "cedd7226-5b1a-4835-9f35-20581916f89f",
+              "documentId": "744f81f8-d37a-49ce-9883-fe7ff7cb1bcc",
+              "versionId": "8d6a6a1a-4e4d-4b1b-bbe8-da1e50bf46c3",
+              "versionNumber": 2,
+              "chunkId": "04d17343-bdeb-4f7b-a596-77f8ed3c460f",
+              "chunkIndex": 0,
+              "score": 0.01639344262295082
+            }
+          ],
+          "quarantinedChunkIds": [],
+          "mode": "lexical",
+          "degraded": true
+        }
+      ],
+      "providersAndEmbedding": "stubbed",
+      "realAuthHttpSqlAndBrowsers": true,
+      "appliedToLiveProject": false
+    }
+  },
+  "layouts": {
+    "desktop": {
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    "mobile": {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    "rtl": {
+      "width": 1100,
+      "scrollWidth": 1100
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "command": "npm run typecheck",
+    "exitCode": 0
+  },
+  {
+    "command": "npm run typecheck:tests",
+    "exitCode": 0
+  },
+  {
+    "command": "npm --workspace backend run build",
+    "exitCode": 0
+  },
+  {
+    "command": "npm --workspace frontend exec -- eslint [all Phase 2 changed/new frontend files]",
+    "exitCode": 0
+  }
+]

@@ -1,0 +1,148 @@
+{
+  "passed": 35,
+  "expectedFailures": 0,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "login preserves membership failure 403 without setting cookies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login preserves membership failure 500 without setting cookies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login preserves membership failure 503 without setting cookies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login reports unavailable Supabase Auth as 503 without cookies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login reports invalid credentials as 401 without authorizing",
+      "outcome": "PASS"
+    },
+    {
+      "name": "authorized login preserves successful envelope and secure cookie behavior",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend me and page guard preserve backend failure 401",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend me and page guard preserve backend failure 403",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend me and page guard preserve backend failure 500",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend me and page guard preserve backend failure 503",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend uses authoritative backend context and forwards bearer identity",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend denies invalid backend success payload",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend reports unreachable backend as 503",
+      "outcome": "PASS"
+    },
+    {
+      "name": "explicit empty authorization cannot fall back to the cookie identity",
+      "outcome": "PASS"
+    },
+    {
+      "name": "unique confirmed legacy email resolves stored identity, organization, role and name",
+      "outcome": "PASS"
+    },
+    {
+      "name": "direct membership wins over conflicting email and metadata",
+      "outcome": "PASS"
+    },
+    {
+      "name": "disabled direct membership cannot fall through to an active legacy match",
+      "outcome": "PASS"
+    },
+    {
+      "name": "duplicate email is denied even when second membership active=true",
+      "outcome": "PASS"
+    },
+    {
+      "name": "duplicate email is denied even when second membership active=false",
+      "outcome": "PASS"
+    },
+    {
+      "name": "unconfirmed email cannot establish legacy membership",
+      "outcome": "PASS"
+    },
+    {
+      "name": "rejects disabled without creating mappings",
+      "outcome": "PASS"
+    },
+    {
+      "name": "rejects missing organization without creating mappings",
+      "outcome": "PASS"
+    },
+    {
+      "name": "rejects invalid role without creating mappings",
+      "outcome": "PASS"
+    },
+    {
+      "name": "lookup failure is a server failure, never a fallback",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Auth infrastructure failure is 503",
+      "outcome": "PASS"
+    },
+    {
+      "name": "malformed explicit authorization cannot fall back to another cookie identity",
+      "outcome": "PASS"
+    },
+    {
+      "name": "missing token is denied before accessing tenant data",
+      "outcome": "PASS"
+    },
+    {
+      "name": "invalid token is denied",
+      "outcome": "PASS"
+    },
+    {
+      "name": "real auth/org middleware and agents route ignore a forged query organization",
+      "outcome": "PASS"
+    },
+    {
+      "name": "tenant A cannot read tenant B agent by ID at the application query boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P1 unmapped authenticated user must receive 403 instead of the first organization",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P1 disabled application member must receive 403",
+      "outcome": "PASS"
+    },
+    {
+      "name": "gateway cache cannot reuse, connect or disconnect another organization session",
+      "outcome": "PASS"
+    },
+    {
+      "name": "runtime health summaries include only authorized device IDs",
+      "outcome": "PASS"
+    },
+    {
+      "name": "knowledge helpers reject foreign KB references before embeddings or writes",
+      "outcome": "PASS"
+    }
+  ]
+}

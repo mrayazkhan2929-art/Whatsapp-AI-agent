@@ -1,0 +1,280 @@
+{
+  "migration": "017_tenant_data_api_guard.sql",
+  "populatedTables": [
+    "agents",
+    "alert_templates",
+    "alerts",
+    "baileys_sessions",
+    "bookings",
+    "contact_flows",
+    "contact_memory",
+    "contacts",
+    "conversations",
+    "devices",
+    "flow_steps",
+    "flows",
+    "handoff_events",
+    "inventory_gaps",
+    "knowledge_bases",
+    "knowledge_chunks",
+    "lead_assignments",
+    "lead_scores",
+    "message_locks",
+    "message_replies",
+    "messages",
+    "notification_preferences",
+    "notification_rules",
+    "notifications",
+    "nudge_jobs",
+    "organizations",
+    "properties",
+    "sentiment_history",
+    "team_members",
+    "users"
+  ],
+  "dataUnchanged": true,
+  "before": {
+    "agents": {
+      "count": 1,
+      "sha256": "bcb1d04128fa35c9d4cce526bc79fa45bcbf74b63c126403902035698f2ecc86"
+    },
+    "alert_templates": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "alerts": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "baileys_sessions": {
+      "count": 1,
+      "sha256": "62349bcae3f3525a127bb06cf6f8c1d2d6d98d9cba4f569d78f1dcf87a828da9"
+    },
+    "bookings": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "contact_flows": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "contact_memory": {
+      "count": 1,
+      "sha256": "bc540ea691d9d8e72d225e8fe1fde5cdc0aa8a56bc6d0f17b42c6621d6e37e7d"
+    },
+    "contacts": {
+      "count": 1,
+      "sha256": "7474e923bce35ed2e2e4eb2a92a36aa387a2116e3ec7cb28047f140e46c208d1"
+    },
+    "conversations": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "devices": {
+      "count": 1,
+      "sha256": "8ac49d4fbea682f8b7bdc68bd1a3e55fec5f782a6f9bfbbe19bc585aad3d6914"
+    },
+    "flow_steps": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "flows": {
+      "count": 1,
+      "sha256": "565e662b0c8b526435bafb4ff34f905c9ddf1fcdca8ffb9f7dc8cbf1ee2fdc46"
+    },
+    "handoff_events": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "inventory_gaps": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_bases": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_chunks": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "lead_assignments": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "lead_scores": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "message_locks": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "message_replies": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "messages": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notification_preferences": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notification_rules": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notifications": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "nudge_jobs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "organizations": {
+      "count": 1,
+      "sha256": "b33b30b43c98c19441aa4014de5228987bdf688634a2e4b82e2ab0d1ee40629d"
+    },
+    "properties": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sentiment_history": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "team_members": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "users": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "after": {
+    "agents": {
+      "count": 1,
+      "sha256": "bcb1d04128fa35c9d4cce526bc79fa45bcbf74b63c126403902035698f2ecc86"
+    },
+    "alert_templates": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "alerts": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "baileys_sessions": {
+      "count": 1,
+      "sha256": "62349bcae3f3525a127bb06cf6f8c1d2d6d98d9cba4f569d78f1dcf87a828da9"
+    },
+    "bookings": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "contact_flows": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "contact_memory": {
+      "count": 1,
+      "sha256": "bc540ea691d9d8e72d225e8fe1fde5cdc0aa8a56bc6d0f17b42c6621d6e37e7d"
+    },
+    "contacts": {
+      "count": 1,
+      "sha256": "7474e923bce35ed2e2e4eb2a92a36aa387a2116e3ec7cb28047f140e46c208d1"
+    },
+    "conversations": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "devices": {
+      "count": 1,
+      "sha256": "8ac49d4fbea682f8b7bdc68bd1a3e55fec5f782a6f9bfbbe19bc585aad3d6914"
+    },
+    "flow_steps": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "flows": {
+      "count": 1,
+      "sha256": "565e662b0c8b526435bafb4ff34f905c9ddf1fcdca8ffb9f7dc8cbf1ee2fdc46"
+    },
+    "handoff_events": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "inventory_gaps": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_bases": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "knowledge_chunks": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "lead_assignments": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "lead_scores": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "message_locks": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "message_replies": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "messages": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notification_preferences": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notification_rules": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "notifications": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "nudge_jobs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "organizations": {
+      "count": 1,
+      "sha256": "b33b30b43c98c19441aa4014de5228987bdf688634a2e4b82e2ab0d1ee40629d"
+    },
+    "properties": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sentiment_history": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "team_members": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "users": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "command": "npm run lint",
+    "exitCode": 1,
+    "seconds": 9.3,
+    "log": "docs/phase8/logs/final-lint.log"
+  },
+  {
+    "command": "node scripts/phase8-evidence.mjs",
+    "exitCode": 0,
+    "seconds": 0.1,
+    "log": "docs/phase8/logs/final-evidence.log"
+  },
+  {
+    "command": "node scripts/phase8-environment.mjs",
+    "exitCode": 0,
+    "seconds": 1.7,
+    "log": "docs/phase8/logs/final-environment.log"
+  },
+  {
+    "command": "node node_modules/vitest/vitest.mjs run tests/unit/source-safety.test.ts",
+    "exitCode": 0,
+    "seconds": 0.7,
+    "log": "docs/phase8/logs/final-preservation.log",
+    "tests": {
+      "passed": 8,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "node scripts/phase8-files.mjs",
+    "exitCode": 0,
+    "seconds": 0.3,
+    "log": "docs/phase8/logs/final-files.log"
+  }
+]

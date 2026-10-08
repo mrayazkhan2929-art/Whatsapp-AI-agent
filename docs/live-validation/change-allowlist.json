@@ -1,0 +1,10 @@
+[
+  "backend/src/whatsapp/BaileysManager.ts",
+  "backend/src/config/env.ts",
+  "backend/src/index.ts",
+  "backend/src/modules/config/AgentStudioPolicy.ts",
+  "backend/src/modules/config/AgentVersionService.ts",
+  "backend/src/modules/ai/ModelGateway.ts",
+  "frontend/src/components/studio/StudioSections.tsx",
+  "tests/unit/source-safety.test.ts"
+]

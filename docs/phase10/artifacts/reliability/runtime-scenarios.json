@@ -1,0 +1,181 @@
+{
+  "ownerFence": {
+    "ownerId": "3619c993-84ad-4ffb-bcca-26666f2a4dc3",
+    "generation": 1
+  },
+  "afterTakeover": {
+    "ownerId": "2313f399-a7ce-4f92-8902-1cb4f8851583",
+    "generation": 2
+  },
+  "scenarios": [
+    {
+      "name": "reads the own device despite forged organization query",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects foreign read",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects foreign connect with a forged body",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects foreign disconnect",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects foreign delete",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects cross-tenant credentials for own device",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "requires authentication",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "reads the own device despite forged organization query",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects foreign read",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects foreign connect with a forged body",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects foreign disconnect",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects foreign delete",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "rejects cross-tenant credentials for own device",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "requires authentication",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "a second API replica returns a controlled conflict without clearing owner credentials",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "encrypts credentials and preserves Buffer roundtrip under ownership",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "browser displays the authenticated device workspace without application errors",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "concurrent first acquisitions admit exactly one owner",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "reacquisition advances generation and old renew cannot resurrect it",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "an expired lease cannot renew even if no successor exists",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "foreign organization cannot acquire or revoke a device",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "foreign parent links are rejected for private tables",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "stale generations cannot update state, credentials or claim sends",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "unfenced auth mutation cannot clear an active owner",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "authenticated and anonymous REST cannot read leases, jobs or execute lease RPCs",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "a non-owner relays through the actual owner exactly once",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "notifications without preferred device select only a tenant-owned relay",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "competing notifications claim one physical send and queue stores IDs only",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "expired queued requests are cancelled without any transport call",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "conflicting send identities are rejected without another row",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "lost acknowledgement enters review and cannot be automatically resent",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "two embedding replicas process one version with one provider call",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "completed indexing notification can be recreated after parsing lease expires",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "unavailable Redis fails publication promptly, preserves work and shuts down cleanly",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "database receipt validation quarantines a mismatched acknowledgement",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "paused owner stops sending and successor advances generation",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "a stale worker cannot send after takeover",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "owner crash triggers bootstrap takeover and saved AI reply sends once",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "database owner polling drains queued sends when Redis is absent",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "graceful shutdown releases ownership while preserving reconnect status",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "crash after physical delivery leaves an uncertain send quarantined across takeover",
+      "tenantBUnchanged": true
+    },
+    {
+      "name": "an operator on another replica revokes ownership without clearing credentials remotely",
+      "tenantBUnchanged": true
+    }
+  ],
+  "externalRequests": 0
+}

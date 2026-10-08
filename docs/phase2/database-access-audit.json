@@ -1,0 +1,293 @@
+{
+  "relations": [
+    {
+      "relname": "agents",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "ai_agents",
+      "relkind": "v",
+      "relrowsecurity": false,
+      "reloptions": [
+        "security_invoker=true"
+      ],
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "alert_templates",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "alerts",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "baileys_sessions",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "bookings",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "contact_flows",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "contact_memory",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "reloptions": null,
+      "anon_select": false,
+      "authenticated_select": false
+    },
+    {
+      "relname": "contacts",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "conversation_flows",
+      "relkind": "v",
+      "relrowsecurity": false,
+      "reloptions": [
+        "security_invoker=true"
+      ],
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "conversations",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "devices",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "flow_steps",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "flows",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "handoff_events",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "inventory_gaps",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "knowledge_bases",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "knowledge_chunks",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "lead_assignments",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "lead_scores",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "message_locks",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "message_replies",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "messages",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "notification_preferences",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "notification_rules",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "notifications",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "nudge_jobs",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "organization_profiles",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": false,
+      "authenticated_select": false
+    },
+    {
+      "relname": "organizations",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "properties",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "sentiment_history",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "team_members",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "users",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "reloptions": null,
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "wa_session_keys",
+      "relkind": "v",
+      "relrowsecurity": false,
+      "reloptions": [
+        "security_invoker=true"
+      ],
+      "anon_select": true,
+      "authenticated_select": true
+    },
+    {
+      "relname": "whatsapp_devices",
+      "relkind": "v",
+      "relrowsecurity": false,
+      "reloptions": [
+        "security_invoker=true"
+      ],
+      "anon_select": true,
+      "authenticated_select": true
+    }
+  ],
+  "securityDefinerFunctions": []
+}

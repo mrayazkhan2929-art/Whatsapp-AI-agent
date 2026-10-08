@@ -1,0 +1,1792 @@
+{
+  "source": "Current workspace; SQL inventory is static evidence, not a live DB schema.",
+  "node": "v22.23.2",
+  "packages": [
+    {
+      "file": "package.json",
+      "name": "wa-chatbot-iere",
+      "version": "4.0.0",
+      "private": true,
+      "packageManager": "npm@10.9.7",
+      "engines": {
+        "node": ">=22 <23",
+        "npm": ">=10"
+      },
+      "workspaces": [
+        "frontend",
+        "backend"
+      ],
+      "scripts": {
+        "dev": "node scripts/dev-all.mjs",
+        "dev:frontend": "npm --workspace frontend run dev",
+        "dev:backend": "npm --workspace backend run dev",
+        "build": "npm --workspace frontend run build && npm --workspace backend run build",
+        "start": "npm --workspace frontend run start",
+        "lint": "npm --workspace frontend run lint",
+        "typecheck": "npm --workspace frontend run typecheck && npm --workspace backend run typecheck",
+        "import:properties": "npm --workspace frontend run import:properties",
+        "test": "vitest run",
+        "test:unit": "vitest run tests/unit",
+        "test:integration": "vitest run tests/integration",
+        "test:tenant": "vitest run tests/tenant",
+        "test:ai-regression": "vitest run tests/ai-regression tests/integration/message-router.test.ts",
+        "test:e2e": "playwright test",
+        "test:all": "npm test && npm run test:e2e",
+        "test:strict": "npm test && node scripts/phase0-strict.mjs",
+        "typecheck:tests": "tsc --project tsconfig.tests.json --noEmit",
+        "baseline:inventory": "node scripts/phase0-inventory.mjs"
+      },
+      "dependencies": {
+        "pg": "^8.20.0"
+      },
+      "devDependencies": {
+        "@playwright/test": "1.63.0",
+        "@testing-library/dom": "10.4.1",
+        "@testing-library/jest-dom": "6.9.1",
+        "@testing-library/react": "16.3.3",
+        "@testing-library/user-event": "14.6.7",
+        "@types/jsdom": "21.1.7",
+        "@types/supertest": "6.0.3",
+        "jsdom": "26.1.0",
+        "supertest": "7.3.1",
+        "vite": "7.3.7",
+        "vitest": "4.1.11"
+      }
+    },
+    {
+      "file": "backend/package.json",
+      "name": "iere-whatsapp-backend",
+      "version": "1.0.0",
+      "type": "module",
+      "scripts": {
+        "dev": "tsx watch src/index.ts",
+        "clean": "node ./scripts/clean-dist.mjs",
+        "build": "npm run clean && tsc -p tsconfig.json",
+        "start": "node dist/index.js",
+        "typecheck": "tsc --noEmit",
+        "backfill:contact-memory": "tsx scripts/backfill-contact-memory.ts"
+      },
+      "dependencies": {
+        "@anthropic-ai/sdk": "^0.27.0",
+        "@supabase/supabase-js": "^2.45.0",
+        "@whiskeysockets/baileys": "^6.7.9",
+        "express": "^4.18.3",
+        "groq-sdk": "^0.7.0",
+        "langdetect": "^0.2.1",
+        "openai": "^4.52.0",
+        "pino": "^9.3.2",
+        "qrcode": "^1.5.4",
+        "bullmq": "^5.1.0",
+        "ioredis": "^5.4.1",
+        "zod": "^3.23.8",
+        "tsx": "^4.16.2"
+      },
+      "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^22.0.0",
+        "@types/qrcode": "^1.5.5",
+        "typescript": "^5.5.4"
+      }
+    },
+    {
+      "file": "frontend/package.json",
+      "name": "wa-chatbot-iere-frontend",
+      "version": "0.2.0",
+      "private": true,
+      "scripts": {
+        "dev": "next dev -p 3000",
+        "build": "next build",
+        "start": "next start -p 3000",
+        "lint": "eslint .",
+        "typecheck": "tsc --noEmit",
+        "import:properties": "bun run ../scripts/import-properties.ts"
+      },
+      "dependencies": {
+        "@anthropic-ai/sdk": "^0.27.0",
+        "@dnd-kit/core": "^6.3.1",
+        "@dnd-kit/sortable": "^10.0.0",
+        "@dnd-kit/utilities": "^3.2.2",
+        "@hookform/resolvers": "^5.1.1",
+        "@mdxeditor/editor": "^3.39.1",
+        "@radix-ui/react-accordion": "^1.2.11",
+        "@radix-ui/react-alert-dialog": "^1.1.14",
+        "@radix-ui/react-aspect-ratio": "^1.1.7",
+        "@radix-ui/react-avatar": "^1.1.10",
+        "@radix-ui/react-checkbox": "^1.3.2",
+        "@radix-ui/react-collapsible": "^1.1.11",
+        "@radix-ui/react-context-menu": "^2.2.15",
+        "@radix-ui/react-dialog": "^1.1.14",
+        "@radix-ui/react-dropdown-menu": "^2.1.15",
+        "@radix-ui/react-hover-card": "^1.1.14",
+        "@radix-ui/react-label": "^2.1.7",
+        "@radix-ui/react-menubar": "^1.1.15",
+        "@radix-ui/react-navigation-menu": "^1.2.13",
+        "@radix-ui/react-popover": "^1.1.14",
+        "@radix-ui/react-progress": "^1.1.7",
+        "@radix-ui/react-radio-group": "^1.3.7",
+        "@radix-ui/react-scroll-area": "^1.2.9",
+        "@radix-ui/react-select": "^2.2.5",
+        "@radix-ui/react-separator": "^1.1.7",
+        "@radix-ui/react-slider": "^1.3.5",
+        "@radix-ui/react-slot": "^1.2.3",
+        "@radix-ui/react-switch": "^1.2.5",
+        "@radix-ui/react-tabs": "^1.1.12",
+        "@radix-ui/react-toast": "^1.2.14",
+        "@radix-ui/react-toggle": "^1.1.9",
+        "@radix-ui/react-toggle-group": "^1.1.10",
+        "@radix-ui/react-tooltip": "^1.2.7",
+        "@reactuses/core": "^6.0.5",
+        "@supabase/supabase-js": "^2.45.0",
+        "@swc/helpers": "^0.5.21",
+        "@tanstack/react-query": "^5.82.0",
+        "@tanstack/react-table": "^8.21.3",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "cmdk": "^1.1.1",
+        "date-fns": "^4.1.0",
+        "embla-carousel-react": "^8.6.0",
+        "framer-motion": "^12.23.2",
+        "groq-sdk": "^0.7.0",
+        "input-otp": "^1.4.2",
+        "lucide-react": "^0.525.0",
+        "next": "^16.1.1",
+        "next-auth": "^4.24.11",
+        "next-intl": "^4.3.4",
+        "next-themes": "^0.4.6",
+        "openai": "^4.52.0",
+        "react": "^19.0.0",
+        "react-day-picker": "^9.8.0",
+        "react-dom": "^19.0.0",
+        "react-hook-form": "^7.60.0",
+        "react-markdown": "^10.1.0",
+        "react-resizable-panels": "^3.0.3",
+        "react-syntax-highlighter": "^15.6.1",
+        "recharts": "^2.15.4",
+        "sharp": "^0.34.3",
+        "socket.io-client": "^4.8.3",
+        "sonner": "^2.0.6",
+        "tailwind-merge": "^3.3.1",
+        "tailwindcss-animate": "^1.0.7",
+        "uuid": "^11.1.0",
+        "vaul": "^1.1.2",
+        "z-ai-web-dev-sdk": "^0.0.17",
+        "zod": "^4.0.2",
+        "zustand": "^5.0.6"
+      },
+      "devDependencies": {
+        "@tailwindcss/postcss": "^4",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "bun-types": "^1.3.4",
+        "eslint": "^9",
+        "eslint-config-next": "^16.1.1",
+        "tailwindcss": "^4",
+        "tw-animate-css": "^1.3.5",
+        "typescript": "^5"
+      }
+    }
+  ],
+  "migrations": [
+    {
+      "file": "supabase/migrations/001_initial_schema.sql",
+      "sha256": "871db36dbd732d5fafa40d1f890bacb1b092cfcbf9a350fb9ada25bf25f8d18a",
+      "createdTables": [
+        "organizations",
+        "users",
+        "devices",
+        "knowledge_bases",
+        "flows",
+        "team_members",
+        "agents",
+        "properties",
+        "contacts",
+        "conversations",
+        "baileys_sessions",
+        "messages",
+        "knowledge_chunks",
+        "flow_steps",
+        "contact_flows",
+        "bookings",
+        "lead_scores",
+        "nudge_jobs",
+        "handoff_events"
+      ],
+      "tableDefinitions": [
+        "create table if not exists organizations (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  slug text not null unique,\n  plan text not null default 'starter',\n  settings jsonb not null default '{}'::jsonb,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists users (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  email text not null,\n  name text not null,\n  role text not null default 'admin' check (role in ('owner', 'admin', 'operator', 'member', 'viewer')),\n  avatar text,\n  password_hash text not null,\n  preferences jsonb not null default '{}'::jsonb,\n  active boolean not null default true,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now(),\n  unique (org_id, email)\n);",
+        "create table if not exists devices (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  name text not null,\n  phone text,\n  status text not null default 'disconnected' check (status in ('connected', 'disconnected', 'connecting')),\n  last_seen timestamptz,\n  qr_code text,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists knowledge_bases (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  name text not null,\n  description text,\n  source_type text not null default 'document',\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists flows (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  name text not null,\n  description text,\n  trigger_type text not null default 'new_contact',\n  trigger_data jsonb not null default '{}'::jsonb,\n  active boolean not null default true,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists team_members (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  name text not null,\n  role text not null check (role in ('CEO', 'Sales Manager', 'Agent', 'Receptionist')),\n  whatsapp text not null,\n  email text not null,\n  area_speciality text[] not null default '{}'::text[],\n  budget_threshold_aed numeric,\n  avatar_url text,\n  active boolean not null default true,\n  notes text,\n  speciality_areas text[] not null default '{}'::text[],\n  route_to text check (route_to in ('VIP', 'HOT', 'WARM', 'SUPPORT')),\n  min_budget_aed numeric,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists agents (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  name text not null,\n  system_prompt text not null,\n  knowledge_base_id uuid references knowledge_bases(id) on delete set null,\n  default_flow_id uuid references flows(id) on delete set null,\n  temperature double precision not null default 0.7,\n  max_tokens integer not null default 1000,\n  active boolean not null default true,\n  handoff_count integer not null default 0,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists properties (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  ref text not null,\n  type text check (type in ('apartment', 'villa', 'townhouse', 'penthouse')),\n  category text check (category in ('sale', 'rent')),\n  status text check (status in ('ready', 'off-plan')),\n  district text not null,\n  building text,\n  bedrooms text,\n  price_aed numeric not null,\n  size_sqft numeric,\n  agent_id uuid references team_members(id) on delete set null,\n  available boolean not null default true,\n  description text,\n  image_urls text[] not null default '{}'::text[],\n  amenities text[] not null default '{}'::text[],\n  ref_number text,\n  transaction_type text check (transaction_type in ('SALE', 'RENT')),\n  full_area text,\n  agent_name text,\n  agent_whatsapp text,\n  bathrooms text,\n  permit_number text,\n  portal text,\n  listed_on date,\n  last_updated date,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now(),\n  unique (org_id, ref)\n);",
+        "create table if not exists contacts (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  phone text not null,\n  name text,\n  email text,\n  push_name text,\n  contact_memory jsonb not null default '{}'::jsonb,\n  lead_score integer not null default 0 check (lead_score between 0 and 100),\n  lead_status text not null default 'new' check (lead_status in ('new', 'cold', 'warm', 'hot', 'boiling', 'converted', 'lost')),\n  language text not null default 'en' check (language in ('en', 'ar')),\n  intent text check (intent in ('buy', 'rent', 'invest', 'browse')),\n  area_interest text,\n  bedrooms text,\n  budget text,\n  timeline text,\n  notes text,\n  assigned_to uuid references team_members(id) on delete set null,\n  handled_by text not null default 'ai' check (handled_by in ('ai', 'human')),\n  last_message_at timestamptz,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now(),\n  unique (org_id, phone)\n);",
+        "create table if not exists conversations (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  contact_id uuid not null references contacts(id) on delete cascade,\n  device_id uuid references devices(id) on delete set null,\n  status text not null default 'active' check (status in ('active', 'resolved', 'archived')),\n  handled_by text not null default 'ai' check (handled_by in ('ai', 'human')),\n  assigned_to uuid references team_members(id) on delete set null,\n  lead_score integer not null default 0,\n  detected_intent text,\n  detected_lang text not null default 'en',\n  last_message_at timestamptz,\n  unread_count integer not null default 0,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists baileys_sessions (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  device_id uuid not null references devices(id) on delete cascade,\n  key_type text not null,\n  key_id text not null,\n  data text not null,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now(),\n  unique (device_id, key_type, key_id)\n);",
+        "create table if not exists messages (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  conversation_id uuid not null references conversations(id) on delete cascade,\n  direction text not null check (direction in ('inbound', 'outbound')),\n  sender_type text not null default 'ai' check (sender_type in ('ai', 'human', 'contact', 'system')),\n  sender_name text,\n  content text not null,\n  message_type text not null default 'text',\n  wa_message_id text,\n  status text not null default 'sent' check (status in ('sent', 'delivered', 'read', 'failed')),\n  delivered_at timestamptz,\n  read_at timestamptz,\n  metadata jsonb not null default '{}'::jsonb,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists knowledge_chunks (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  knowledge_base_id uuid not null references knowledge_bases(id) on delete cascade,\n  content text not null,\n  embedding vector(1536),\n  metadata jsonb not null default '{}'::jsonb,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists flow_steps (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  flow_id uuid not null references flows(id) on delete cascade,\n  step_order integer not null,\n  step_type text not null check (step_type in ('send_message', 'ask_question', 'ai_response', 'condition', 'action', 'handoff', 'booking')),\n  config jsonb not null default '{}'::jsonb,\n  next_step_id uuid,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists contact_flows (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  contact_id uuid not null references contacts(id) on delete cascade,\n  flow_id uuid not null references flows(id) on delete cascade,\n  current_step jsonb not null default '{}'::jsonb,\n  status text not null default 'active' check (status in ('active', 'completed', 'abandoned')),\n  completed_at timestamptz,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now(),\n  unique (contact_id, flow_id)\n);",
+        "create table if not exists bookings (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  contact_id uuid not null references contacts(id) on delete cascade,\n  conversation_id uuid references conversations(id) on delete set null,\n  agent_name text,\n  agent_whatsapp text,\n  property_ref text,\n  property_area text,\n  scheduled_date timestamptz not null,\n  scheduled_time text not null,\n  duration_minutes integer not null default 30,\n  status text not null default 'scheduled' check (status in ('scheduled', 'confirmed', 'completed', 'cancelled', 'no_show')),\n  notes text,\n  calendar_event_id text,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists lead_scores (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  contact_id uuid not null references contacts(id) on delete cascade,\n  conversation_id uuid references conversations(id) on delete set null,\n  score integer not null check (score between 0 and 100),\n  factors jsonb not null default '{}'::jsonb,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists nudge_jobs (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  contact_id uuid not null references contacts(id) on delete cascade,\n  device_id uuid references devices(id) on delete set null,\n  conversation_id uuid references conversations(id) on delete set null,\n  nudge_type text not null check (nudge_type in ('24h', '72h')),\n  status text not null default 'pending' check (status in ('pending', 'sent', 'cancelled')),\n  scheduled_at timestamptz not null,\n  sent_at timestamptz,\n  cancelled_at timestamptz,\n  message_en text,\n  message_ar text,\n  message_sent text,\n  language text not null default 'en',\n  completed_at timestamptz,\n  result jsonb not null default '{}'::jsonb,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);",
+        "create table if not exists handoff_events (\n  id uuid primary key default gen_random_uuid(),\n  org_id uuid not null references organizations(id) on delete cascade,\n  conversation_id uuid not null references conversations(id) on delete cascade,\n  contact_id uuid not null references contacts(id) on delete cascade,\n  triggered_by text not null check (triggered_by in ('keyword', 'max_turns', 'manual', 'flow', 'sentiment')),\n  trigger_value text,\n  assigned_to uuid references team_members(id) on delete set null,\n  status text not null default 'pending' check (status in ('pending', 'accepted', 'rejected', 'resolved')),\n  priority text not null default 'high' check (priority in ('low', 'medium', 'high', 'urgent')),\n  accepted_at timestamptz,\n  rejected_at timestamptz,\n  resolved_at timestamptz,\n  created_at timestamptz not null default now(),\n  updated_at timestamptz not null default now()\n);"
+      ],
+      "indexDefinitions": [
+        "create unique index if not exists idx_messages_conversation_cursor on messages(conversation_id, created_at desc, id desc);",
+        "create index if not exists idx_devices_org_id on devices(org_id);",
+        "create index if not exists idx_baileys_sessions_org_id on baileys_sessions(org_id);",
+        "create index if not exists idx_baileys_sessions_device_id on baileys_sessions(device_id);",
+        "create index if not exists idx_contacts_org_id on contacts(org_id);",
+        "create index if not exists idx_contacts_assigned_to on contacts(assigned_to);",
+        "create index if not exists idx_conversations_org_id on conversations(org_id);",
+        "create index if not exists idx_conversations_contact_id on conversations(contact_id);",
+        "create index if not exists idx_conversations_device_id on conversations(device_id);",
+        "create index if not exists idx_messages_org_id on messages(org_id);",
+        "create index if not exists idx_agents_org_id on agents(org_id);",
+        "create index if not exists idx_properties_org_id on properties(org_id);",
+        "create index if not exists idx_properties_agent_id on properties(agent_id);",
+        "create index if not exists idx_team_members_org_id on team_members(org_id);",
+        "create index if not exists idx_knowledge_bases_org_id on knowledge_bases(org_id);",
+        "create index if not exists idx_knowledge_chunks_org_id on knowledge_chunks(org_id);",
+        "create index if not exists idx_knowledge_chunks_kb_id on knowledge_chunks(knowledge_base_id);",
+        "create index if not exists idx_flows_org_id on flows(org_id);",
+        "create index if not exists idx_flow_steps_org_id on flow_steps(org_id);",
+        "create index if not exists idx_flow_steps_flow_id on flow_steps(flow_id);",
+        "create index if not exists idx_contact_flows_org_id on contact_flows(org_id);",
+        "create index if not exists idx_contact_flows_contact_id on contact_flows(contact_id);",
+        "create index if not exists idx_contact_flows_flow_id on contact_flows(flow_id);",
+        "create index if not exists idx_bookings_org_id on bookings(org_id);",
+        "create index if not exists idx_bookings_contact_id on bookings(contact_id);",
+        "create index if not exists idx_bookings_conversation_id on bookings(conversation_id);",
+        "create index if not exists idx_lead_scores_org_id on lead_scores(org_id);",
+        "create index if not exists idx_lead_scores_contact_id on lead_scores(contact_id);",
+        "create index if not exists idx_lead_scores_conversation_id on lead_scores(conversation_id);",
+        "create index if not exists idx_nudge_jobs_org_id on nudge_jobs(org_id);",
+        "create index if not exists idx_nudge_jobs_contact_id on nudge_jobs(contact_id);",
+        "create index if not exists idx_nudge_jobs_device_id on nudge_jobs(device_id);",
+        "create index if not exists idx_handoff_events_org_id on handoff_events(org_id);",
+        "create index if not exists idx_handoff_events_conversation_id on handoff_events(conversation_id);",
+        "create index if not exists idx_handoff_events_contact_id on handoff_events(contact_id);",
+        "create index if not exists idx_handoff_events_assigned_to on handoff_events(assigned_to);"
+      ],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/002_pgvector.sql",
+      "sha256": "ca73b19e084b4800c6f3b50098969125eee68a18cc6515ae821e2bdf07f1ddea",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [
+        "CREATE INDEX IF NOT EXISTS knowledge_chunks_embedding_hnsw \n  ON knowledge_chunks USING hnsw (embedding vector_cosine_ops);",
+        "CREATE INDEX IF NOT EXISTS properties_fts \n  ON properties USING gin(to_tsvector('english', coalesce(district,'') || ' ' || coalesce(building,'') || ' ' || coalesce(bedrooms,'')));",
+        "CREATE INDEX IF NOT EXISTS properties_price ON properties(price_aed);",
+        "CREATE INDEX IF NOT EXISTS properties_available ON properties(available);",
+        "CREATE INDEX IF NOT EXISTS contacts_phone ON contacts(phone);",
+        "CREATE INDEX IF NOT EXISTS contacts_org_score ON contacts(org_id, lead_score);",
+        "CREATE INDEX IF NOT EXISTS conversations_contact ON conversations(contact_id);",
+        "CREATE INDEX IF NOT EXISTS nudge_jobs_scheduled ON nudge_jobs(scheduled_at, status);",
+        "CREATE INDEX IF NOT EXISTS team_members_speciality ON team_members USING GIN(area_speciality);"
+      ],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/003_properties_seed.sql",
+      "sha256": "037982d8a9dfceea1fa5280aefcf7b2325813115787013442b0fe60ff124725d",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/004_team_members_seed.sql",
+      "sha256": "2db99611400f3105963f467b60c86c2d3cb3b30fa2f2218e974230357913d701",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/005_rls_policies.sql",
+      "sha256": "3c350897aab43e1bc989efad27a32257cb236427ddfdecf8b661cdb0ac06810e",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [],
+      "policyDefinitions": [
+        "create policy org_isolation on organizations using (id = public.current_org_id());",
+        "create policy org_isolation on users using (org_id = public.current_org_id());",
+        "create policy org_isolation on devices using (org_id = public.current_org_id());",
+        "create policy org_isolation on baileys_sessions using (org_id = public.current_org_id());",
+        "create policy org_isolation on contacts using (org_id = public.current_org_id());",
+        "create policy org_isolation on conversations using (org_id = public.current_org_id());",
+        "create policy org_isolation on messages using (org_id = public.current_org_id());",
+        "create policy org_isolation on agents using (org_id = public.current_org_id());",
+        "create policy org_isolation on properties using (org_id = public.current_org_id());",
+        "create policy org_isolation on team_members using (org_id = public.current_org_id());",
+        "create policy org_isolation on knowledge_bases using (org_id = public.current_org_id());",
+        "create policy org_isolation on knowledge_chunks using (org_id = public.current_org_id());",
+        "create policy org_isolation on flows using (org_id = public.current_org_id());",
+        "create policy org_isolation on flow_steps using (org_id = public.current_org_id());",
+        "create policy org_isolation on contact_flows using (org_id = public.current_org_id());",
+        "create policy org_isolation on bookings using (org_id = public.current_org_id());",
+        "create policy org_isolation on lead_scores using (org_id = public.current_org_id());",
+        "create policy org_isolation on nudge_jobs using (org_id = public.current_org_id());",
+        "create policy org_isolation on handoff_events using (org_id = public.current_org_id());"
+      ],
+      "alters": [
+        "alter table organizations enable row level security;",
+        "alter table users enable row level security;",
+        "alter table devices enable row level security;",
+        "alter table baileys_sessions enable row level security;",
+        "alter table contacts enable row level security;",
+        "alter table conversations enable row level security;",
+        "alter table messages enable row level security;",
+        "alter table agents enable row level security;",
+        "alter table properties enable row level security;",
+        "alter table team_members enable row level security;",
+        "alter table knowledge_bases enable row level security;",
+        "alter table knowledge_chunks enable row level security;",
+        "alter table flows enable row level security;",
+        "alter table flow_steps enable row level security;",
+        "alter table contact_flows enable row level security;",
+        "alter table bookings enable row level security;",
+        "alter table lead_scores enable row level security;",
+        "alter table nudge_jobs enable row level security;",
+        "alter table handoff_events enable row level security;"
+      ],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/006_vector_functions.sql",
+      "sha256": "829fdfa05d5405010d6fea60fe3aef7b72f14d1cedd7b7adbae10f909ed30c8d",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/007_nudge_functions.sql",
+      "sha256": "bc4617ba1d1a6d1f0d1ce4b84e23c406f5d232df874034c94ca698f019b23601",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/008_sentiment_functions.sql",
+      "sha256": "c172aee8e7a4a92084ead19fcd0343d25e67755220407f5b9f3b90fe5616dca7",
+      "createdTables": [
+        "sentiment_history"
+      ],
+      "tableDefinitions": [
+        "CREATE TABLE IF NOT EXISTS sentiment_history (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n  contact_id UUID NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,\n  message_id UUID NOT NULL REFERENCES messages(id) ON DELETE CASCADE,\n  sentiment_score NUMERIC(3,2) NOT NULL CHECK (sentiment_score >= -1 AND sentiment_score <= 1),\n  sentiment VARCHAR(20) NOT NULL CHECK (sentiment IN ('positive', 'neutral', 'negative')),\n  confidence NUMERIC(3,2) NOT NULL CHECK (confidence >= 0 AND confidence <= 1),\n  emotions TEXT[] NOT NULL DEFAULT '{}'::text[],\n  escalation_risk VARCHAR(20) NOT NULL CHECK (escalation_risk IN ('low', 'medium', 'high', 'critical')),\n  analyzed_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);"
+      ],
+      "indexDefinitions": [
+        "CREATE INDEX IF NOT EXISTS idx_sentiment_history_org_id ON sentiment_history(org_id);",
+        "CREATE INDEX IF NOT EXISTS idx_sentiment_history_contact_id ON sentiment_history(contact_id);",
+        "CREATE INDEX IF NOT EXISTS idx_sentiment_history_message_id ON sentiment_history(message_id);",
+        "CREATE INDEX IF NOT EXISTS idx_sentiment_history_analyzed_at ON sentiment_history(analyzed_at DESC);",
+        "CREATE INDEX IF NOT EXISTS idx_sentiment_history_escalation_risk ON sentiment_history(escalation_risk);"
+      ],
+      "policyDefinitions": [
+        "CREATE POLICY sentiment_history_select_org ON sentiment_history\n  FOR SELECT USING (org_id = public.current_org_id());",
+        "CREATE POLICY sentiment_history_insert_org ON sentiment_history\n  FOR INSERT WITH CHECK (auth.role() = 'service_role' OR org_id = public.current_org_id());",
+        "CREATE POLICY sentiment_history_update_org ON sentiment_history\n  FOR UPDATE USING (auth.role() = 'service_role' OR org_id = public.current_org_id())\n  WITH CHECK (auth.role() = 'service_role' OR org_id = public.current_org_id());"
+      ],
+      "alters": [
+        "ALTER TABLE sentiment_history ADD COLUMN IF NOT EXISTS org_id UUID REFERENCES organizations(id) ON DELETE CASCADE;",
+        "ALTER TABLE sentiment_history ADD COLUMN IF NOT EXISTS emotions TEXT[] NOT NULL DEFAULT '{}'::text[];",
+        "ALTER TABLE sentiment_history ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();",
+        "ALTER TABLE sentiment_history ENABLE ROW LEVEL SECURITY;"
+      ],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/009_alert_functions.sql",
+      "sha256": "1029e675310e3322f316d28e2cea354a46baddccfb45ff510554f383eaff3493",
+      "createdTables": [
+        "alerts",
+        "notification_preferences",
+        "notification_rules",
+        "alert_templates",
+        "notifications"
+      ],
+      "tableDefinitions": [
+        "CREATE TABLE IF NOT EXISTS alerts (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n  type VARCHAR(50) NOT NULL CHECK (type IN ('lead', 'handoff', 'sentiment', 'booking', 'nudge', 'system', 'analytics')),\n  priority VARCHAR(20) NOT NULL CHECK (priority IN ('low', 'medium', 'high', 'urgent')),\n  title TEXT NOT NULL,\n  message TEXT NOT NULL,\n  user_id UUID REFERENCES users(id) ON DELETE SET NULL,\n  contact_id UUID REFERENCES contacts(id) ON DELETE SET NULL,\n  conversation_id UUID REFERENCES conversations(id) ON DELETE SET NULL,\n  template_id VARCHAR(100),\n  notifications_sent INTEGER NOT NULL DEFAULT 0,\n  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,\n  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);",
+        "CREATE TABLE IF NOT EXISTS notification_preferences (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n  whatsapp JSONB NOT NULL DEFAULT '{\"enabled\": true}'::jsonb,\n  email JSONB NOT NULL DEFAULT '{\"enabled\": true, \"immediate\": true}'::jsonb,\n  sms JSONB NOT NULL DEFAULT '{\"enabled\": false, \"urgent_only\": true}'::jsonb,\n  push JSONB NOT NULL DEFAULT '{\"enabled\": true}'::jsonb,\n  categories JSONB NOT NULL DEFAULT '[]'::jsonb,\n  quiet_hours JSONB NOT NULL DEFAULT '{\"enabled\": true, \"startTime\": \"22:00\", \"endTime\": \"08:00\"}'::jsonb,\n  sound_settings JSONB NOT NULL DEFAULT '{\"enabled\": true, \"volume\": 50, \"sound\": \"default\"}'::jsonb,\n  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);",
+        "CREATE TABLE IF NOT EXISTS notification_rules (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n  name TEXT NOT NULL,\n  type VARCHAR(50) NOT NULL CHECK (type IN ('lead', 'handoff', 'sentiment', 'booking', 'nudge', 'system', 'analytics')),\n  conditions JSONB NOT NULL DEFAULT '[]'::jsonb,\n  actions JSONB NOT NULL DEFAULT '[]'::jsonb,\n  enabled BOOLEAN NOT NULL DEFAULT TRUE,\n  priority INTEGER NOT NULL DEFAULT 100,\n  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);",
+        "CREATE TABLE IF NOT EXISTS alert_templates (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n  name TEXT NOT NULL,\n  type VARCHAR(50) NOT NULL,\n  priority VARCHAR(20) NOT NULL,\n  channels JSONB NOT NULL DEFAULT '[]'::jsonb,\n  template JSONB NOT NULL DEFAULT '{}'::jsonb,\n  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);",
+        "CREATE TABLE IF NOT EXISTS notifications (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n  alert_id UUID REFERENCES alerts(id) ON DELETE CASCADE,\n  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n  type VARCHAR(50) NOT NULL,\n  title TEXT NOT NULL,\n  message TEXT NOT NULL,\n  channel VARCHAR(20) NOT NULL CHECK (channel IN ('whatsapp', 'email', 'sms', 'push')),\n  status VARCHAR(20) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'sent', 'delivered', 'failed')),\n  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,\n  read_at TIMESTAMPTZ,\n  sent_at TIMESTAMPTZ,\n  delivered_at TIMESTAMPTZ,\n  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);"
+      ],
+      "indexDefinitions": [
+        "CREATE UNIQUE INDEX IF NOT EXISTS idx_notification_preferences_user_id ON notification_preferences(user_id);",
+        "CREATE UNIQUE INDEX IF NOT EXISTS idx_alert_templates_org_name ON alert_templates(org_id, name);",
+        "CREATE INDEX IF NOT EXISTS idx_alerts_org_id ON alerts(org_id);",
+        "CREATE INDEX IF NOT EXISTS idx_alerts_type ON alerts(type);",
+        "CREATE INDEX IF NOT EXISTS idx_alerts_priority ON alerts(priority);",
+        "CREATE INDEX IF NOT EXISTS idx_alerts_user_id ON alerts(user_id);",
+        "CREATE INDEX IF NOT EXISTS idx_alerts_contact_id ON alerts(contact_id);",
+        "CREATE INDEX IF NOT EXISTS idx_alerts_created_at ON alerts(created_at DESC);",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_org_id ON notifications(org_id);",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_alert_id ON notifications(alert_id);",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_user_id ON notifications(user_id);",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_type ON notifications(type);",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_status ON notifications(status);",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_channel ON notifications(channel);",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_created_at ON notifications(created_at DESC);",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_read_at ON notifications(read_at);",
+        "CREATE INDEX IF NOT EXISTS idx_notification_rules_org_id ON notification_rules(org_id);",
+        "CREATE INDEX IF NOT EXISTS idx_notification_rules_type ON notification_rules(type);",
+        "CREATE INDEX IF NOT EXISTS idx_notification_rules_enabled ON notification_rules(enabled);",
+        "CREATE INDEX IF NOT EXISTS idx_notification_rules_priority ON notification_rules(priority);",
+        "CREATE INDEX IF NOT EXISTS idx_alert_templates_org_id ON alert_templates(org_id);"
+      ],
+      "policyDefinitions": [
+        "CREATE POLICY alerts_select_org ON alerts\n  FOR SELECT USING (org_id = public.current_org_id());",
+        "CREATE POLICY alerts_insert_org ON alerts\n  FOR INSERT WITH CHECK (auth.role() = 'service_role' OR org_id = public.current_org_id());",
+        "CREATE POLICY alerts_update_org ON alerts\n  FOR UPDATE USING (auth.role() = 'service_role' OR org_id = public.current_org_id())\n  WITH CHECK (auth.role() = 'service_role' OR org_id = public.current_org_id());",
+        "CREATE POLICY notification_preferences_select_self ON notification_preferences\n  FOR SELECT USING (\n    org_id = public.current_org_id()\n    AND user_id = auth.uid()\n  );",
+        "CREATE POLICY notification_preferences_insert_self ON notification_preferences\n  FOR INSERT WITH CHECK (\n    auth.role() = 'service_role'\n    OR (org_id = public.current_org_id() AND user_id = auth.uid())\n  );",
+        "CREATE POLICY notification_preferences_update_self ON notification_preferences\n  FOR UPDATE USING (\n    auth.role() = 'service_role'\n    OR (org_id = public.current_org_id() AND user_id = auth.uid())\n  )\n  WITH CHECK (\n    auth.role() = 'service_role'\n    OR (org_id = public.current_org_id() AND user_id = auth.uid())\n  );",
+        "CREATE POLICY notifications_select_self ON notifications\n  FOR SELECT USING (\n    org_id = public.current_org_id()\n    AND user_id = auth.uid()\n  );",
+        "CREATE POLICY notifications_insert_org ON notifications\n  FOR INSERT WITH CHECK (\n    auth.role() = 'service_role'\n    OR (org_id = public.current_org_id() AND user_id = auth.uid())\n  );",
+        "CREATE POLICY notifications_update_self ON notifications\n  FOR UPDATE USING (\n    auth.role() = 'service_role'\n    OR (org_id = public.current_org_id() AND user_id = auth.uid())\n  )\n  WITH CHECK (\n    auth.role() = 'service_role'\n    OR (org_id = public.current_org_id() AND user_id = auth.uid())\n  );",
+        "CREATE POLICY notification_rules_select_org ON notification_rules\n  FOR SELECT USING (org_id = public.current_org_id());",
+        "CREATE POLICY notification_rules_manage_admin ON notification_rules\n  FOR ALL USING (\n    auth.role() = 'service_role'\n    OR EXISTS (\n      SELECT 1\n      FROM users\n      WHERE users.id = auth.uid()\n        AND users.org_id = notification_rules.org_id\n        AND users.role IN ('owner', 'admin')\n    )\n  )\n  WITH CHECK (\n    auth.role() = 'service_role'\n    OR EXISTS (\n      SELECT 1\n      FROM users\n      WHERE users.id = auth.uid()\n        AND users.org_id = notification_rules.org_id\n        AND users.role IN ('owner', 'admin')\n    )\n  );",
+        "CREATE POLICY alert_templates_select_org ON alert_templates\n  FOR SELECT USING (org_id = public.current_org_id());",
+        "CREATE POLICY alert_templates_manage_admin ON alert_templates\n  FOR ALL USING (\n    auth.role() = 'service_role'\n    OR EXISTS (\n      SELECT 1\n      FROM users\n      WHERE users.id = auth.uid()\n        AND users.org_id = alert_templates.org_id\n        AND users.role IN ('owner', 'admin')\n    )\n  )\n  WITH CHECK (\n    auth.role() = 'service_role'\n    OR EXISTS (\n      SELECT 1\n      FROM users\n      WHERE users.id = auth.uid()\n        AND users.org_id = alert_templates.org_id\n        AND users.role IN ('owner', 'admin')\n    )\n  );"
+      ],
+      "alters": [
+        "ALTER TABLE alerts ADD COLUMN IF NOT EXISTS org_id UUID REFERENCES organizations(id) ON DELETE CASCADE;",
+        "ALTER TABLE alerts ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();",
+        "ALTER TABLE alerts ADD COLUMN IF NOT EXISTS metadata JSONB NOT NULL DEFAULT '{}'::jsonb;",
+        "ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS org_id UUID REFERENCES organizations(id) ON DELETE CASCADE;",
+        "ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS categories JSONB NOT NULL DEFAULT '[]'::jsonb;",
+        "ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS quiet_hours JSONB NOT NULL DEFAULT '{\"enabled\": true, \"startTime\": \"22:00\", \"endTime\": \"08:00\"}'::jsonb;",
+        "ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS sound_settings JSONB NOT NULL DEFAULT '{\"enabled\": true, \"volume\": 50, \"sound\": \"default\"}'::jsonb;",
+        "ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();",
+        "ALTER TABLE notification_rules ADD COLUMN IF NOT EXISTS org_id UUID REFERENCES organizations(id) ON DELETE CASCADE;",
+        "ALTER TABLE notification_rules ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();",
+        "ALTER TABLE alert_templates ADD COLUMN IF NOT EXISTS org_id UUID REFERENCES organizations(id) ON DELETE CASCADE;",
+        "ALTER TABLE alert_templates ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();",
+        "ALTER TABLE notifications ADD COLUMN IF NOT EXISTS org_id UUID REFERENCES organizations(id) ON DELETE CASCADE;",
+        "ALTER TABLE notifications ADD COLUMN IF NOT EXISTS alert_id UUID REFERENCES alerts(id) ON DELETE CASCADE;",
+        "ALTER TABLE notifications ADD COLUMN IF NOT EXISTS read_at TIMESTAMPTZ;",
+        "ALTER TABLE notifications ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();",
+        "ALTER TABLE alerts ENABLE ROW LEVEL SECURITY;",
+        "ALTER TABLE notification_preferences ENABLE ROW LEVEL SECURITY;",
+        "ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;",
+        "ALTER TABLE notification_rules ENABLE ROW LEVEL SECURITY;",
+        "ALTER TABLE alert_templates ENABLE ROW LEVEL SECURITY;"
+      ],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/010_indirect_properties_inventory_gaps.sql",
+      "sha256": "1f58c3d91ff30bcec6b64ddb864f39b102f3933c68926fe1222b7a76f488c543",
+      "createdTables": [
+        "inventory_gaps"
+      ],
+      "tableDefinitions": [
+        "CREATE TABLE IF NOT EXISTS inventory_gaps (\n  id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),\n  org_id            uuid NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n  contact_id        uuid REFERENCES contacts(id),\n  conversation_id   uuid REFERENCES conversations(id),\n  transaction_type  TEXT,\n  area              TEXT,\n  bedrooms          TEXT,\n  budget_min        NUMERIC,\n  budget_max        NUMERIC,\n  status_wanted     TEXT,\n  category          TEXT,\n  direct_results    INT DEFAULT 0,\n  indirect_results  INT DEFAULT 0,\n  used_fallback     BOOLEAN DEFAULT FALSE,\n  created_at        timestamptz DEFAULT now()\n);"
+      ],
+      "indexDefinitions": [
+        "CREATE INDEX idx_properties_fts ON properties\n  USING gin(to_tsvector('english',\n    coalesce(district,'') || ' ' ||\n    coalesce(building,'') || ' ' ||\n    coalesce(category,'') || ' ' ||\n    coalesce(bedrooms,'') || ' ' ||\n    coalesce(partner_agency,'') || ' ' ||\n    coalesce(source,'')\n  ));",
+        "CREATE INDEX IF NOT EXISTS idx_properties_source ON properties(org_id, source);",
+        "CREATE INDEX IF NOT EXISTS idx_gaps_area ON inventory_gaps(org_id, area);",
+        "CREATE INDEX IF NOT EXISTS idx_gaps_created ON inventory_gaps(org_id, created_at DESC);"
+      ],
+      "policyDefinitions": [
+        "CREATE POLICY org_isolation ON inventory_gaps\n  USING (org_id = (current_setting('request.jwt.claims', true)::jsonb->>'org_id')::uuid);"
+      ],
+      "alters": [
+        "ALTER TABLE properties\n  ADD COLUMN IF NOT EXISTS source TEXT NOT NULL DEFAULT 'direct'\n  CHECK (source IN ('direct', 'indirect'));",
+        "ALTER TABLE properties\n  ADD COLUMN IF NOT EXISTS partner_agency TEXT,\n  ADD COLUMN IF NOT EXISTS partner_agent_name TEXT,\n  ADD COLUMN IF NOT EXISTS partner_agent_phone TEXT,\n  ADD COLUMN IF NOT EXISTS partner_agent_email TEXT,\n  ADD COLUMN IF NOT EXISTS listing_url TEXT,\n  ADD COLUMN IF NOT EXISTS co_broker_commission TEXT;",
+        "ALTER TABLE inventory_gaps ENABLE ROW LEVEL SECURITY;"
+      ],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/011_message_deduplication.sql",
+      "sha256": "6105956018b3611361d7a79a7a0de9c799de27ca0ebf771afeb8295a5f80c8fc",
+      "createdTables": [
+        "message_locks",
+        "message_replies"
+      ],
+      "tableDefinitions": [
+        "CREATE TABLE IF NOT EXISTS message_locks (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    message_id TEXT NOT NULL,\n    org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n    UNIQUE(message_id, org_id)\n);",
+        "CREATE TABLE IF NOT EXISTS message_replies (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    message_id TEXT NOT NULL,\n    org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n    reply_type TEXT NOT NULL CHECK (reply_type IN ('ai', 'flow', 'properties', 'handoff', 'system')),\n    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n    UNIQUE(message_id, org_id)\n);"
+      ],
+      "indexDefinitions": [
+        "CREATE INDEX IF NOT EXISTS idx_message_locks_message_id_org_id ON message_locks(message_id, org_id);",
+        "CREATE INDEX IF NOT EXISTS idx_message_replies_message_id_org_id ON message_replies(message_id, org_id);"
+      ],
+      "policyDefinitions": [
+        "CREATE POLICY \"Users can view message locks for their org\" ON message_locks\n    FOR SELECT USING (org_id = public.current_org_id());",
+        "CREATE POLICY \"Users can insert message locks for their org\" ON message_locks\n    FOR INSERT WITH CHECK (org_id = public.current_org_id());",
+        "CREATE POLICY \"Users can view message replies for their org\" ON message_replies\n    FOR SELECT USING (org_id = public.current_org_id());",
+        "CREATE POLICY \"Users can insert message replies for their org\" ON message_replies\n    FOR INSERT WITH CHECK (org_id = public.current_org_id());"
+      ],
+      "alters": [
+        "ALTER TABLE message_locks ENABLE ROW LEVEL SECURITY;",
+        "ALTER TABLE message_replies ENABLE ROW LEVEL SECURITY;"
+      ],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/011_properties_distress_deal.sql",
+      "sha256": "bcc120547592cb4d81c13154ec14a5387ad8626060c379b063d65ccb0177ae32",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [
+        "CREATE INDEX IF NOT EXISTS idx_properties_distress_deal\n  ON properties(org_id, source, distress_deal);"
+      ],
+      "policyDefinitions": [],
+      "alters": [
+        "ALTER TABLE properties\n  ADD COLUMN IF NOT EXISTS distress_deal BOOLEAN NOT NULL DEFAULT FALSE;"
+      ],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/012_agent_assignment.sql",
+      "sha256": "ffd49b63cfd7c15797d65f6571081f406a2de0d33293a36710d039427d6eca1d",
+      "createdTables": [
+        "lead_assignments"
+      ],
+      "tableDefinitions": [
+        "CREATE TABLE IF NOT EXISTS lead_assignments (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,\n    contact_id UUID NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,\n    agent_id UUID NOT NULL REFERENCES team_members(id) ON DELETE CASCADE,\n    assigned_area TEXT,\n    assigned_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n    status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'completed', 'cancelled')),\n    notes TEXT,\n    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);"
+      ],
+      "indexDefinitions": [
+        "CREATE INDEX IF NOT EXISTS idx_lead_assignments_org_id ON lead_assignments(org_id);",
+        "CREATE INDEX IF NOT EXISTS idx_lead_assignments_contact_id ON lead_assignments(contact_id);",
+        "CREATE INDEX IF NOT EXISTS idx_lead_assignments_agent_id ON lead_assignments(agent_id);",
+        "CREATE INDEX IF NOT EXISTS idx_lead_assignments_assigned_at ON lead_assignments(assigned_at);",
+        "CREATE INDEX IF NOT EXISTS idx_contacts_assigned_agent_id ON contacts(assigned_agent_id);"
+      ],
+      "policyDefinitions": [
+        "CREATE POLICY \"Users can view lead assignments for their org\" ON lead_assignments\n    FOR SELECT USING (org_id = public.current_org_id());",
+        "CREATE POLICY \"Users can insert lead assignments for their org\" ON lead_assignments\n    FOR INSERT WITH CHECK (org_id = public.current_org_id());",
+        "CREATE POLICY \"Users can update lead assignments for their org\" ON lead_assignments\n    FOR UPDATE USING (org_id = public.current_org_id());"
+      ],
+      "alters": [
+        "ALTER TABLE contacts\nADD COLUMN IF NOT EXISTS assigned_agent_id UUID REFERENCES team_members(id) ON DELETE SET NULL,\nADD COLUMN IF NOT EXISTS assigned_at TIMESTAMPTZ,\nADD COLUMN IF NOT EXISTS assignment_area TEXT;",
+        "ALTER TABLE lead_assignments ENABLE ROW LEVEL SECURITY;"
+      ],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/013_contact_memory_and_cleanup.sql",
+      "sha256": "7ca01ec3d49ef8997c4a09903aa9e5b897d003baef81fa1c1960985389b0381a",
+      "createdTables": [
+        "contact_memory"
+      ],
+      "tableDefinitions": [
+        "create table if not exists contact_memory (\n  id uuid primary key default gen_random_uuid(),\n  contact_id uuid not null references contacts(id) on delete cascade,\n  key text not null,\n  value text,\n  updated_at timestamptz not null default now(),\n  unique (contact_id, key)\n);"
+      ],
+      "indexDefinitions": [
+        "create index if not exists idx_contact_memory_contact_id\n  on contact_memory(contact_id);"
+      ],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/014_ai_pipeline_cleanup.sql",
+      "sha256": "410f8fd1703abd2dd16ba97aad38afeea3e4f3457568f054cdcc6ab1262344ba",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": [
+        "DELETE FROM properties\nWHERE size_sqft > 50000;",
+        "DELETE FROM properties\nWHERE transaction_type = 'SALE'\n  AND price_aed < 10000;",
+        "DELETE FROM properties\nWHERE ref_number IN ('FDS', 'IERE-52', '5551');",
+        "DELETE FROM properties\nWHERE size_sqft IS NOT NULL\n  AND size_sqft < 100;"
+      ]
+    },
+    {
+      "file": "supabase/migrations/015_runtime_routing_and_data_cleanup.sql",
+      "sha256": "3c437cc93519cec6b123e995391922aedc4b45c92fd3c2688f345688033a82ba",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    },
+    {
+      "file": "supabase/migrations/016_fix_conversations_unique_constraint.sql",
+      "sha256": "35d26232b34f8fdd9aea26e26e65fdd4a2c268e7657da811535365c8d413b4d9",
+      "createdTables": [],
+      "tableDefinitions": [],
+      "indexDefinitions": [
+        "Create unique index if it doesn't exist\n    IF NOT EXISTS (\n      SELECT 1\n      FROM pg_indexes\n      WHERE schemaname = 'public'\n        AND indexname = 'conversations_org_id_contact_id_key'\n    ) THEN\n      EXECUTE 'CREATE UNIQUE INDEX conversations_org_id_contact_id_key ON public.conversations (org_id, contact_id)';"
+      ],
+      "policyDefinitions": [],
+      "alters": [],
+      "destructiveStatements": []
+    }
+  ],
+  "duplicateMigrationPrefixes": [
+    "011"
+  ],
+  "backendRoutes": [
+    {
+      "file": "backend/src/api/routes/agents.ts",
+      "line": 8,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/agents.ts",
+      "line": 30,
+      "method": "get",
+      "path": "/:id"
+    },
+    {
+      "file": "backend/src/api/routes/analytics.ts",
+      "line": 24,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/auth.ts",
+      "line": 8,
+      "method": "get",
+      "path": "/me"
+    },
+    {
+      "file": "backend/src/api/routes/auth.ts",
+      "line": 15,
+      "method": "post",
+      "path": "/logout"
+    },
+    {
+      "file": "backend/src/api/routes/bookings.ts",
+      "line": 20,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/bookings.ts",
+      "line": 42,
+      "method": "post",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/chat.ts",
+      "line": 28,
+      "method": "post",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/contacts.ts",
+      "line": 23,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/contacts.ts",
+      "line": 69,
+      "method": "get",
+      "path": "/:id"
+    },
+    {
+      "file": "backend/src/api/routes/contacts.ts",
+      "line": 97,
+      "method": "get",
+      "path": "/:contactId/property-matches"
+    },
+    {
+      "file": "backend/src/api/routes/contacts.ts",
+      "line": 153,
+      "method": "patch",
+      "path": "/:id"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 27,
+      "method": "patch",
+      "path": "/bulk"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 65,
+      "method": "delete",
+      "path": "/bulk"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 99,
+      "method": "patch",
+      "path": "/:id"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 136,
+      "method": "post",
+      "path": "/reset-conversation"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 32,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 89,
+      "method": "post",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 121,
+      "method": "get",
+      "path": "/:id"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 159,
+      "method": "post",
+      "path": "/:id/connect"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 191,
+      "method": "post",
+      "path": "/:id/disconnect"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 221,
+      "method": "delete",
+      "path": "/:id"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 270,
+      "method": "get",
+      "path": "/:id/qr"
+    },
+    {
+      "file": "backend/src/api/routes/flows.ts",
+      "line": 8,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/flows.ts",
+      "line": 30,
+      "method": "get",
+      "path": "/:id"
+    },
+    {
+      "file": "backend/src/api/routes/knowledge.ts",
+      "line": 8,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/knowledge.ts",
+      "line": 30,
+      "method": "get",
+      "path": "/:id/chunks"
+    },
+    {
+      "file": "backend/src/api/routes/messages.ts",
+      "line": 27,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/messages.ts",
+      "line": 81,
+      "method": "post",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/nudges.ts",
+      "line": 8,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/nudges.ts",
+      "line": 38,
+      "method": "post",
+      "path": "/:id/cancel"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 22,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 84,
+      "method": "get",
+      "path": "/:ref"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 112,
+      "method": "post",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 143,
+      "method": "get",
+      "path": "/stats"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 176,
+      "method": "get",
+      "path": "/health"
+    },
+    {
+      "file": "backend/src/api/routes/settings.ts",
+      "line": 16,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/api/routes/settings.ts",
+      "line": 38,
+      "method": "patch",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 60,
+      "method": "get",
+      "path": "/"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 69,
+      "method": "get",
+      "path": "/healthz"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 79,
+      "method": "use",
+      "path": "/api/v1/health"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 81,
+      "method": "get",
+      "path": "/api/v1/setup/status"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 96,
+      "method": "use",
+      "path": "/api/v1/auth"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 97,
+      "method": "use",
+      "path": "/api/v1/chat"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 98,
+      "method": "use",
+      "path": "/api/v1/devices"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 99,
+      "method": "use",
+      "path": "/api/v1/contacts"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 100,
+      "method": "use",
+      "path": "/api/v1/conversations"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 101,
+      "method": "use",
+      "path": "/api/v1/messages"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 102,
+      "method": "use",
+      "path": "/api/v1/properties"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 103,
+      "method": "use",
+      "path": "/api/v1/agents"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 104,
+      "method": "use",
+      "path": "/api/v1/knowledge"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 105,
+      "method": "use",
+      "path": "/api/v1/flows"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 106,
+      "method": "use",
+      "path": "/api/v1/bookings"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 107,
+      "method": "use",
+      "path": "/api/v1/analytics"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 108,
+      "method": "use",
+      "path": "/api/v1/nudges"
+    },
+    {
+      "file": "backend/src/index.ts",
+      "line": 109,
+      "method": "use",
+      "path": "/api/v1/settings"
+    },
+    {
+      "file": "backend/src/routes/health.ts",
+      "line": 6,
+      "method": "get",
+      "path": "/"
+    }
+  ],
+  "frontendRoutes": [
+    {
+      "file": "frontend/src/app/(auth)/activity-log/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/agents/[id]/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/agents/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/analytics/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/bookings/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/contacts/[id]/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/contacts/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/dashboard/lead-scraper/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/dashboard/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/dashboard/whatsapp-campaign/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/devices/[id]/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/devices/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/flows/[id]/builder/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/flows/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/inbox/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/knowledge-base/[id]/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/knowledge-base/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/nudges/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/pipeline/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/properties/[ref]/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/properties/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/settings/api/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/settings/billing/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/settings/handoff/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/settings/notifications/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/settings/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/settings/team/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/team-performance/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/(auth)/templates/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/api/activity-log/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/agents/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/agents/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/auth/login/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/auth/logout/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/auth/me/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/bookings/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/bookings/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/timeline/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/contacts/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/messages/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/conversations/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/dashboard/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/devices/[id]/connect/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/devices/[id]/disconnect/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/devices/[id]/qr/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/devices/[id]/route.ts",
+      "methods": [
+        "DELETE"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/devices/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/flows/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/flows/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/notification-preferences/route.ts",
+      "methods": [
+        "GET",
+        "PUT"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/notifications/[id]/route.ts",
+      "methods": [
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/notifications/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/nudges/[id]/route.ts",
+      "methods": [
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/nudges/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/properties/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/properties/inventory-gaps/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/properties/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/properties/stats/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/settings/api/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/settings/billing/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/settings/handoff/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/settings/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/settings/team/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/settings/widgets/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/system/status/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/team/performance/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/team/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/v1/agents/[agentId]/quick-replies/count/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/v1/contacts/[id]/property-matches/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/messages/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/suggest-replies/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/bulk/route.ts",
+      "methods": [
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/v1/messages/[id]/route.ts",
+      "methods": [
+        "DELETE"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/v1/messages/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/api/v1/nudges/send-now/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "file": "frontend/src/app/login/page.tsx",
+      "methods": []
+    },
+    {
+      "file": "frontend/src/app/page.tsx",
+      "methods": []
+    }
+  ],
+  "environment": [
+    {
+      "name": "SUPABASE_URL",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_URL",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "SUPABASE_SERVICE_ROLE_KEY",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "SUPABASE_SERVICE_KEY",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "CLAUDE_API_KEY",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "ANTHROPIC_KEY",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "CLAUDE_KEY",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "REDIS_PORT",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "PORT",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "NODE_ENV",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "JWT_EXPIRY",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "TZ",
+      "file": "backend/src/config/env.ts"
+    },
+    {
+      "name": "RAILWAY_GIT_COMMIT_SHA",
+      "file": "backend/src/config/runtimeFingerprint.ts"
+    },
+    {
+      "name": "RENDER_GIT_COMMIT",
+      "file": "backend/src/config/runtimeFingerprint.ts"
+    },
+    {
+      "name": "VERCEL_GIT_COMMIT_SHA",
+      "file": "backend/src/config/runtimeFingerprint.ts"
+    },
+    {
+      "name": "TZ",
+      "file": "backend/src/index.ts"
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "file": "backend/src/modules/ai/aiService.ts"
+    },
+    {
+      "name": "GROQ_API_KEY",
+      "file": "backend/src/modules/ai/aiService.ts"
+    },
+    {
+      "name": "SUPABASE_URL",
+      "file": "backend/src/modules/ai/router.ts"
+    },
+    {
+      "name": "SUPABASE_SERVICE_ROLE_KEY",
+      "file": "backend/src/modules/ai/router.ts"
+    },
+    {
+      "name": "SUPABASE_URL",
+      "file": "backend/src/services/agentAlert.ts"
+    },
+    {
+      "name": "SUPABASE_SERVICE_ROLE_KEY",
+      "file": "backend/src/services/agentAlert.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_URL",
+      "file": "frontend/src/app/api/auth/login/route.ts"
+    },
+    {
+      "name": "SUPABASE_URL",
+      "file": "frontend/src/app/api/auth/login/route.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      "file": "frontend/src/app/api/auth/login/route.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+      "file": "frontend/src/app/api/auth/login/route.ts"
+    },
+    {
+      "name": "NODE_ENV",
+      "file": "frontend/src/app/api/auth/login/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "file": "frontend/src/app/api/chat/route.ts"
+    },
+    {
+      "name": "CLAUDE_API_KEY",
+      "file": "frontend/src/app/api/chat/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_KEY",
+      "file": "frontend/src/app/api/chat/route.ts"
+    },
+    {
+      "name": "CLAUDE_KEY",
+      "file": "frontend/src/app/api/chat/route.ts"
+    },
+    {
+      "name": "OPENAI_API_KEY",
+      "file": "frontend/src/app/api/chat/route.ts"
+    },
+    {
+      "name": "GROQ_API_KEY",
+      "file": "frontend/src/app/api/chat/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "file": "frontend/src/app/api/route.ts"
+    },
+    {
+      "name": "CLAUDE_API_KEY",
+      "file": "frontend/src/app/api/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_KEY",
+      "file": "frontend/src/app/api/route.ts"
+    },
+    {
+      "name": "CLAUDE_KEY",
+      "file": "frontend/src/app/api/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "CLAUDE_API_KEY",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_KEY",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "CLAUDE_KEY",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "GROQ_API_KEY",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "OPENAI_API_KEY",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "RESEND_API_KEY",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "GOOGLE_CLIENT_ID",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "GOOGLE_CLIENT_SECRET",
+      "file": "frontend/src/app/api/settings/api/route.ts"
+    },
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "file": "frontend/src/app/api/settings/billing/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "CLAUDE_API_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "CLAUDE_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "GROQ_API_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "OPENAI_API_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "RESEND_API_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "GOOGLE_CLIENT_ID",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "GOOGLE_CLIENT_SECRET",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_URL",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "SUPABASE_SERVICE_ROLE_KEY",
+      "file": "frontend/src/app/api/settings/route.ts"
+    },
+    {
+      "name": "BACKEND_URL",
+      "file": "frontend/src/app/api/system/status/route.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_BACKEND_URL",
+      "file": "frontend/src/app/api/system/status/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "file": "frontend/src/app/api/system/status/route.ts"
+    },
+    {
+      "name": "CLAUDE_API_KEY",
+      "file": "frontend/src/app/api/system/status/route.ts"
+    },
+    {
+      "name": "ANTHROPIC_KEY",
+      "file": "frontend/src/app/api/system/status/route.ts"
+    },
+    {
+      "name": "CLAUDE_KEY",
+      "file": "frontend/src/app/api/system/status/route.ts"
+    },
+    {
+      "name": "GROQ_API_KEY",
+      "file": "frontend/src/app/api/system/status/route.ts"
+    },
+    {
+      "name": "OPENAI_API_KEY",
+      "file": "frontend/src/app/api/system/status/route.ts"
+    },
+    {
+      "name": "BACKEND_URL",
+      "file": "frontend/src/lib/backend-api.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_BACKEND_URL",
+      "file": "frontend/src/lib/backend-api.ts"
+    },
+    {
+      "name": "NODE_ENV",
+      "file": "frontend/src/lib/backend-api.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_URL",
+      "file": "frontend/src/lib/supabase.ts"
+    },
+    {
+      "name": "SUPABASE_URL",
+      "file": "frontend/src/lib/supabase.ts"
+    },
+    {
+      "name": "SUPABASE_SERVICE_ROLE_KEY",
+      "file": "frontend/src/lib/supabase.ts"
+    },
+    {
+      "name": "SUPABASE_SERVICE_KEY",
+      "file": "frontend/src/lib/supabase.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      "file": "frontend/src/lib/supabase.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+      "file": "frontend/src/lib/supabase.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_ENABLE_REALTIME",
+      "file": "frontend/src/lib/useRealtime.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_REALTIME_URL",
+      "file": "frontend/src/lib/useRealtime.ts"
+    },
+    {
+      "name": "NODE_ENV",
+      "file": "frontend/src/lib/useRealtime.ts"
+    }
+  ],
+  "existingTestFiles": []
+}

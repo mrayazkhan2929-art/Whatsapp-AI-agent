@@ -1,0 +1,121 @@
+{
+  "version": "4.0.0",
+  "name": "wa-chatbot-iere",
+  "dependencies": {
+    "iere-whatsapp-backend": {
+      "version": "1.0.0",
+      "resolved": "file:../backend",
+      "overridden": false,
+      "dependencies": {
+        "@whiskeysockets/baileys": {
+          "version": "6.7.24",
+          "resolved": "https://registry.npmjs.org/@whiskeysockets/baileys/-/baileys-6.7.24.tgz",
+          "overridden": false,
+          "dependencies": {
+            "libsignal": {
+              "version": "2.0.1",
+              "resolved": "git+ssh://git@github.com/whiskeysockets/libsignal-node.git#1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67",
+              "overridden": false,
+              "dependencies": {
+                "protobufjs": {
+                  "version": "7.6.6"
+                }
+              }
+            },
+            "protobufjs": {
+              "version": "7.6.6",
+              "resolved": "https://registry.npmjs.org/protobufjs/-/protobufjs-7.6.6.tgz",
+              "overridden": true
+            },
+            "sharp": {
+              "version": "0.35.5"
+            }
+          }
+        },
+        "express": {
+          "version": "4.22.1",
+          "resolved": "https://registry.npmjs.org/express/-/express-4.22.1.tgz",
+          "overridden": false,
+          "dependencies": {
+            "body-parser": {
+              "version": "1.20.8",
+              "resolved": "https://registry.npmjs.org/body-parser/-/body-parser-1.20.8.tgz",
+              "overridden": false,
+              "dependencies": {
+                "qs": {
+                  "version": "6.16.0"
+                }
+              }
+            },
+            "qs": {
+              "version": "6.16.0",
+              "resolved": "https://registry.npmjs.org/qs/-/qs-6.16.0.tgz",
+              "overridden": true
+            }
+          }
+        },
+        "tsx": {
+          "version": "4.21.0",
+          "resolved": "https://registry.npmjs.org/tsx/-/tsx-4.21.0.tgz",
+          "overridden": false,
+          "dependencies": {
+            "esbuild": {
+              "version": "0.28.2"
+            }
+          }
+        }
+      }
+    },
+    "supertest": {
+      "version": "7.3.1",
+      "resolved": "https://registry.npmjs.org/supertest/-/supertest-7.3.1.tgz",
+      "overridden": false,
+      "dependencies": {
+        "superagent": {
+          "version": "10.4.1",
+          "resolved": "https://registry.npmjs.org/superagent/-/superagent-10.4.1.tgz",
+          "overridden": false,
+          "dependencies": {
+            "qs": {
+              "version": "6.16.0"
+            }
+          }
+        }
+      }
+    },
+    "vite": {
+      "version": "7.3.7",
+      "resolved": "https://registry.npmjs.org/vite/-/vite-7.3.7.tgz",
+      "overridden": false,
+      "dependencies": {
+        "esbuild": {
+          "version": "0.28.2",
+          "resolved": "https://registry.npmjs.org/esbuild/-/esbuild-0.28.2.tgz",
+          "overridden": true
+        }
+      }
+    },
+    "wa-chatbot-iere-frontend": {
+      "version": "0.2.0",
+      "resolved": "file:../frontend",
+      "overridden": false,
+      "dependencies": {
+        "next": {
+          "version": "16.4.0",
+          "resolved": "https://registry.npmjs.org/next/-/next-16.4.0.tgz",
+          "overridden": false,
+          "dependencies": {
+            "sharp": {
+              "version": "0.35.5"
+            }
+          }
+        },
+        "sharp": {
+          "version": "0.35.5",
+          "resolved": "https://registry.npmjs.org/sharp/-/sharp-0.35.5.tgz",
+          "overridden": true
+        }
+      }
+    }
+  }
+}

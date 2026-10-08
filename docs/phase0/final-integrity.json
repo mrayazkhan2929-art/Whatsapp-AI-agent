@@ -1,0 +1,17 @@
+{
+  "originalZip": "..\\Whatsapp_AI_Agent-main.zip",
+  "originalZipSHA256": "A8F73FE512D1932627358D1132F8A7985EBA4804DA1F3E879024AB2B295074AA",
+  "changedOriginalFiles": [
+    ".gitignore",
+    "ARCHITECTURE_FIX_SUMMARY.md",
+    "IMPLEMENTATION_GUIDE.md",
+    "PRODUCTION_FIX_v5.0_SUMMARY.md",
+    "README.md",
+    "package-lock.json",
+    "package.json"
+  ],
+  "missingOriginalFiles": [],
+  "protectedFileCount": 329,
+  "changedProtectedFiles": [],
+  "rollbackSnapshotSHA256": "D7D125D707C9216F867788A651906A88470F48A05753B55683A0B3E67E469D1F"
+}

@@ -1,0 +1,2397 @@
+{
+  "note": "Static inventory for manual audit; inlineOrgScope is a heuristic, not a security proof. Parent checks, organization primary keys, membership resolution and internal startup operations require separate review.",
+  "queries": [
+    {
+      "file": "backend/src/api/app.ts",
+      "line": 53,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "getSupabaseAdmin().from('devices').select('id').eq('org_id', request.orgId!)"
+    },
+    {
+      "file": "backend/src/api/middleware/auth.ts",
+      "line": 30,
+      "kind": "from",
+      "target": "'users'",
+      "inlineOrgScope": false,
+      "code": "supabase.from('users').select(columns).eq('id', user.id).maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/middleware/auth.ts",
+      "line": 35,
+      "kind": "from",
+      "target": "'users'",
+      "inlineOrgScope": false,
+      "code": "supabase.from('users').select(columns).eq('email', user.email).limit(2)"
+    },
+    {
+      "file": "backend/src/api/middleware/auth.ts",
+      "line": 51,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase.from('organizations').select('id').eq('id', member.org_id).maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/agents.ts",
+      "line": 16,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('agents')\n    .select('*')\n    .eq('org_id', orgId)\n    .order('created_at', { ascending: false })"
+    },
+    {
+      "file": "backend/src/api/routes/agents.ts",
+      "line": 38,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('agents')\n    .select('*')\n    .eq('org_id', orgId)\n    .eq('id', request.params.id)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/analytics.ts",
+      "line": 10,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "supabase.from(table).select('*', { count: 'exact', head: true }).eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/api/routes/bookings.ts",
+      "line": 29,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('bookings')\n    .select('*')\n    .eq('org_id', orgId)\n    .order('scheduled_date', { ascending: false })"
+    },
+    {
+      "file": "backend/src/api/routes/bookings.ts",
+      "line": 59,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('bookings')\n    .insert({\n      org_id: orgId,\n      ...parsed.data,\n      status: 'scheduled',\n    })\n    .select('*')\n    .single()"
+    },
+    {
+      "file": "backend/src/api/routes/chat.ts",
+      "line": 50,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .select('id, contact_id, contacts(phone)').eq('contacts.org_id', orgId)\n      .eq('org_id', orgId)\n      .eq('id', conversationId)\n      .maybeSingle<{ id: string; contact_id: string; contacts: { phone: string } | null }>()"
+    },
+    {
+      "file": "backend/src/api/routes/chat.ts",
+      "line": 68,
+      "kind": "from",
+      "target": "'contact_memory'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('contact_memory')\n      .select('key, value')\n      .eq('contact_id', conversation.contact_id)"
+    },
+    {
+      "file": "backend/src/api/routes/chat.ts",
+      "line": 78,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('messages')\n        .select('direction, content').eq('org_id', orgId)\n        .eq('conversation_id', conversationId)\n        .order('created_at', { ascending: false })\n        .limit(16)"
+    },
+    {
+      "file": "backend/src/api/routes/chat.ts",
+      "line": 107,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase.from('messages').insert({\n      org_id: orgId,\n      conversation_id: conversationId,\n      direction: 'outbound',\n      sender_type: 'ai',\n      sender_name: 'Aya AI',\n      content: safeReply,\n      message_type: 'text',\n      status: 'sent',\n      metadata: {\n        lane: result.lane,\n        lang: result.lang,\n        replyMode: result.replyMode,\n        propertyRefs: result.shownPropertyRefs ?? [],\n      },\n    })"
+    },
+    {
+      "file": "backend/src/api/routes/chat.ts",
+      "line": 124,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .update({\n        handled_by: result.handoff ? 'human' : 'ai',\n        last_message_at: new Date().toISOString(),\n        detected_lang: result.lang,\n        updated_at: new Date().toISOString(),\n      })\n      .eq('id', conversationId)\n      .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/api/routes/contacts.ts",
+      "line": 36,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('contacts')\n    .select('*')\n    .eq('org_id', orgId)\n    .order('updated_at', { ascending: false })\n    .order('id', { ascending: false })\n    .limit(limit + 1)"
+    },
+    {
+      "file": "backend/src/api/routes/contacts.ts",
+      "line": 78,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('contacts')\n    .select('*')\n    .eq('org_id', orgId)\n    .eq('id', request.params.id)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/contacts.ts",
+      "line": 106,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('contacts')\n    .select('id, area_interest, bedrooms, budget, intent, contact_memory')\n    .eq('id', request.params.contactId)\n    .eq('org_id', orgId)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/contacts.ts",
+      "line": 170,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('contacts')\n    .update({\n      ...parsed.data,\n      updated_at: new Date().toISOString(),\n    })\n    .eq('org_id', orgId)\n    .eq('id', request.params.id)\n    .select('*')\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 19,
+      "kind": "from",
+      "target": "'inventory_gaps'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('inventory_gaps')\n    .update({ conversation_id: null })\n    .eq('org_id', orgId)\n    .in('conversation_id', ids)"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 56,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .update(normalizedUpdates)\n    .in('id', ids)\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 94,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .delete()\n    .in('id', ids)\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 131,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .update(normalizedUpdates)\n    .eq('id', request.params.id)\n    .eq('org_id', orgId)\n    .select('*')\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 169,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .update({ handled_by: 'ai', updated_at: new Date().toISOString() })\n      .eq('org_id', orgId)\n      .eq('handled_by', 'human')\n      .lt('updated_at', cutoff)\n      .select('id')"
+    },
+    {
+      "file": "backend/src/api/routes/conversations.ts",
+      "line": 193,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .update({ handled_by: 'ai', updated_at: new Date().toISOString() })\n      .eq('org_id', orgId)\n      .eq('id', conversationId)"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 19,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('devices')\n    .select('*')\n    .eq('org_id', orgId)\n    .eq('id', deviceId)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 41,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('devices')\n    .select('id, name, phone, status, last_seen, qr_code, created_at, updated_at')\n    .eq('org_id', orgId)\n    .order('created_at', { ascending: false })"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 52,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .select('device_id')\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 104,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('devices')\n    .insert({\n      org_id: orgId,\n      name: parsed.data.name.trim(),\n      status: 'disconnected',\n    })\n    .select('*')\n    .single()"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 254,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('devices')\n      .delete()\n      .eq('id', deviceId)\n      .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/api/routes/devices.ts",
+      "line": 289,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('devices')\n    .select('id, status, qr_code, updated_at')\n    .eq('org_id', orgId)\n    .eq('id', request.params.id)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/flows.ts",
+      "line": 16,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('flows')\n    .select('*')\n    .eq('org_id', orgId)\n    .order('created_at', { ascending: false })"
+    },
+    {
+      "file": "backend/src/api/routes/flows.ts",
+      "line": 38,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('flows')\n    .select('*')\n    .eq('org_id', orgId)\n    .eq('id', request.params.id)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/flows.ts",
+      "line": 55,
+      "kind": "from",
+      "target": "'flow_steps'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('flow_steps')\n    .select('*').eq('org_id', orgId)\n    .eq('flow_id', flow.id)\n    .order('step_order', { ascending: true })"
+    },
+    {
+      "file": "backend/src/api/routes/knowledge.ts",
+      "line": 17,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('knowledge_bases')\n    .select('*, knowledge_chunks(count)').eq('knowledge_chunks.org_id', orgId)\n    .eq('org_id', orgId)\n    .order('created_at', { ascending: false })"
+    },
+    {
+      "file": "backend/src/api/routes/knowledge.ts",
+      "line": 41,
+      "kind": "from",
+      "target": "'knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('knowledge_chunks')\n    .select('id, content, metadata, created_at')\n    .eq('org_id', orgId)\n    .eq('knowledge_base_id', request.params.id)\n    .order('created_at', { ascending: false })"
+    },
+    {
+      "file": "backend/src/api/routes/messages.ts",
+      "line": 41,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .select('id')\n    .eq('org_id', orgId)\n    .eq('id', conversationId)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/messages.ts",
+      "line": 53,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('messages')\n    .select('*').eq('org_id', orgId)\n    .eq('conversation_id', conversationId)\n    .order('created_at', { ascending: false })\n    .order('id', { ascending: false })\n    .limit(limit + 1)"
+    },
+    {
+      "file": "backend/src/api/routes/messages.ts",
+      "line": 97,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .select('id, device_id, contact_id, contacts(phone, name)').eq('contacts.org_id', orgId)\n    .eq('org_id', orgId)\n    .eq('id', parsed.data.conversationId)\n    .maybeSingle<ConversationSendContext>()"
+    },
+    {
+      "file": "backend/src/api/routes/messages.ts",
+      "line": 125,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase.from('messages').insert({\n      org_id: orgId,\n      conversation_id: parsed.data.conversationId,\n      direction: 'outbound',\n      sender_type: 'human',\n      sender_name: parsed.data.senderName ?? 'Agent',\n      content: parsed.data.content,\n      status: 'failed',\n      metadata: {\n        transport: 'baileys',\n        error: error instanceof Error ? error.message : 'Unknown WhatsApp transport error',\n      },\n    })"
+    },
+    {
+      "file": "backend/src/api/routes/messages.ts",
+      "line": 148,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('messages')\n    .insert({\n      org_id: orgId,\n      conversation_id: parsed.data.conversationId,\n      direction: 'outbound',\n      sender_type: 'human',\n      sender_name: parsed.data.senderName ?? 'Agent',\n      content: parsed.data.content,\n      wa_message_id: sendResult.messageId,\n      status: 'sent',\n      metadata: {\n        transport: 'baileys',\n        deviceId: sendResult.deviceId,\n      },\n    })\n    .select('*')\n    .single()"
+    },
+    {
+      "file": "backend/src/api/routes/messages.ts",
+      "line": 172,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .update({\n      last_message_at: new Date().toISOString(),\n      updated_at: new Date().toISOString(),\n    }).eq('org_id', orgId)\n    .eq('id', parsed.data.conversationId)"
+    },
+    {
+      "file": "backend/src/api/routes/nudges.ts",
+      "line": 16,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('nudge_jobs')\n    .select('*')\n    .eq('org_id', orgId)\n    .order('scheduled_at', { ascending: false })"
+    },
+    {
+      "file": "backend/src/api/routes/nudges.ts",
+      "line": 46,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('nudge_jobs')\n    .update({ status: 'cancelled', updated_at: new Date().toISOString() })\n    .eq('org_id', orgId)\n    .eq('id', request.params.id)\n    .select('*')\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 34,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('properties')\n    .select('*')\n    .eq('org_id', orgId)\n    .order('updated_at', { ascending: false })\n    .order('id', { ascending: false })\n    .limit(limit + 1)"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 92,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('properties')\n    .select('*')\n    .eq('org_id', orgId)\n    .eq('ref', request.params.ref)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 126,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('properties')\n    .insert({\n      org_id: orgId,\n      ...parsed.data,\n    })\n    .select('*')\n    .single()"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 151,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('properties')\n    .select('source')\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 187,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .select('id').eq('org_id', orgId)\n      .limit(1)"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 206,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .select('id').eq('org_id', orgId)\n      .eq('handled_by', 'human')"
+    },
+    {
+      "file": "backend/src/api/routes/properties.ts",
+      "line": 217,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('messages')\n      .select('id, created_at').eq('org_id', orgId)\n      .gte('created_at', fiveMinutesAgo)\n      .limit(1)"
+    },
+    {
+      "file": "backend/src/api/routes/settings.ts",
+      "line": 25,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n    .from('organizations')\n    .select('*')\n    .eq('id', orgId)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/api/routes/settings.ts",
+      "line": 57,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n    .from('organizations')\n    .update({\n      ...parsed.data,\n      updated_at: new Date().toISOString(),\n    })\n    .eq('id', orgId)\n    .select('*')\n    .single()"
+    },
+    {
+      "file": "backend/src/api/tenant.ts",
+      "line": 10,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "db.from(table).select('id').eq('org_id', orgId).eq(column, value).limit(1)"
+    },
+    {
+      "file": "backend/src/api/tenant.ts",
+      "line": 14,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "db.from(table).select('id').eq('org_id', orgId).eq('ref_number', value).limit(1)"
+    },
+    {
+      "file": "backend/src/api/tenant.ts",
+      "line": 29,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "db.from('conversations').select('id').eq('org_id', orgId).in('id', unique)"
+    },
+    {
+      "file": "backend/src/api/tenant.ts",
+      "line": 46,
+      "kind": "from",
+      "target": "child",
+      "inlineOrgScope": false,
+      "code": "db.from(child).select('id').in(column, ids).neq('org_id', orgId).limit(1)"
+    },
+    {
+      "file": "backend/src/api/tenant.ts",
+      "line": 50,
+      "kind": "from",
+      "target": "child",
+      "inlineOrgScope": true,
+      "code": "db.from(child).select('id').eq('org_id', orgId).in(column, ids)"
+    },
+    {
+      "file": "backend/src/lib/healthCheck.ts",
+      "line": 57,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase.from('organizations').select('id').eq('id', orgId).limit(1).throwOnError()"
+    },
+    {
+      "file": "backend/src/lib/healthCheck.ts",
+      "line": 73,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase.from('devices').select('id, status').eq('org_id', orgId).throwOnError()"
+    },
+    {
+      "file": "backend/src/lib/healthCheck.ts",
+      "line": 92,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n            .from('conversations')\n            .select('handled_by')\n            .eq('org_id', orgId)\n            .eq('status', 'active')\n            .throwOnError()"
+    },
+    {
+      "file": "backend/src/modules/agents/teamRouter.ts",
+      "line": 46,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('team_members')\n      .select('*')\n      .eq('org_id', orgId)\n      .ilike('role', `%${role}%`)\n      .eq('is_active', true)\n      .single()"
+    },
+    {
+      "file": "backend/src/modules/agents/teamRouter.ts",
+      "line": 60,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('team_members')\n      .select('*')\n      .eq('org_id', orgId)\n      .ilike('name', `%${name}%`)\n      .eq('is_active', true)\n      .single()"
+    },
+    {
+      "file": "backend/src/modules/ai/agentResolver.ts",
+      "line": 105,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('team_members')\n      .select('name, role, whatsapp, area_speciality, speciality_areas, min_budget_aed, route_to, active')\n      .eq('org_id', orgId)\n      .eq('active', true)"
+    },
+    {
+      "file": "backend/src/modules/ai/router.ts",
+      "line": 133,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "sb\n      .from('knowledge_bases')\n      .select('id, name')\n      .eq('org_id', orgId)\n      .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "backend/src/modules/ai/router.ts",
+      "line": 367,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "sb\n      .from('properties')\n      .select('*')\n      .eq('org_id', orgId)\n      .eq('available', true)\n      .order('price_aed', { ascending: true })\n      .limit(3)"
+    },
+    {
+      "file": "backend/src/modules/ai/router.ts",
+      "line": 412,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "sb\n          .from('properties')\n          .select('id', { count: 'exact', head: true })\n          .eq('org_id', orgId)\n          .or(`district.ilike.%${area}%,building.ilike.%${area}%`)"
+    },
+    {
+      "file": "backend/src/modules/contacts/contactMemory.ts",
+      "line": 33,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('contacts')\n    .select('id')\n    .eq('phone', phoneNumber)\n    .eq('org_id', orgId)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/modules/contacts/contactMemory.ts",
+      "line": 59,
+      "kind": "from",
+      "target": "'contact_memory'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('contact_memory')\n      .select('key, value')\n      .eq('contact_id', contactId)"
+    },
+    {
+      "file": "backend/src/modules/contacts/contactMemory.ts",
+      "line": 64,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('messages')\n      .select('id', { count: 'exact', head: true })\n      .eq('org_id', orgId)\n      .in(\n        'conversation_id',\n        (\n          await supabase\n            .from('conversations')\n            .select('id')\n            .eq('org_id', orgId)\n            .eq('contact_id', contactId)\n        ).data?.map((row) => row.id) ?? [],\n      )"
+    },
+    {
+      "file": "backend/src/modules/contacts/contactMemory.ts",
+      "line": 71,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n            .from('conversations')\n            .select('id')\n            .eq('org_id', orgId)\n            .eq('contact_id', contactId)"
+    },
+    {
+      "file": "backend/src/modules/contacts/contactMemory.ts",
+      "line": 119,
+      "kind": "from",
+      "target": "'contact_memory'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('contact_memory')\n      .upsert(rows, { onConflict: 'contact_id,key' })"
+    },
+    {
+      "file": "backend/src/modules/handoff/handoffService.ts",
+      "line": 19,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('contacts')\n    .select('id')\n    .eq('phone', phoneNumber)\n    .eq('org_id', orgId)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/modules/handoff/handoffService.ts",
+      "line": 28,
+      "kind": "from",
+      "target": "'contact_memory'",
+      "inlineOrgScope": false,
+      "code": "supabase\n    .from('contact_memory')\n    .select('key, value')\n    .eq('contact_id', contact.id)"
+    },
+    {
+      "file": "backend/src/modules/handoff/handoffService.ts",
+      "line": 57,
+      "kind": "from",
+      "target": "'contact_memory'",
+      "inlineOrgScope": false,
+      "code": "supabase.from('contact_memory').upsert([\n        { contact_id: context.contactId, key: 'assignedAgentId', value: agent.id, updated_at: now },\n        { contact_id: context.contactId, key: 'assignedAgentName', value: agent.name, updated_at: now },\n        { contact_id: context.contactId, key: 'assignedAgentPhone', value: agent.phone ?? '', updated_at: now },\n        { contact_id: context.contactId, key: 'handoffTriggered', value: 'true', updated_at: now },\n      ], { onConflict: 'contact_id,key' })"
+    },
+    {
+      "file": "backend/src/modules/handoff/handoffService.ts",
+      "line": 64,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('conversations')\n        .update({ handled_by: 'human', updated_at: now })\n        .eq('org_id', params.orgId)\n        .eq('contact_id', context.contactId)\n        .eq('status', 'active')"
+    },
+    {
+      "file": "backend/src/modules/session/selfHealEngine.ts",
+      "line": 31,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "getSupabaseAdmin()\n    .from('devices')\n    .update({\n      ...values,\n      updated_at: new Date().toISOString(),\n    })\n    .eq('id', deviceId)\n    .eq('org_id', orgId)\n    .throwOnError()"
+    },
+    {
+      "file": "backend/src/properties/PropertyMatcher.ts",
+      "line": 305,
+      "kind": "from",
+      "target": "'inventory_gaps'",
+      "inlineOrgScope": true,
+      "code": "this.supabase?.from('inventory_gaps').insert({\n        org_id: params.orgId,\n        contact_id: params.contactId ?? null,\n        conversation_id: params.conversationId ?? null,\n        transaction_type: params.query.transactionType ?? null,\n        area: params.query.area ?? null,\n        bedrooms: params.query.bedrooms ?? null,\n        budget_min: params.query.minPrice ?? null,\n        budget_max: params.query.maxPrice ?? null,\n        status_wanted: params.query.status ?? null,\n        category: params.query.category ?? null,\n        direct_results: params.directCount,\n        indirect_results: params.indirectCount,\n        used_fallback: params.usedFallback,\n        created_at: new Date().toISOString(),\n      })"
+    },
+    {
+      "file": "backend/src/properties/PropertyMatcher.ts",
+      "line": 460,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('properties')\n      .select(\n        'ref, ref_number, type, category, bedrooms, bathrooms, size_sqft, status, district, building, price_aed, agent_id, agent_name, agent_whatsapp, available, description, source, partner_agency, partner_agent_name, partner_agent_phone, partner_agent_email, co_broker_commission, listing_url, distress_deal',\n      )\n      .eq('org_id', orgId)\n      .eq('available', true)\n      .order('price_aed', { ascending: true })"
+    },
+    {
+      "file": "backend/src/rag/HybridRAG.ts",
+      "line": 53,
+      "kind": "rpc",
+      "target": "'match_knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "this.supabase.rpc('match_knowledge_chunks', {\n        query_embedding: embedding,\n        kb_id: knowledgeBaseId,\n        org_id: orgId,\n        match_count: limit,\n        similarity_threshold: 0.65\n      })"
+    },
+    {
+      "file": "backend/src/rag/HybridRAG.ts",
+      "line": 91,
+      "kind": "from",
+      "target": "'knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n        .from('knowledge_chunks')\n        .select('id, content, metadata')\n        .eq('knowledge_base_id', knowledgeBaseId)\n        .eq('org_id', orgId)\n        .textSearch('content', tsQuery, {\n          type: 'websearch',\n          config: 'english'\n        })\n        .limit(limit)"
+    },
+    {
+      "file": "backend/src/rag/HybridRAG.ts",
+      "line": 189,
+      "kind": "from",
+      "target": "'knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n        .from('knowledge_chunks')\n        .insert({\n          knowledge_base_id: knowledgeBaseId,\n          org_id: orgId,\n          content,\n          embedding,\n          metadata\n        })\n        .select('id')\n        .single()"
+    },
+    {
+      "file": "backend/src/rag/HybridRAG.ts",
+      "line": 215,
+      "kind": "from",
+      "target": "'knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n        .from('knowledge_chunks')\n        .delete()\n        .eq('org_id', orgId)\n        .eq('id', chunkId)"
+    },
+    {
+      "file": "backend/src/rag/HybridRAG.ts",
+      "line": 238,
+      "kind": "rpc",
+      "target": "'match_knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "this.supabase.rpc('match_knowledge_chunks', {\n        query_embedding: new Array(1536).fill(0),\n        kb_id: '00000000-0000-0000-0000-000000000000',\n        org_id: '00000000-0000-0000-0000-000000000000',\n        match_count: 1,\n        similarity_threshold: 0.1\n      })"
+    },
+    {
+      "file": "backend/src/rag/KnowledgeIngestion.ts",
+      "line": 60,
+      "kind": "from",
+      "target": "'knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('knowledge_chunks')\n      .select('id')\n      .eq('knowledge_base_id', knowledgeBaseId)\n      .eq('org_id', orgId)\n      .eq('metadata->>document_id', documentId)"
+    },
+    {
+      "file": "backend/src/rag/KnowledgeIngestion.ts",
+      "line": 76,
+      "kind": "from",
+      "target": "'knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "this.supabase.from('knowledge_chunks').delete().eq('org_id', orgId).in('id', ids)"
+    },
+    {
+      "file": "backend/src/rag/KnowledgeIngestion.ts",
+      "line": 86,
+      "kind": "from",
+      "target": "'knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('knowledge_chunks')\n      .select('metadata')\n      .eq('knowledge_base_id', knowledgeBaseId)\n      .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 315,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .select('id, name')\n      .eq('id', requestedOrgId)\n      .maybeSingle()"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 327,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n    .from('organizations')\n    .select('id, name')\n    .ilike('name', '%Investment Experts%')\n    .order('created_at', { ascending: true })\n    .limit(1)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 339,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n    .from('organizations')\n    .select('id, name')\n    .order('created_at', { ascending: true })\n    .limit(1)\n    .maybeSingle()"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 359,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('team_members')\n    .select('id, name, whatsapp, email')\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 422,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": false,
+      "code": "supabase\n        .from('team_members')\n        .update(payload)\n        .eq('id', existing.id)"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 434,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('team_members')\n      .insert(payload)"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 449,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('team_members')\n    .select('id, name, whatsapp')\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 485,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('properties')\n    .select('ref')\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/scripts/importIereCsv.ts",
+      "line": 584,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('properties')\n      .upsert(chunk, { onConflict: 'org_id,ref', ignoreDuplicates: false })"
+    },
+    {
+      "file": "backend/src/services/agentAlert.ts",
+      "line": 106,
+      "kind": "from",
+      "target": "'agent_alerts'",
+      "inlineOrgScope": true,
+      "code": "supabase.from('agent_alerts').insert({\n        org_id: alert.orgId,\n        agent_name: agent.name,\n        agent_wa: agentWa,\n        client_phone: alert.clientPhone,\n        client_message: alert.clientMessage,\n        area: alert.area,\n        bedrooms: alert.bedrooms,\n        budget: alert.budget,\n        sent_at: new Date().toISOString(),\n        status: 'sent',\n      })"
+    },
+    {
+      "file": "backend/src/whatsapp/BaileysManager.ts",
+      "line": 402,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('devices')\n      .update({\n        status,\n        phone: phone ?? undefined,\n        qr_code: qrCode ?? null,\n        last_seen: status === 'connected' ? new Date().toISOString() : null,\n        updated_at: new Date().toISOString(),\n      })\n      .eq('id', this.config.deviceId)\n      .eq('org_id', this.config.orgId)\n      .throwOnError()"
+    },
+    {
+      "file": "backend/src/whatsapp/DBAuthState.ts",
+      "line": 54,
+      "kind": "from",
+      "target": "'baileys_sessions'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('baileys_sessions')\n      .select('data')\n      .eq('device_id', this.deviceId)\n      .eq('org_id', this.orgId)\n      .eq('key_type', keyType)\n      .eq('key_id', keyId)\n      .maybeSingle()"
+    },
+    {
+      "file": "backend/src/whatsapp/DBAuthState.ts",
+      "line": 74,
+      "kind": "from",
+      "target": "'baileys_sessions'",
+      "inlineOrgScope": true,
+      "code": "this.supabase.from('baileys_sessions').upsert(\n      {\n        device_id: this.deviceId,\n        org_id: this.orgId,\n        key_type: keyType,\n        key_id: keyId,\n        data: encrypted,\n        updated_at: new Date().toISOString(),\n      },\n      { onConflict: 'device_id,key_type,key_id' },\n    )"
+    },
+    {
+      "file": "backend/src/whatsapp/DBAuthState.ts",
+      "line": 92,
+      "kind": "from",
+      "target": "'baileys_sessions'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('baileys_sessions')\n      .delete()\n      .eq('device_id', this.deviceId)\n      .eq('org_id', this.orgId)\n      .eq('key_type', keyType)\n      .eq('key_id', keyId)"
+    },
+    {
+      "file": "backend/src/whatsapp/DBAuthState.ts",
+      "line": 106,
+      "kind": "from",
+      "target": "'baileys_sessions'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('baileys_sessions')\n      .delete()\n      .eq('device_id', this.deviceId)\n      .eq('org_id', this.orgId)"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 176,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('contacts')\n      .select('phone')\n      .eq('id', input.contactId)\n      .eq('org_id', input.orgId)\n      .single()"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 197,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "this.supabase.from('messages').insert({\n        org_id: input.orgId,\n        conversation_id: input.conversationId,\n        direction: 'outbound',\n        sender_type: 'ai',\n        sender_name: 'Aya',\n        content: input.text,\n        message_type: 'text',\n        wa_message_id: sendResult.messageId,\n        status: 'sent',\n      })"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 209,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "this.supabase.from('messages').insert({\n        org_id: input.orgId,\n        conversation_id: input.conversationId,\n        direction: 'outbound',\n        sender_type: 'ai',\n        sender_name: 'Aya',\n        content: input.text,\n        message_type: 'text',\n        status: 'failed',\n      })"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 232,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('messages')\n      .select('content, direction')\n      .eq('conversation_id', conversationId)\n      .eq('org_id', orgId)\n      .order('created_at', { ascending: false })\n      .limit(8)"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 254,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('contacts')\n      .upsert(\n        {\n          org_id: orgId,\n          phone,\n          name: pushName,\n          last_message_at: new Date().toISOString(),\n        },\n        { onConflict: 'org_id,phone' },\n      )\n      .select('id, org_id, phone, name, language, contact_memory')\n      .single()"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 283,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('conversations')\n      .select('id, org_id, contact_id')\n      .eq('org_id', orgId)\n      .eq('contact_id', contactId)\n      .eq('status', 'active')\n      .order('updated_at', { ascending: false })\n      .limit(1)\n      .maybeSingle()"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 297,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('conversations')\n      .insert({\n        org_id: orgId,\n        contact_id: contactId,\n        status: 'active',\n        last_message_at: new Date().toISOString(),\n      })\n      .select('id, org_id, contact_id')\n      .single()"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 326,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('messages')\n      .insert({\n        org_id: orgId,\n        conversation_id: conversationId,\n        direction,\n        sender_type: direction === 'inbound' ? 'contact' : 'ai',\n        content,\n        message_type: this.getMessageType(message),\n      })\n      .select('id')\n      .single()"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 351,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('conversations')\n      .update({\n        last_message_at: new Date().toISOString(),\n      })\n      .eq('id', conversationId)\n      .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 451,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('contacts')\n      .select('contact_memory')\n      .eq('id', contactId)\n      .eq('org_id', orgId)\n      .maybeSingle()"
+    },
+    {
+      "file": "backend/src/whatsapp/MessageRouter.ts",
+      "line": 461,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('contacts')\n      .update({\n        contact_memory: { ...current, ...metadata },\n        updated_at: new Date().toISOString(),\n      })\n      .eq('id', contactId)\n      .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/whatsapp/WhatsAppGateway.ts",
+      "line": 134,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('devices')\n      .select('id, org_id, status')\n      .in('status', ['connected', 'connecting'])"
+    },
+    {
+      "file": "backend/src/whatsapp/WhatsAppGateway.ts",
+      "line": 150,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase\n            .from('devices')\n            .update({\n              status: 'disconnected',\n              qr_code: null,\n              updated_at: new Date().toISOString(),\n            })\n            .eq('id', device.id)\n            .eq('org_id', device.org_id)"
+    },
+    {
+      "file": "backend/src/whatsapp/WhatsAppGateway.ts",
+      "line": 237,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n        .from('devices')\n        .update({\n          status: 'disconnected',\n          qr_code: null,\n          updated_at: new Date().toISOString(),\n        })\n        .eq('id', deviceId)\n        .eq('org_id', orgId)"
+    },
+    {
+      "file": "backend/src/whatsapp/WhatsAppGateway.ts",
+      "line": 356,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n            .from('properties')\n            .select('ref_number')\n            .eq('org_id', input.orgId)\n            .in('ref_number', refs)"
+    },
+    {
+      "file": "backend/src/whatsapp/WhatsAppGateway.ts",
+      "line": 456,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('devices')\n      .select('id, org_id, status')\n      .eq('org_id', orgId)\n      .in('status', ['connected', 'connecting'])\n      .order('updated_at', { ascending: false })"
+    },
+    {
+      "file": "backend/src/whatsapp/WhatsAppGateway.ts",
+      "line": 504,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n      .from('devices')\n      .select('id, org_id, status, qr_code, updated_at')\n      .eq('id', deviceId)\n      .eq('org_id', orgId)\n      .maybeSingle()"
+    },
+    {
+      "file": "backend/src/whatsapp/WhatsAppGateway.ts",
+      "line": 571,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "this.supabase\n        .from('devices')\n        .update({\n          status: 'connecting',\n          qr_code: null,\n          updated_at: new Date().toISOString(),\n        })\n        .eq('id', deviceId)\n        .eq('org_id', orgId)\n        .throwOnError()"
+    },
+    {
+      "file": "frontend/src/app/api/activity-log/route.ts",
+      "line": 70,
+      "kind": "from",
+      "target": "'alerts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('alerts')\n        .select('id, type, title, message, created_at, updated_at, metadata')\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(30)"
+    },
+    {
+      "file": "frontend/src/app/api/activity-log/route.ts",
+      "line": 76,
+      "kind": "from",
+      "target": "'handoff_events'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('handoff_events')\n        .select('id, trigger_value, created_at, assigned_to, contacts(name), team_members(name)').eq('team_members.org_id', auth.orgId).eq('contacts.org_id', auth.orgId)\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(20)"
+    },
+    {
+      "file": "frontend/src/app/api/activity-log/route.ts",
+      "line": 82,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('bookings')\n        .select('id, status, property_ref, agent_name, created_at, updated_at, contacts(name)').eq('contacts.org_id', auth.orgId)\n        .eq('org_id', auth.orgId)\n        .order('updated_at', { ascending: false })\n        .limit(20)"
+    },
+    {
+      "file": "frontend/src/app/api/activity-log/route.ts",
+      "line": 88,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('id, name, phone, created_at, updated_at, handled_by')\n        .eq('org_id', auth.orgId)\n        .order('updated_at', { ascending: false })\n        .limit(20)"
+    },
+    {
+      "file": "frontend/src/app/api/activity-log/route.ts",
+      "line": 94,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('properties')\n        .select('id, ref, district, created_at, updated_at, available')\n        .eq('org_id', auth.orgId)\n        .order('updated_at', { ascending: false })\n        .limit(20)"
+    },
+    {
+      "file": "frontend/src/app/api/agents/route.ts",
+      "line": 29,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('agents')\n      .select('*, knowledge_bases(id, name), flows(id, name)').eq('flows.org_id', auth.orgId).eq('knowledge_bases.org_id', auth.orgId)\n      .eq('org_id', auth.orgId)\n      .order('created_at', { ascending: false })"
+    },
+    {
+      "file": "frontend/src/app/api/agents/route.ts",
+      "line": 88,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('agents')\n      .insert({\n        org_id: auth.orgId,\n        name: parsed.data.name,\n        system_prompt: parsed.data.systemPrompt,\n        knowledge_base_id: parsed.data.knowledgeBaseId ?? null,\n        default_flow_id: parsed.data.defaultFlowId ?? null,\n        temperature: parsed.data.temperature,\n        max_tokens: parsed.data.maxTokens,\n        active: parsed.data.active,\n      })\n      .select('*, knowledge_bases(id, name), flows(id, name)').eq('flows.org_id', auth.orgId).eq('knowledge_bases.org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/agents/[id]/route.ts",
+      "line": 49,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('agents')\n      .select('*, knowledge_bases(id, name), flows(id, name)').eq('flows.org_id', auth.orgId).eq('knowledge_bases.org_id', auth.orgId)\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/agents/[id]/route.ts",
+      "line": 93,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('agents')\n      .select('id')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/agents/[id]/route.ts",
+      "line": 116,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('agents')\n      .update(updates).eq('org_id', auth.orgId)\n      .eq('id', id)\n      .select('*, knowledge_bases(id, name), flows(id, name)').eq('flows.org_id', auth.orgId).eq('knowledge_bases.org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/agents/[id]/route.ts",
+      "line": 151,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('agents')\n      .select('id')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/agents/[id]/route.ts",
+      "line": 162,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('agents')\n      .delete().eq('org_id', auth.orgId)\n      .eq('id', id)"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 48,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from(table)\n    .select('*', { count: 'exact', head: true })\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 69,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from(table)\n    .select('*', { count: 'exact', head: true })\n    .eq('org_id', orgId)\n    .gte(dateField, dateValue)"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 91,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from(table)\n    .select('*', { count: 'exact', head: true })\n    .eq('org_id', orgId)\n    .gte(field, gte)\n    .lte(field, lte)"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 315,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('intent')\n        .eq('org_id', auth.orgId)\n        .not('intent', 'is', null)"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 320,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('area_interest')\n        .eq('org_id', auth.orgId)\n        .not('area_interest', 'is', null)"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 325,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('conversations')\n        .select('created_at')\n        .eq('org_id', auth.orgId)\n        .gte('created_at', thirtyDaysAgoISO)\n        .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 331,
+      "kind": "from",
+      "target": "'handoff_events'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('handoff_events')\n        .select('created_at')\n        .eq('org_id', auth.orgId)\n        .gte('created_at', thirtyDaysAgoISO)\n        .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 337,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('messages')\n        .select('conversation_id, direction, created_at')\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/analytics/route.ts",
+      "line": 342,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .not('area_interest', 'is', null)"
+    },
+    {
+      "file": "frontend/src/app/api/bookings/route.ts",
+      "line": 40,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('bookings')\n      .select('*', { count: 'exact', head: true })\n      .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/bookings/route.ts",
+      "line": 52,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('bookings')\n      .select('*, contacts(id, name, phone, push_name)').eq('contacts.org_id', auth.orgId)\n      .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/bookings/route.ts",
+      "line": 111,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('bookings')\n      .insert({\n        org_id: auth.orgId,\n        contact_id: parsed.data.contactId,\n        conversation_id: parsed.data.conversationId ?? null,\n        agent_name: parsed.data.agentName ?? null,\n        agent_whatsapp: parsed.data.agentWhatsapp ?? null,\n        property_ref: parsed.data.propertyRef ?? null,\n        property_area: parsed.data.propertyArea ?? null,\n        scheduled_date: parsed.data.scheduledDate,\n        scheduled_time: parsed.data.scheduledTime,\n        duration_minutes: parsed.data.duration,\n        notes: parsed.data.notes ?? null,\n        status: 'scheduled',\n      })\n      .select('*, contacts(id, name, phone, push_name)').eq('contacts.org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/bookings/[id]/route.ts",
+      "line": 33,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('bookings')\n      .select('*, contacts(id, name, phone, push_name), conversations(id, status)').eq('conversations.org_id', auth.orgId).eq('contacts.org_id', auth.orgId)\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/bookings/[id]/route.ts",
+      "line": 77,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('bookings')\n      .select('id')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/bookings/[id]/route.ts",
+      "line": 100,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('bookings')\n      .update(updateData).eq('org_id', auth.orgId)\n      .eq('id', id)\n      .select('*, contacts(id, name, phone, push_name), conversations(id, status)').eq('conversations.org_id', auth.orgId).eq('contacts.org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 118,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase.from('conversations').select('contact_id').eq('id', conversationId).eq('org_id', orgId).maybeSingle()"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 135,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('conversations')\n        .update({ handled_by: 'human', updated_at: new Date().toISOString() })\n        .eq('id', conversationId)\n        .eq('org_id', orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 161,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .select('contact_id')\n      .eq('id', conversationId)\n      .eq('org_id', orgId)\n      .maybeSingle()"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 171,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('contact_memory')\n        .eq('id', contactId)\n        .eq('org_id', orgId)\n        .maybeSingle()"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 221,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('properties')\n      .select(propertySelect)\n      .eq('org_id', orgId)\n      .eq('available', true)\n      .eq('source', 'direct')\n      .order('price_aed', { ascending: true })\n      .limit(limit)"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 252,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('properties')\n        .select(propertySelect)\n        .eq('org_id', orgId)\n        .eq('available', true)\n        .eq('source', 'direct')\n        .order('price_aed', { ascending: true })\n        .limit(limit)"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 283,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('properties')\n        .select(propertySelect)\n        .eq('org_id', orgId)\n        .eq('available', true)\n        .eq('source', 'indirect')\n        .order('price_aed', { ascending: true })\n        .limit(limit)"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 314,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n          .from('properties')\n          .select(propertySelect)\n          .eq('org_id', orgId)\n          .eq('available', true)\n          .eq('source', 'indirect')\n          .order('price_aed', { ascending: true })\n          .limit(limit)"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 347,
+      "kind": "from",
+      "target": "'inventory_gaps'",
+      "inlineOrgScope": true,
+      "code": "supabase.from('inventory_gaps').insert({\n          org_id: orgId,\n          contact_id: contactId,\n          conversation_id: conversationId ?? null,\n          transaction_type: intent.transactionType ?? null,\n          area: intent.area ?? null,\n          bedrooms: intent.bedrooms ?? null,\n          budget_min: intent.budget ? parseFloat(intent.budget) * 0.82 : null,\n          budget_max: budgetMax,\n          status_wanted: intent.status ?? null,\n          category: intent.category ?? null,\n          direct_results: 0,\n          indirect_results: indirectResults.length,\n          used_fallback: indirectResults.length > 0,\n          created_at: new Date().toISOString(),\n        })"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 372,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('properties')\n      .select(propertySelect)\n      .eq('org_id', orgId)\n      .eq('available', true)\n      .eq('source', 'direct')\n      .order('price_aed', { ascending: true })\n      .limit(3)"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 400,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('properties')\n        .select(propertySelect)\n        .eq('org_id', orgId)\n        .eq('available', true)\n        .eq('source', 'indirect')\n        .order('price_aed', { ascending: true })\n        .limit(3)"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 443,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('agents')\n      .select('knowledge_base_id')\n      .eq('org_id', orgId)\n      .eq('active', true)\n      .limit(1)\n      .maybeSingle()"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 468,
+      "kind": "rpc",
+      "target": "'match_knowledge_chunks'",
+      "inlineOrgScope": true,
+      "code": "supabase.rpc('match_knowledge_chunks', {\n          query_embedding: embedding,\n          kb_id: agent.knowledge_base_id,\n          org_id: orgId,\n          match_count: 4,\n          similarity_threshold: 0.65,\n        })"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 518,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('contacts')\n      .update({\n        contact_memory: merged,\n        language: lang,\n        updated_at: new Date().toISOString(),\n      })\n      .eq('id', contactId)\n      .eq('org_id', orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 618,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase.from('messages').insert({\n      org_id: orgId,\n      conversation_id: conversationId,\n      direction: 'outbound',\n      sender_type: 'ai',\n      sender_name: 'Aya (AI)',\n      content: reply,\n    })"
+    },
+    {
+      "file": "frontend/src/app/api/chat/route.ts",
+      "line": 626,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .update({\n        last_message_at: new Date().toISOString(),\n        detected_lang: lang,\n      })\n      .eq('id', conversationId)\n      .eq('org_id', orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/route.ts",
+      "line": 46,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .select(\"*\")\n      .eq(\"org_id\", auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/route.ts",
+      "line": 67,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .select(\"*\", { count: \"exact\", head: true })\n      .eq(\"org_id\", auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/route.ts",
+      "line": 93,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n          .from(\"conversations\")\n          .select(\"*\", { count: \"exact\", head: true }).eq('org_id', auth.orgId)\n          .eq(\"contact_id\", c.id)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/route.ts",
+      "line": 141,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .insert({\n        org_id: auth.orgId,\n        phone: parsed.data.phone,\n        name: parsed.data.name ?? null,\n        email: parsed.data.email ?? null,\n        push_name: parsed.data.pushName ?? null,\n        lead_score: parsed.data.leadScore ?? 0,\n        lead_status: parsed.data.leadStatus ?? \"new\",\n        language: parsed.data.language ?? \"en\",\n        intent: parsed.data.intent ?? null,\n        area_interest: parsed.data.areaInterest ?? null,\n        bedrooms: parsed.data.bedrooms ?? null,\n        budget: parsed.data.budget ?? null,\n        timeline: parsed.data.timeline ?? null,\n        notes: parsed.data.notes ?? null,\n        assigned_to: parsed.data.assignedTo ?? null,\n        handled_by: parsed.data.handledBy ?? null,\n      })\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/route.ts",
+      "line": 42,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .select(\"*\")\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/route.ts",
+      "line": 66,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .select(\"*\", { count: \"exact\", head: true }).eq('org_id', auth.orgId)\n      .eq(\"contact_id\", id)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/route.ts",
+      "line": 110,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .select(\"id\")\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/route.ts",
+      "line": 126,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .update(snakeData)\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/route.ts",
+      "line": 162,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .select(\"id\")\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/route.ts",
+      "line": 175,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .delete()\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/timeline/route.ts",
+      "line": 54,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('contacts')\n      .select('id, name, phone, created_at')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/timeline/route.ts",
+      "line": 65,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .select('id')\n      .eq('contact_id', id)\n      .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/timeline/route.ts",
+      "line": 81,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n            .from('messages')\n            .select('id, direction, sender_type, content, created_at')\n            .in('conversation_id', conversationIds)\n            .eq('org_id', auth.orgId)\n            .order('created_at', { ascending: false })\n            .limit(12)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/timeline/route.ts",
+      "line": 89,
+      "kind": "from",
+      "target": "'lead_scores'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('lead_scores')\n        .select('id, score, created_at')\n        .eq('contact_id', id)\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(6)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/timeline/route.ts",
+      "line": 96,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('bookings')\n        .select('id, property_ref, status, scheduled_date, created_at')\n        .eq('contact_id', id)\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(6)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/timeline/route.ts",
+      "line": 103,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('nudge_jobs')\n        .select('id, nudge_type, status, scheduled_at, sent_at, created_at')\n        .eq('contact_id', id)\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(6)"
+    },
+    {
+      "file": "frontend/src/app/api/contacts/[id]/timeline/route.ts",
+      "line": 110,
+      "kind": "from",
+      "target": "'handoff_events'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('handoff_events')\n        .select('id, trigger_value, created_at, team_members(name)').eq('team_members.org_id', auth.orgId)\n        .eq('contact_id', id)\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(6)"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/route.ts",
+      "line": 38,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .select(\"*\")\n      .eq(\"org_id\", auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/route.ts",
+      "line": 57,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .select(\"*\", { count: \"exact\", head: true })\n      .eq(\"org_id\", auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/route.ts",
+      "line": 79,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n          .from(\"contacts\")\n          .select(\"id, name, phone, push_name, lead_score, lead_status, intent\").eq('org_id', auth.orgId)\n          .eq(\"id\", c.contact_id)\n          .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/route.ts",
+      "line": 86,
+      "kind": "from",
+      "target": "\"messages\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n          .from(\"messages\")\n          .select(\"content, created_at, direction, sender_type, status\").eq('org_id', auth.orgId)\n          .eq(\"conversation_id\", c.id)\n          .order(\"created_at\", { ascending: false })\n          .limit(1)"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/route.ts",
+      "line": 148,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .insert({\n        org_id: auth.orgId,\n        contact_id: parsed.data.contactId,\n        device_id: parsed.data.deviceId ?? null,\n        status: parsed.data.status ?? \"active\",\n        handled_by: parsed.data.handledBy ?? \"ai\",\n        assigned_to: parsed.data.assignedTo ?? null,\n        lead_score: parsed.data.leadScore ?? 0,\n        detected_intent: parsed.data.detectedIntent ?? null,\n        detected_lang: parsed.data.detectedLang ?? \"en\",\n        last_message_at: new Date().toISOString(),\n      })\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/route.ts",
+      "line": 170,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .select(\"id, name, phone, push_name\").eq('org_id', auth.orgId)\n      .eq(\"id\", parsed.data.contactId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/messages/route.ts",
+      "line": 33,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .select(\"id\")\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/messages/route.ts",
+      "line": 48,
+      "kind": "from",
+      "target": "\"messages\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"messages\")\n      .select(\"*\").eq('org_id', auth.orgId)\n      .eq(\"conversation_id\", id)\n      .order(\"created_at\", { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/messages/route.ts",
+      "line": 91,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .select(\"id, unread_count\")\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/messages/route.ts",
+      "line": 106,
+      "kind": "from",
+      "target": "\"messages\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"messages\")\n      .insert({\n        org_id: auth.orgId,\n        conversation_id: id,\n        direction: parsed.data.direction,\n        sender_type: parsed.data.senderType ?? \"ai\",\n        sender_name: parsed.data.senderName ?? null,\n        content: parsed.data.content,\n        message_type: parsed.data.messageType ?? \"text\",\n        metadata: parsed.data.metadata ?? {},\n      })\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/messages/route.ts",
+      "line": 136,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .update(updateData).eq('org_id', auth.orgId)\n      .eq(\"id\", id)"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/route.ts",
+      "line": 34,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .select(\"*\")\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/route.ts",
+      "line": 49,
+      "kind": "from",
+      "target": "\"contacts\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"contacts\")\n      .select(\"id, name, phone, push_name, lead_score, lead_status, intent\").eq('org_id', auth.orgId)\n      .eq(\"id\", conversation.contact_id)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/route.ts",
+      "line": 57,
+      "kind": "from",
+      "target": "\"devices\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n          .from(\"devices\")\n          .select(\"id, name, status\").eq('org_id', auth.orgId)\n          .eq(\"id\", conversation.device_id)\n          .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/route.ts",
+      "line": 65,
+      "kind": "from",
+      "target": "\"messages\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"messages\")\n      .select(\"*\").eq('org_id', auth.orgId)\n      .eq(\"conversation_id\", id)\n      .order(\"created_at\", { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/route.ts",
+      "line": 115,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .select(\"id\")\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/conversations/[id]/route.ts",
+      "line": 140,
+      "kind": "from",
+      "target": "\"conversations\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"conversations\")\n      .update(snakeData)\n      .eq(\"id\", id)\n      .eq(\"org_id\", auth.orgId)\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/dashboard/route.ts",
+      "line": 26,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('conversations')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/dashboard/route.ts",
+      "line": 30,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/dashboard/route.ts",
+      "line": 34,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('properties')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/dashboard/route.ts",
+      "line": 38,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('bookings')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .gte('scheduled_date', todayISO)"
+    },
+    {
+      "file": "frontend/src/app/api/dashboard/route.ts",
+      "line": 43,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('conversations')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .eq('status', 'active')"
+    },
+    {
+      "file": "frontend/src/app/api/dashboard/route.ts",
+      "line": 48,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .eq('lead_status', 'new')"
+    },
+    {
+      "file": "frontend/src/app/api/devices/route.ts",
+      "line": 37,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('devices')\n      .select('*')\n      .eq('org_id', auth.orgId)\n      .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/devices/route.ts",
+      "line": 50,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('conversations')\n      .select('device_id')\n      .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/flows/route.ts",
+      "line": 35,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('flows')\n      .select('*, flow_steps(count), agents(count)').eq('agents.org_id', auth.orgId).eq('flow_steps.org_id', auth.orgId)\n      .eq('org_id', auth.orgId)\n      .order('created_at', { ascending: false })"
+    },
+    {
+      "file": "frontend/src/app/api/flows/route.ts",
+      "line": 91,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('flows')\n      .insert({\n        org_id: auth.orgId,\n        name: flowData.name,\n        description: flowData.description ?? null,\n        trigger_type: flowData.triggerType,\n        trigger_data: flowData.triggerData,\n        active: flowData.active,\n      })\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/flows/route.ts",
+      "line": 119,
+      "kind": "from",
+      "target": "'flow_steps'",
+      "inlineOrgScope": false,
+      "code": "supabase\n        .from('flow_steps')\n        .insert(stepsToInsert)"
+    },
+    {
+      "file": "frontend/src/app/api/flows/route.ts",
+      "line": 129,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('flows')\n      .select('*, flow_steps(*)').eq('flow_steps.org_id', auth.orgId).eq('org_id', auth.orgId)\n      .eq('id', flow.id)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/flows/[id]/route.ts",
+      "line": 31,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('flows')\n      .select('*, flow_steps(*), agents(count)').eq('agents.org_id', auth.orgId).eq('flow_steps.org_id', auth.orgId)\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/flows/[id]/route.ts",
+      "line": 91,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('flows')\n      .select('id')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/flows/[id]/route.ts",
+      "line": 110,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('flows')\n      .update(updates).eq('org_id', auth.orgId)\n      .eq('id', id)\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/flows/[id]/route.ts",
+      "line": 145,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('flows')\n      .select('id')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/flows/[id]/route.ts",
+      "line": 159,
+      "kind": "from",
+      "target": "'flows'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('flows')\n      .delete().eq('org_id', auth.orgId)\n      .eq('id', id)"
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/route.ts",
+      "line": 24,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('knowledge_bases')\n      .select('*, knowledge_chunks(count)').eq('knowledge_chunks.org_id', auth.orgId)\n      .eq('org_id', auth.orgId)\n      .order('created_at', { ascending: false })"
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/route.ts",
+      "line": 36,
+      "kind": "from",
+      "target": "'agents'",
+      "inlineOrgScope": true,
+      "code": "supabase\n          .from('agents')\n          .select('knowledge_base_id')\n          .eq('org_id', auth.orgId)\n          .in('knowledge_base_id', kbIds)"
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/route.ts",
+      "line": 88,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('knowledge_bases')\n      .insert({\n        org_id: auth.orgId,\n        name: parsed.data.name,\n        description: parsed.data.description ?? null,\n        source_type: parsed.data.sourceType,\n      })\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/[id]/route.ts",
+      "line": 29,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('knowledge_bases')\n      .select('*, knowledge_chunks(*), agents(count)').eq('agents.org_id', auth.orgId).eq('knowledge_chunks.org_id', auth.orgId)\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/[id]/route.ts",
+      "line": 81,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('knowledge_bases')\n      .select('id')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/[id]/route.ts",
+      "line": 98,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('knowledge_bases')\n      .update(updates).eq('org_id', auth.orgId)\n      .eq('id', id)\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/[id]/route.ts",
+      "line": 133,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('knowledge_bases')\n      .select('id')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/knowledge-bases/[id]/route.ts",
+      "line": 147,
+      "kind": "from",
+      "target": "'knowledge_bases'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('knowledge_bases')\n      .delete().eq('org_id', auth.orgId)\n      .eq('id', id)"
+    },
+    {
+      "file": "frontend/src/app/api/notification-preferences/route.ts",
+      "line": 89,
+      "kind": "from",
+      "target": "'notification_preferences'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('notification_preferences')\n      .select('categories, quiet_hours, sound_settings')\n      .eq('org_id', auth.orgId)\n      .eq('user_id', auth.userId)\n      .maybeSingle()"
+    },
+    {
+      "file": "frontend/src/app/api/notification-preferences/route.ts",
+      "line": 105,
+      "kind": "from",
+      "target": "'notification_preferences'",
+      "inlineOrgScope": false,
+      "code": "supabase\n        .from('notification_preferences')\n        .insert(row)"
+    },
+    {
+      "file": "frontend/src/app/api/notification-preferences/route.ts",
+      "line": 154,
+      "kind": "from",
+      "target": "'notification_preferences'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('notification_preferences')\n      .upsert(buildPreferenceRow(auth.userId, auth.orgId, preferences), {\n        onConflict: 'user_id',\n      })"
+    },
+    {
+      "file": "frontend/src/app/api/notifications/route.ts",
+      "line": 29,
+      "kind": "from",
+      "target": "'notifications'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('notifications')\n      .select('id, type, title, message, channel, status, metadata, created_at, read_at')\n      .eq('org_id', auth.orgId)\n      .eq('user_id', auth.userId)\n      .eq('channel', 'push')"
+    },
+    {
+      "file": "frontend/src/app/api/notifications/route.ts",
+      "line": 42,
+      "kind": "from",
+      "target": "'notifications'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('notifications')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .eq('user_id', auth.userId)\n        .eq('channel', 'push')"
+    },
+    {
+      "file": "frontend/src/app/api/notifications/route.ts",
+      "line": 48,
+      "kind": "from",
+      "target": "'notifications'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('notifications')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .eq('user_id', auth.userId)\n        .eq('channel', 'push')\n        .is('read_at', null)"
+    },
+    {
+      "file": "frontend/src/app/api/notifications/route.ts",
+      "line": 103,
+      "kind": "from",
+      "target": "'notifications'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('notifications')\n      .update({ read_at: readAt })\n      .eq('org_id', auth.orgId)\n      .eq('user_id', auth.userId)\n      .eq('channel', 'push')\n      .is('read_at', null)"
+    },
+    {
+      "file": "frontend/src/app/api/notifications/[id]/route.ts",
+      "line": 34,
+      "kind": "from",
+      "target": "'notifications'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('notifications')\n      .update({ read_at: payload.data.readAt ?? new Date().toISOString() })\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .eq('user_id', auth.userId)\n      .eq('channel', 'push')\n      .select('id, type, title, message, channel, status, metadata, created_at, read_at')\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/nudges/route.ts",
+      "line": 24,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('nudge_jobs')\n      .select('*', { count: 'exact', head: true })\n      .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/nudges/route.ts",
+      "line": 35,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('nudge_jobs')\n      .select('*, contacts(id, name, phone, push_name)').eq('contacts.org_id', auth.orgId)\n      .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/nudges/[id]/route.ts",
+      "line": 22,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('nudge_jobs')\n      .select('*')\n      .eq('id', id)\n      .eq('org_id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/nudges/[id]/route.ts",
+      "line": 40,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('nudge_jobs')\n      .update({\n        status: 'cancelled',\n        cancelled_at: new Date().toISOString(),\n      }).eq('org_id', auth.orgId)\n      .eq('id', id)\n      .select('*')\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/properties/inventory-gaps/route.ts",
+      "line": 17,
+      "kind": "from",
+      "target": "'inventory_gaps'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('inventory_gaps')\n    .select('area, bedrooms, transaction_type, budget_max, used_fallback, created_at')\n    .eq('org_id', auth.orgId)\n    .order('created_at', { ascending: false })\n    .limit(limit)"
+    },
+    {
+      "file": "frontend/src/app/api/properties/route.ts",
+      "line": 94,
+      "kind": "from",
+      "target": "\"properties\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"properties\")\n      .select(\"*\")\n      .eq(\"org_id\", auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/properties/route.ts",
+      "line": 132,
+      "kind": "from",
+      "target": "\"properties\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"properties\")\n      .select(\"*\", { count: \"exact\", head: true })\n      .eq(\"org_id\", auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/properties/route.ts",
+      "line": 208,
+      "kind": "from",
+      "target": "\"properties\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"properties\")\n      .insert({\n        org_id: auth.orgId,\n        ref: refNumber,\n        ref_number: refNumber,\n        type: normalizedType,\n        transaction_type: normalizedTransactionType,\n        category: normalizedCategory,\n        bedrooms: parsed.data.bedrooms ?? null,\n        bathrooms: parsed.data.bathrooms ?? null,\n        size_sqft: parsed.data.sizeSqft ?? null,\n        status: normalizedStatus,\n        district: parsed.data.district ?? null,\n        building: parsed.data.building ?? null,\n        full_area: parsed.data.fullArea ?? parsed.data.district ?? null,\n        price_aed: parsed.data.priceAed,\n        agent_name: parsed.data.agentName ?? null,\n        agent_whatsapp: parsed.data.agentWhatsapp ?? null,\n        available: parsed.data.available ?? true,\n        permit_number: parsed.data.permitNumber ?? null,\n        portal: parsed.data.portal ?? null,\n        source,\n        partner_agency: source === \"indirect\" ? parsed.data.partnerAgency ?? null : null,\n        partner_agent_name: source === \"indirect\" ? parsed.data.partnerAgentName ?? null : null,\n        partner_agent_phone: source === \"indirect\" ? parsed.data.partnerAgentPhone ?? null : null,\n        partner_agent_email: source === \"indirect\" ? parsed.data.partnerAgentEmail ?? null : null,\n        co_broker_commission: source === \"indirect\" ? parsed.data.coBrokerCommission ?? null : null,\n        listing_url: source === \"indirect\" ? parsed.data.listingUrl ?? null : null,\n        distress_deal: parsed.data.distressDeal === true,\n      })\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/properties/stats/route.ts",
+      "line": 14,
+      "kind": "from",
+      "target": "'properties'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('properties')\n    .select('transaction_type, category, district, price_aed, available, status, source')\n    .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/properties/[id]/route.ts",
+      "line": 42,
+      "kind": "from",
+      "target": "\"properties\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"properties\")\n      .select(\"*\")\n      .eq(\"org_id\", auth.orgId)\n      .or(`id.eq.${id},ref_number.eq.${id}`)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/properties/[id]/route.ts",
+      "line": 86,
+      "kind": "from",
+      "target": "\"properties\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"properties\")\n      .select(\"id\")\n      .eq(\"org_id\", auth.orgId)\n      .or(`id.eq.${id},ref_number.eq.${id}`)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/properties/[id]/route.ts",
+      "line": 102,
+      "kind": "from",
+      "target": "\"properties\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"properties\")\n      .update(snakeData)\n      .eq(\"id\", existing.id)\n      .eq(\"org_id\", auth.orgId)\n      .select()\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/properties/[id]/route.ts",
+      "line": 138,
+      "kind": "from",
+      "target": "\"properties\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"properties\")\n      .select(\"id\")\n      .eq(\"org_id\", auth.orgId)\n      .or(`id.eq.${id},ref_number.eq.${id}`)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/properties/[id]/route.ts",
+      "line": 149,
+      "kind": "from",
+      "target": "\"properties\"",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from(\"properties\")\n      .delete()\n      .eq(\"id\", existing.id)\n      .eq(\"org_id\", auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/route.ts",
+      "line": 13,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase.from('organizations').select('id').eq('id', auth.orgId).limit(1)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/api/route.ts",
+      "line": 49,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n        .from('organizations')\n        .select('settings')\n        .eq('id', auth.orgId)\n        .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/api/route.ts",
+      "line": 54,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('messages')\n        .select('id, sender_type, direction, created_at')\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(4)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/api/route.ts",
+      "line": 60,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('bookings')\n        .select('id, status, property_ref, scheduled_date, created_at')\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(3)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/api/route.ts",
+      "line": 66,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('nudge_jobs')\n        .select('id, status, nudge_type, updated_at, created_at')\n        .eq('org_id', auth.orgId)\n        .order('updated_at', { ascending: false })\n        .limit(3)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/api/route.ts",
+      "line": 72,
+      "kind": "from",
+      "target": "'handoff_events'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('handoff_events')\n        .select('id, status, trigger_value, created_at')\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: false })\n        .limit(3)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/api/route.ts",
+      "line": 197,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .select('settings')\n      .eq('id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/api/route.ts",
+      "line": 211,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .update({\n        settings: {\n          ...currentSettings,\n          api: payload.data,\n        },\n      })\n      .eq('id', auth.orgId)\n      .select('settings')\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/billing/route.ts",
+      "line": 31,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n        .from('organizations')\n        .select('plan, settings')\n        .eq('id', auth.orgId)\n        .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/billing/route.ts",
+      "line": 36,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('messages')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .gte('created_at', monthStartIso)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/billing/route.ts",
+      "line": 41,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('messages')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .eq('sender_type', 'ai')\n        .gte('created_at', monthStartIso)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/billing/route.ts",
+      "line": 47,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/billing/route.ts",
+      "line": 51,
+      "kind": "from",
+      "target": "'devices'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('devices')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/handoff/route.ts",
+      "line": 61,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .select('settings')\n      .eq('id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/handoff/route.ts",
+      "line": 103,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .select('settings')\n      .eq('id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/handoff/route.ts",
+      "line": 117,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .update({\n        settings: {\n          ...currentSettings,\n          handoff: payload.data,\n        },\n      })\n      .eq('id', auth.orgId)\n      .select('settings')\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/route.ts",
+      "line": 40,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n        .from('organizations')\n        .select('name, slug, plan, settings')\n        .eq('id', auth.orgId)\n        .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/route.ts",
+      "line": 45,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('team_members')\n        .select('*', { count: 'exact', head: true })\n        .eq('org_id', auth.orgId)\n        .eq('active', true)"
+    },
+    {
+      "file": "frontend/src/app/api/settings/route.ts",
+      "line": 113,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .select('settings, plan')\n      .eq('id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/route.ts",
+      "line": 139,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .update({\n        name: payload.data.organizationName,\n        slug: payload.data.organizationSlug,\n        settings: nextSettings,\n      })\n      .eq('id', auth.orgId)\n      .select('name, slug, plan, settings')\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/team/route.ts",
+      "line": 31,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n        .from('organizations')\n        .select('settings')\n        .eq('id', auth.orgId)\n        .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/team/route.ts",
+      "line": 36,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('team_members')\n        .select('id, name, role, active')\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/settings/team/route.ts",
+      "line": 91,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .select('settings')\n      .eq('id', auth.orgId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/team/route.ts",
+      "line": 105,
+      "kind": "from",
+      "target": "'organizations'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('organizations')\n      .update({\n        settings: {\n          ...currentSettings,\n          team: payload.data,\n        },\n      })\n      .eq('id', auth.orgId)\n      .select('settings')\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/widgets/route.ts",
+      "line": 9,
+      "kind": "from",
+      "target": "'users'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('users')\n      .select('preferences').eq('org_id', auth.orgId)\n      .eq('id', auth.userId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/widgets/route.ts",
+      "line": 26,
+      "kind": "from",
+      "target": "'users'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('users')\n      .select('preferences').eq('org_id', auth.orgId)\n      .eq('id', auth.userId)\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/settings/widgets/route.ts",
+      "line": 33,
+      "kind": "from",
+      "target": "'users'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('users')\n      .update({ preferences: prefs }).eq('org_id', auth.orgId)\n      .eq('id', auth.userId)"
+    },
+    {
+      "file": "frontend/src/app/api/system/status/route.ts",
+      "line": 12,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from(table)\n    .select('*', { count: 'exact', head: true })\n    .eq('org_id', orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/system/status/route.ts",
+      "line": 135,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('team_members')\n        .select('name')\n        .eq('org_id', auth.orgId)\n        .eq('active', true)\n        .order('created_at', { ascending: true })\n        .limit(4)"
+    },
+    {
+      "file": "frontend/src/app/api/team/performance/route.ts",
+      "line": 139,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('team_members')\n        .select('id, name, role, whatsapp, email, area_speciality, speciality_areas, active, created_at, updated_at')\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/team/performance/route.ts",
+      "line": 144,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('conversations')\n        .select('id, contact_id, assigned_to, lead_score, status, created_at, last_message_at')\n        .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/team/performance/route.ts",
+      "line": 148,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('contacts')\n        .select('id, assigned_to, lead_score')\n        .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/team/performance/route.ts",
+      "line": 152,
+      "kind": "from",
+      "target": "'bookings'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('bookings')\n        .select('id, contact_id, conversation_id, status, scheduled_date')\n        .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/team/performance/route.ts",
+      "line": 156,
+      "kind": "from",
+      "target": "'handoff_events'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('handoff_events')\n        .select('id, assigned_to, status, created_at')\n        .eq('org_id', auth.orgId)\n        .gte('created_at', thirtyDaysAgoISO)"
+    },
+    {
+      "file": "frontend/src/app/api/team/performance/route.ts",
+      "line": 161,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n        .from('messages')\n        .select('conversation_id, direction, created_at')\n        .eq('org_id', auth.orgId)\n        .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/team/route.ts",
+      "line": 38,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": true,
+      "code": "supabase\n      .from('team_members')\n      .select('*')\n      .eq('org_id', auth.orgId)\n      .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/team/route.ts",
+      "line": 122,
+      "kind": "from",
+      "target": "'team_members'",
+      "inlineOrgScope": false,
+      "code": "supabase\n      .from('team_members')\n      .insert(insertRecord)\n      .select('*')\n      .single()"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/bulk/route.ts",
+      "line": 12,
+      "kind": "from",
+      "target": "'inventory_gaps'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('inventory_gaps')\n    .update({ conversation_id: null })\n    .eq('org_id', orgId)\n    .in('conversation_id', ids)"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/bulk/route.ts",
+      "line": 53,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .update(updates)\n    .in('id', payload.ids)\n    .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/bulk/route.ts",
+      "line": 90,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .delete()\n    .in('id', payload.ids)\n    .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/messages/route.ts",
+      "line": 19,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .select('id')\n    .eq('id', id)\n    .eq('org_id', auth.orgId)\n    .maybeSingle()"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/messages/route.ts",
+      "line": 30,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('messages')\n    .select('*').eq('org_id', auth.orgId)\n    .eq('conversation_id', id)\n    .order('created_at', { ascending: true })"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/messages/route.ts",
+      "line": 62,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .select('id, unread_count')\n    .eq('id', id)\n    .eq('org_id', auth.orgId)\n    .maybeSingle()"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/messages/route.ts",
+      "line": 73,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('messages')\n    .insert({\n      org_id: auth.orgId,\n      conversation_id: id,\n      direction: payload.direction,\n      sender_type: payload.senderType ?? 'human',\n      sender_name: payload.senderName ?? null,\n      content: payload.content,\n      message_type: payload.messageType ?? 'text',\n      status: payload.direction === 'outbound' ? 'sent' : null,\n    })\n    .select('*')\n    .single()"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/messages/route.ts",
+      "line": 92,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .update({\n      last_message_at: new Date().toISOString(),\n      unread_count: payload.direction === 'inbound' ? (conversation.unread_count ?? 0) + 1 : 0,\n      updated_at: new Date().toISOString(),\n    })\n    .eq('id', id)\n    .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/suggest-replies/route.ts",
+      "line": 47,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('conversations')\n    .select('id, detected_lang, contacts!inner(intent, budget, area_interest)').eq('contacts.org_id', auth.orgId)\n    .eq('id', id)\n    .eq('org_id', auth.orgId)\n    .single()"
+    },
+    {
+      "file": "frontend/src/app/api/v1/conversations/[id]/suggest-replies/route.ts",
+      "line": 58,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('messages')\n    .select('content, direction').eq('org_id', auth.orgId)\n    .eq('conversation_id', id)\n    .order('created_at', { ascending: false })\n    .limit(5)"
+    },
+    {
+      "file": "frontend/src/app/api/v1/messages/[id]/route.ts",
+      "line": 20,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('messages')\n    .select('id, org_id, sender_type, direction')\n    .eq('id', id)\n    .eq('org_id', auth.orgId)\n    .maybeSingle()"
+    },
+    {
+      "file": "frontend/src/app/api/v1/messages/[id]/route.ts",
+      "line": 37,
+      "kind": "from",
+      "target": "'messages'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('messages')\n    .delete()\n    .eq('id', id)\n    .eq('org_id', auth.orgId)"
+    },
+    {
+      "file": "frontend/src/app/api/v1/nudges/send-now/route.ts",
+      "line": 25,
+      "kind": "from",
+      "target": "'contacts'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('contacts')\n    .select('id, language')\n    .eq('id', payload.contactId)\n    .eq('org_id', auth.orgId)\n    .single()"
+    },
+    {
+      "file": "frontend/src/app/api/v1/nudges/send-now/route.ts",
+      "line": 43,
+      "kind": "from",
+      "target": "'nudge_jobs'",
+      "inlineOrgScope": true,
+      "code": "supabase\n    .from('nudge_jobs')\n    .insert({\n      org_id: auth.orgId,\n      contact_id: payload.contactId,\n      conversation_id: payload.conversationId ?? null,\n      nudge_type: '24h',\n      status: 'sent',\n      scheduled_at: sentAt,\n      sent_at: sentAt,\n      language: contact.language ?? 'en',\n      message_en: messageEn,\n      message_ar: messageAr,\n      message_sent: messageSent,\n      result: { manual: true },\n    })\n    .select('*')\n    .single()"
+    },
+    {
+      "file": "frontend/src/lib/tenant.ts",
+      "line": 10,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "db.from(table).select('id').eq('org_id', orgId).eq(column, value).limit(1)"
+    },
+    {
+      "file": "frontend/src/lib/tenant.ts",
+      "line": 14,
+      "kind": "from",
+      "target": "table",
+      "inlineOrgScope": true,
+      "code": "db.from(table).select('id').eq('org_id', orgId).eq('ref_number', value).limit(1)"
+    },
+    {
+      "file": "frontend/src/lib/tenant.ts",
+      "line": 29,
+      "kind": "from",
+      "target": "'conversations'",
+      "inlineOrgScope": true,
+      "code": "db.from('conversations').select('id').eq('org_id', orgId).in('id', unique)"
+    },
+    {
+      "file": "frontend/src/lib/tenant.ts",
+      "line": 46,
+      "kind": "from",
+      "target": "child",
+      "inlineOrgScope": false,
+      "code": "db.from(child).select('id').in(column, ids).neq('org_id', orgId).limit(1)"
+    },
+    {
+      "file": "frontend/src/lib/tenant.ts",
+      "line": 50,
+      "kind": "from",
+      "target": "child",
+      "inlineOrgScope": true,
+      "code": "db.from(child).select('id').eq('org_id', orgId).in(column, ids)"
+    }
+  ]
+}

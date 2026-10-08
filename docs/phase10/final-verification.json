@@ -1,0 +1,44 @@
+[
+  {
+    "command": "node scripts/phase10-indexing-recheck.mjs",
+    "exitCode": 0,
+    "seconds": 150.1,
+    "log": "docs/phase10/logs/final-indexing-recheck.log"
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 1,
+    "seconds": 9.5,
+    "log": "docs/phase10/logs/final-lint.log"
+  },
+  {
+    "command": "node scripts/phase10-evidence.mjs",
+    "exitCode": 0,
+    "seconds": 0.1,
+    "log": "docs/phase10/logs/final-evidence.log"
+  },
+  {
+    "command": "node scripts/phase10-environment.mjs",
+    "exitCode": 0,
+    "seconds": 2,
+    "log": "docs/phase10/logs/final-environment.log"
+  },
+  {
+    "command": "node node_modules/vitest/vitest.mjs run tests/unit/source-safety.test.ts",
+    "exitCode": 0,
+    "seconds": 0.9,
+    "log": "docs/phase10/logs/final-preservation.log",
+    "tests": {
+      "passed": 10,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "node scripts/phase10-files.mjs",
+    "exitCode": 0,
+    "seconds": 0.4,
+    "log": "docs/phase10/logs/final-files.log"
+  }
+]

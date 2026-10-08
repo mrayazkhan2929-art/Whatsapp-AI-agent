@@ -1,0 +1,625 @@
+{
+  "passed": 153,
+  "expectedFailures": 1,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "preserves the Phase 0 checkpoint outside explicitly authorized phase paths",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves the Phase 1 source checkpoint outside the Phase 2 change allowlist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves the Phase 2 checkpoint outside the explicit Phase 3 allowlist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves the Phase 3 checkpoint outside the explicit Phase 4 allowlist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves the Phase 4 checkpoint outside the explicit Phase 5 allowlist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "roundtrips the current API pagination cursor",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > Hi routes to general",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > office address routes to company",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > 2BR Dubai Marina under AED 2M routes to property",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > Connect me with an agent routes to agent",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses AED 2M",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses AED 750k",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > parses 1,900,000",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > extracts English Marina, bedrooms and budget",
+      "outcome": "PASS"
+    },
+    {
+      "name": "deterministic intent and criteria baseline > keeps prior area and bedrooms when the user supplies a budget",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login preserves membership failure 403 without setting cookies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login preserves membership failure 500 without setting cookies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login preserves membership failure 503 without setting cookies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login reports unavailable Supabase Auth as 503 without cookies",
+      "outcome": "PASS"
+    },
+    {
+      "name": "login reports invalid credentials as 401 without authorizing",
+      "outcome": "PASS"
+    },
+    {
+      "name": "authorized login preserves successful envelope and secure cookie behavior",
+      "outcome": "PASS"
+    },
+    {
+      "name": "real MessageRouter persists text, invokes AI and sends through its gateway abstraction",
+      "outcome": "PASS"
+    },
+    {
+      "name": "image inbound is persisted without generating a text reply",
+      "outcome": "PASS"
+    },
+    {
+      "name": "history and conversation writes stay scoped when malformed foreign children exist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 inbound persistence carries original WhatsApp ID and tenant/device context",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate twice executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate 10 concurrently executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate after new router instance executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate two replicas executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "same text with distinct IDs executes twice",
+      "outcome": "PASS"
+    },
+    {
+      "name": "missing ID and own echoes never execute or persist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "transport failure saves one uncertain response and does not send a second fallback",
+      "outcome": "PASS"
+    },
+    {
+      "name": "persistence failures fail closed before business execution",
+      "outcome": "PASS"
+    },
+    {
+      "name": "[XFAIL] P6 handoff flag must persist a real handoff lifecycle event",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected [] to have a length of 1 but got +0"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts I need to buy a 2BR apartment in Marina under AED 2M",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts أريد شراء شقة غرفتين في دبي مارينا بميزانية أقل من ٢ مليون درهم",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts شقة 2BR في Marina للإيجار أقل من ١٢٠ ألف",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts villa project: \"Harbour\"; building: \"Tower One\"; developer: Builder",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts مرجع REF-123",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts reference: ABC",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts Send property A/UNIT-101",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts reference: \"AB C/1\"",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts Studio in JVC",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts bounded budget from between 1 and 2 million",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts bounded budget from من ١ مليون إلى ٢ مليون",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts bounded budget from at least AED 750k",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts bounded budget from Max 2 million",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts bounded budget from 1,900,000",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > extracts bounded budget from 2BR",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > merges a budget and more without losing the current area or bedrooms",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > clears the selected reference for alternatives and retains it for more details",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > keeps transaction category separate from property type at the compatibility boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "structured English, Arabic and mixed criteria > rejects invalid bounds and unknown organization criteria",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > resolves exact reference REF-2 without location clarification",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > resolves exact reference ref-2 without location clarification",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > resolves exact reference REF-2-ALIAS without location clarification",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > never substitutes another listing for an unknown or foreign reference",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > refuses ambiguous aliases and unavailable exact identities",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > excludes both aliases before limiting and never repeats when alternatives exist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > enforces the explicit constraint {\"propertyType\":\"villa\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > enforces the explicit constraint {\"project\":\"Different\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > enforces the explicit constraint {\"building\":\"Tower\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > enforces the explicit constraint {\"developer\":\"Different\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > enforces the explicit constraint {\"bedrooms\":\"3\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > enforces the explicit constraint {\"status\":\"off-plan\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > enforces the explicit constraint {\"maxPrice\":0}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > enforces the explicit constraint {\"distressOnly\":true}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > applies relaxation only under an approved bounded policy and labels it partial",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > reads current prices and availability without stale cache",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > rejects foreign inventory-gap parents before any compatibility write",
+      "outcome": "PASS"
+    },
+    {
+      "name": "verified matching and identity > preserves tenant-owned inventory-gap logging",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > omits missing bedrooms, transaction, area and agent instead of inventing facts",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > rejects unsafe media URL javascript:alert(1)",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > rejects unsafe media URL http://cdn.example.invalid/a",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > rejects unsafe media URL https://127.0.0.1/a",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > rejects unsafe media URL https://10.0.0.1/a",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > rejects unsafe media URL https://user:pass@cdn.example.invalid/a",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > rejects unsafe media URL https://private.local/a",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > rejects unsafe media URL https://localhost./a",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > rejects unsafe media URL https://[::1]/a",
+      "outcome": "PASS"
+    },
+    {
+      "name": "factual formatting and media > checks the owned parent and filters unsafe media without outbound requests",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend me and page guard preserve backend failure 401",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend me and page guard preserve backend failure 403",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend me and page guard preserve backend failure 500",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend me and page guard preserve backend failure 503",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend uses authoritative backend context and forwards bearer identity",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend denies invalid backend success payload",
+      "outcome": "PASS"
+    },
+    {
+      "name": "frontend reports unreachable backend as 503",
+      "outcome": "PASS"
+    },
+    {
+      "name": "explicit empty authorization cannot fall back to the cookie identity",
+      "outcome": "PASS"
+    },
+    {
+      "name": "property handler preserves tenant scope, bedrooms and budget at the matcher boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 apartment criterion excludes same-area same-budget villas",
+      "outcome": "PASS"
+    },
+    {
+      "name": "empty verified inventory produces no fabricated properties",
+      "outcome": "PASS"
+    },
+    {
+      "name": "rejects executable tools, unbounded models, duplicate links and client tenant overrides",
+      "outcome": "PASS"
+    },
+    {
+      "name": "computes a reviewable diff without mutating either snapshot",
+      "outcome": "PASS"
+    },
+    {
+      "name": "compiles published identity with platform and company precedence",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves database PT409 as HTTP 409",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves database 40001 as HTTP 409",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves database 55000 as HTTP 409",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves database P0002 as HTTP 404",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves database 42501 as HTTP 403",
+      "outcome": "PASS"
+    },
+    {
+      "name": "preserves database XX000 as HTTP 500",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Hi enters the existing general AI path",
+      "outcome": "PASS"
+    },
+    {
+      "name": "office address uses the real company handler without property search",
+      "outcome": "PASS"
+    },
+    {
+      "name": "2BR Dubai Marina under AED 2M forwards current structured criteria",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Connect me with an agent returns the existing handoff flag",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 exact REF-123 request reaches an exact lookup before area clarification",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 another option stays in the property lane with existing criteria",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 Arabic property request extracts area, bedrooms, budget and transaction",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P2 company facts differ between independently configured tenants",
+      "outcome": "PASS"
+    },
+    {
+      "name": "unique confirmed legacy email resolves stored identity, organization, role and name",
+      "outcome": "PASS"
+    },
+    {
+      "name": "direct membership wins over conflicting email and metadata",
+      "outcome": "PASS"
+    },
+    {
+      "name": "disabled direct membership cannot fall through to an active legacy match",
+      "outcome": "PASS"
+    },
+    {
+      "name": "duplicate email is denied even when second membership active=true",
+      "outcome": "PASS"
+    },
+    {
+      "name": "duplicate email is denied even when second membership active=false",
+      "outcome": "PASS"
+    },
+    {
+      "name": "unconfirmed email cannot establish legacy membership",
+      "outcome": "PASS"
+    },
+    {
+      "name": "rejects disabled without creating mappings",
+      "outcome": "PASS"
+    },
+    {
+      "name": "rejects missing organization without creating mappings",
+      "outcome": "PASS"
+    },
+    {
+      "name": "rejects invalid role without creating mappings",
+      "outcome": "PASS"
+    },
+    {
+      "name": "lookup failure is a server failure, never a fallback",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Auth infrastructure failure is 503",
+      "outcome": "PASS"
+    },
+    {
+      "name": "malformed explicit authorization cannot fall back to another cookie identity",
+      "outcome": "PASS"
+    },
+    {
+      "name": "missing token is denied before accessing tenant data",
+      "outcome": "PASS"
+    },
+    {
+      "name": "invalid token is denied",
+      "outcome": "PASS"
+    },
+    {
+      "name": "real auth/org middleware and agents route ignore a forged query organization",
+      "outcome": "PASS"
+    },
+    {
+      "name": "tenant A cannot read tenant B agent by ID at the application query boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P1 unmapped authenticated user must receive 403 instead of the first organization",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P1 disabled application member must receive 403",
+      "outcome": "PASS"
+    },
+    {
+      "name": "resolves only the supplied server tenant, with no global default",
+      "outcome": "PASS"
+    },
+    {
+      "name": "strips forged IDs and timestamps at the service write boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "does not share cached company configuration and applies the next saved change",
+      "outcome": "PASS"
+    },
+    {
+      "name": "does not substitute legacy domains or office locations in the sanitizer",
+      "outcome": "PASS"
+    },
+    {
+      "name": "uses only configured leadership facts, with no hardcoded CEO fallback",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"logo_url\":\"javascript:alert(1)\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"website\":\"file:///private\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"timezone\":\"Invalid/Zone\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"email\":\"invalid\"}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"service_areas\":[\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\",\"Area\"]}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "validates bounded profile fields and safe URLs: {\"legal_name\":\"A\",\"social_links\":{\"social\":\"data:image/png,x\"}}",
+      "outcome": "PASS"
+    },
+    {
+      "name": "surfaces database failures instead of returning fabricated facts",
+      "outcome": "PASS"
+    },
+    {
+      "name": "both prompt builders consume tenant company facts",
+      "outcome": "PASS"
+    },
+    {
+      "name": "company CEO, logo and Arabic contact questions use company facts while property searches retain their lane",
+      "outcome": "PASS"
+    },
+    {
+      "name": "passes the persisted outbound ID to the actual Baileys socket adapter",
+      "outcome": "PASS"
+    },
+    {
+      "name": "gateway cache cannot reuse, connect or disconnect another organization session",
+      "outcome": "PASS"
+    },
+    {
+      "name": "runtime health summaries include only authorized device IDs",
+      "outcome": "PASS"
+    },
+    {
+      "name": "knowledge helpers reject foreign KB references before embeddings or writes",
+      "outcome": "PASS"
+    },
+    {
+      "name": "does not show a pending status for completed",
+      "outcome": "PASS"
+    },
+    {
+      "name": "does not show a pending status for ignored",
+      "outcome": "PASS"
+    },
+    {
+      "name": "does not show a pending status for null",
+      "outcome": "PASS"
+    },
+    {
+      "name": "shows saved replies as awaiting send",
+      "outcome": "PASS"
+    },
+    {
+      "name": "shows uncertain delivery with review guidance",
+      "outcome": "PASS"
+    },
+    {
+      "name": "distinguishes inbound execution review from delivery review",
+      "outcome": "PASS"
+    },
+    {
+      "name": "shows an unacknowledged send as awaiting confirmation",
+      "outcome": "PASS"
+    },
+    {
+      "name": "existing login form labels are usable and exposes server errors inline",
+      "outcome": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,341 @@
+{
+  "requests": 68,
+  "tenantBSnapshotChecks": 17,
+  "tenantTables": [
+    "agent_channel_links",
+    "agent_config_events",
+    "agent_drafts",
+    "agent_playground_runs",
+    "agent_routing_rules",
+    "agent_version_knowledge_bases",
+    "agent_version_tools",
+    "agent_versions",
+    "agents",
+    "alert_templates",
+    "alerts",
+    "audit_logs",
+    "baileys_sessions",
+    "bookings",
+    "contact_flows",
+    "contacts",
+    "conversation_states",
+    "conversations",
+    "device_outbound_jobs",
+    "device_runtime_leases",
+    "devices",
+    "execution_traces",
+    "flow_steps",
+    "flows",
+    "handoff_events",
+    "handoff_notifications",
+    "inventory_gaps",
+    "knowledge_bases",
+    "knowledge_chunks",
+    "knowledge_document_chunks",
+    "knowledge_document_versions",
+    "knowledge_documents",
+    "lead_assignments",
+    "lead_scores",
+    "message_locks",
+    "message_receipts",
+    "message_replies",
+    "messages",
+    "notification_preferences",
+    "notification_rules",
+    "notifications",
+    "nudge_jobs",
+    "organization_profiles",
+    "properties",
+    "property_media",
+    "sentiment_history",
+    "team_members",
+    "users"
+  ],
+  "externalRequests": 0,
+  "browserErrors": [],
+  "checks": [
+    {
+      "rlsTables": 50,
+      "views": 4,
+      "applicationFunctions": 59
+    },
+    {
+      "concurrentReads": 40,
+      "elapsedMs": 241
+    }
+  ],
+  "workflow": [
+    "register",
+    "email confirmation",
+    "create organization",
+    "authorized cookies",
+    "company profile",
+    "create AI agent",
+    "save instructions",
+    "upload and index knowledge",
+    "manage properties",
+    "add team",
+    "save handoff settings",
+    "QR rendered",
+    "simulated phone scan",
+    "link knowledge source",
+    "AI playground",
+    "mandatory tests",
+    "publish",
+    "channel link",
+    "published runtime exact property",
+    "duplicate suppression"
+  ],
+  "accessibility": [
+    {
+      "page": "/onboarding",
+      "viewport": "desktop",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/onboarding",
+      "viewport": "mobile",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/onboarding",
+      "viewport": "rtl",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/dashboard",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/inbox",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "page-has-heading-one",
+          "impact": "moderate"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/contacts",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/pipeline",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/properties",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "empty-table-header",
+          "impact": "minor"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/team",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/knowledge-base",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/devices",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/analytics",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "aria-progressbar-name",
+          "impact": "serious"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/settings",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    },
+    {
+      "page": "/activity-log",
+      "critical": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        },
+        {
+          "id": "region",
+          "impact": "moderate"
+        }
+      ]
+    }
+  ],
+  "whatsappTransport": "local stub only",
+  "embeddings": "local stub only",
+  "liveValidation": false
+}

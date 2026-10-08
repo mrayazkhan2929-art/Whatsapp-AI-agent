@@ -1,0 +1,13 @@
+{
+  "command": "node scripts/phase10-db.mjs tests/tenant-db/knowledge-lifecycle.test.ts tests/tenant-db/device-reliability.test.ts",
+  "exitCode": 0,
+  "seconds": 150,
+  "log": "docs/phase10/logs/indexing-recheck.log",
+  "directory": "F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\test-results\\phase10-db-1791389856227",
+  "tests": {
+    "passed": 103,
+    "failed": 0,
+    "total": 103,
+    "pending": 0
+  }
+}

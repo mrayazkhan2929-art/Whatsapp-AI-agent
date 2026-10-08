@@ -1,0 +1,20 @@
+[
+  "backend/src/api/routes/agents.ts",
+  "backend/src/api/routes/chat.ts",
+  "backend/src/modules/ai/aiService.ts",
+  "backend/src/modules/ai/promptBuilder.ts",
+  "backend/src/modules/ai/router.ts",
+  "backend/src/modules/company/RuntimeConfigResolver.ts",
+  "backend/src/whatsapp/MessageRouter.ts",
+  "frontend/src/app/api/agents/[id]/route.ts",
+  "frontend/src/app/api/agents/route.ts",
+  "frontend/src/app/api/chat/route.ts",
+  "frontend/src/app/api/knowledge-bases/[id]/route.ts",
+  "frontend/src/components/layout/AppSidebar.tsx",
+  "frontend/src/components/layout/AppTopBar.tsx",
+  "frontend/src/components/routes/AgentDetailRoute.tsx",
+  "frontend/src/lib/page-routes.ts",
+  "frontend/src/lib/prompts/iereSystemPrompt.ts",
+  "frontend/src/lib/store.ts",
+  "frontend/src/proxy.ts"
+]

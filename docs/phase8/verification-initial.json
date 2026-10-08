@@ -1,0 +1,149 @@
+[
+  {
+    "command": "npm ci",
+    "exitCode": 0,
+    "seconds": 24.7,
+    "log": "docs/phase8/logs/npm-ci.log"
+  },
+  {
+    "command": "npm run typecheck",
+    "exitCode": 2,
+    "seconds": 2.7,
+    "log": "docs/phase8/logs/npm-run-typecheck.log"
+  },
+  {
+    "command": "npm run typecheck:tests",
+    "exitCode": 0,
+    "seconds": 3.7,
+    "log": "docs/phase8/logs/npm-run-typecheck-tests.log"
+  },
+  {
+    "command": "npm run lint",
+    "exitCode": 1,
+    "seconds": 9.3,
+    "log": "docs/phase8/logs/npm-run-lint.log"
+  },
+  {
+    "command": "npm run build",
+    "exitCode": 1,
+    "seconds": 7.1,
+    "log": "docs/phase8/logs/npm-run-build.log"
+  },
+  {
+    "command": "npm run test:unit",
+    "exitCode": 0,
+    "seconds": 2.3,
+    "log": "docs/phase8/logs/npm-run-test-unit.log",
+    "tests": {
+      "passed": 184,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:integration",
+    "exitCode": 0,
+    "seconds": 1,
+    "log": "docs/phase8/logs/npm-run-test-integration.log",
+    "tests": {
+      "passed": 18,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:tenant",
+    "exitCode": 0,
+    "seconds": 1.2,
+    "log": "docs/phase8/logs/npm-run-test-tenant.log",
+    "tests": {
+      "passed": 35,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:tenant:strict",
+    "exitCode": 0,
+    "seconds": 1.7,
+    "log": "docs/phase8/logs/npm-run-test-tenant-strict.log",
+    "tests": {
+      "passed": 35,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:ai-regression",
+    "exitCode": 0,
+    "seconds": 1,
+    "log": "docs/phase8/logs/npm-run-test-ai-regression.log",
+    "tests": {
+      "passed": 23,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:e2e",
+    "exitCode": 1,
+    "seconds": 1.2,
+    "log": "docs/phase8/logs/npm-run-test-e2e.log",
+    "e2e": {
+      "startTime": "2026-10-07T14:23:37.147Z",
+      "duration": 525.433,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  {
+    "command": "npm run test:all",
+    "exitCode": 1,
+    "seconds": 3.9,
+    "log": "docs/phase8/logs/npm-run-test-all.log",
+    "tests": {
+      "passed": 245,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    },
+    "e2e": {
+      "startTime": "2026-10-07T14:23:41.068Z",
+      "duration": 509.919,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  {
+    "command": "npm run test:strict",
+    "exitCode": 0,
+    "seconds": 2.7,
+    "log": "docs/phase8/logs/npm-run-test-strict.log",
+    "tests": {
+      "passed": 245,
+      "expectedFailures": 0,
+      "failed": 0,
+      "moduleErrors": []
+    }
+  },
+  {
+    "command": "npm run test:studio:db",
+    "exitCode": 1,
+    "seconds": 30,
+    "log": "docs/phase8/logs/npm-run-test-studio-db.log",
+    "tests": {
+      "passed": 0,
+      "failed": 0,
+      "total": 377
+    }
+  }
+]

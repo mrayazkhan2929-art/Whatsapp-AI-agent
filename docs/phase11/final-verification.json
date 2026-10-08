@@ -1,0 +1,60 @@
+{
+  "verifiedAt": "2026-10-08T10:12:40.219Z",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "final-typecheck.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": "final-lint.log"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": "final-build.log"
+    },
+    {
+      "command": "node scripts/phase11-db.mjs tests/tenant-db/http-isolation.test.ts tests/tenant-db/final-hardening.test.ts",
+      "exitCode": 0,
+      "passed": 93,
+      "failed": 0,
+      "total": 93
+    },
+    {
+      "command": "node scripts/phase11-evidence.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/phase11-environment.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/phase11-files.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/unit/source-safety.test.ts",
+      "exitCode": 0,
+      "passed": 11,
+      "expectedFailures": 0,
+      "log": "final-preservation.log"
+    }
+  ],
+  "liveValidation": false,
+  "localReview": {
+    "running": true,
+    "frontendUrl": "http://127.0.0.1:56618",
+    "mailUrl": "http://127.0.0.1:56617",
+    "loginStatus": 200,
+    "membershipStatus": 200,
+    "role": "owner",
+    "completedSteps": 11,
+    "automaticStopHours": 11.5,
+    "whatsapp": "local fixture",
+    "providers": "local fixtures",
+    "applicationProcessesIntentionallyLeftRunning": true
+  }
+}

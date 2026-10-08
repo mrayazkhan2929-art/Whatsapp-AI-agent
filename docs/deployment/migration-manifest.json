@@ -1,0 +1,130 @@
+[
+  {
+    "file": "001_initial_schema.sql",
+    "sha256": "871db36dbd732d5fafa40d1f890bacb1b092cfcbf9a350fb9ada25bf25f8d18a"
+  },
+  {
+    "file": "002_pgvector.sql",
+    "sha256": "ca73b19e084b4800c6f3b50098969125eee68a18cc6515ae821e2bdf07f1ddea"
+  },
+  {
+    "file": "003_properties_seed.sql",
+    "sha256": "037982d8a9dfceea1fa5280aefcf7b2325813115787013442b0fe60ff124725d"
+  },
+  {
+    "file": "004_team_members_seed.sql",
+    "sha256": "2db99611400f3105963f467b60c86c2d3cb3b30fa2f2218e974230357913d701"
+  },
+  {
+    "file": "005_rls_policies.sql",
+    "sha256": "3c350897aab43e1bc989efad27a32257cb236427ddfdecf8b661cdb0ac06810e"
+  },
+  {
+    "file": "006_vector_functions.sql",
+    "sha256": "829fdfa05d5405010d6fea60fe3aef7b72f14d1cedd7b7adbae10f909ed30c8d"
+  },
+  {
+    "file": "007_nudge_functions.sql",
+    "sha256": "bc4617ba1d1a6d1f0d1ce4b84e23c406f5d232df874034c94ca698f019b23601"
+  },
+  {
+    "file": "008_sentiment_functions.sql",
+    "sha256": "c172aee8e7a4a92084ead19fcd0343d25e67755220407f5b9f3b90fe5616dca7"
+  },
+  {
+    "file": "009_alert_functions.sql",
+    "sha256": "1029e675310e3322f316d28e2cea354a46baddccfb45ff510554f383eaff3493"
+  },
+  {
+    "file": "010_indirect_properties_inventory_gaps.sql",
+    "sha256": "1f58c3d91ff30bcec6b64ddb864f39b102f3933c68926fe1222b7a76f488c543"
+  },
+  {
+    "file": "011_message_deduplication.sql",
+    "sha256": "6105956018b3611361d7a79a7a0de9c799de27ca0ebf771afeb8295a5f80c8fc"
+  },
+  {
+    "file": "011_properties_distress_deal.sql",
+    "sha256": "bcc120547592cb4d81c13154ec14a5387ad8626060c379b063d65ccb0177ae32"
+  },
+  {
+    "file": "012_agent_assignment.sql",
+    "sha256": "ffd49b63cfd7c15797d65f6571081f406a2de0d33293a36710d039427d6eca1d"
+  },
+  {
+    "file": "013_contact_memory_and_cleanup.sql",
+    "sha256": "7ca01ec3d49ef8997c4a09903aa9e5b897d003baef81fa1c1960985389b0381a"
+  },
+  {
+    "file": "014_ai_pipeline_cleanup.sql",
+    "sha256": "410f8fd1703abd2dd16ba97aad38afeea3e4f3457568f054cdcc6ab1262344ba"
+  },
+  {
+    "file": "015_runtime_routing_and_data_cleanup.sql",
+    "sha256": "3c437cc93519cec6b123e995391922aedc4b45c92fd3c2688f345688033a82ba"
+  },
+  {
+    "file": "016_fix_conversations_unique_constraint.sql",
+    "sha256": "35d26232b34f8fdd9aea26e26e65fdd4a2c268e7657da811535365c8d413b4d9"
+  },
+  {
+    "file": "017_tenant_data_api_guard.sql",
+    "sha256": "3f36078a46bc5b0ddbd230d073a53c59cea0e2d59e790b32374b6f13899516b9"
+  },
+  {
+    "file": "018_organization_profiles.sql",
+    "sha256": "c03b2260857efe65005e2079d1b3c0c66d0e85099bbf4266c0941d429278a5f7"
+  },
+  {
+    "file": "019_agent_versions.sql",
+    "sha256": "e015b054d4300c813dd290eb5d72d90cae8851ee13cf317f79ce28f0c24ff44e"
+  },
+  {
+    "file": "020_agent_runtime_links.sql",
+    "sha256": "d3cfcd059981f4365051838dc441b965f600e04dae67e8a1cc0bca2c890c5d04"
+  },
+  {
+    "file": "021_conversation_state.sql",
+    "sha256": "e2ea7fd2a564af7319f90997e8f200df051b0992b4e2e0821e982157cb79be47"
+  },
+  {
+    "file": "022_property_identity_and_media.sql",
+    "sha256": "2a7a603f1f828c5ea35db6e77cdf77e0b46042097f4c076972e0c25d4a9bda4b"
+  },
+  {
+    "file": "023_message_idempotency.sql",
+    "sha256": "061e7ac36a50e8a0cf3e30da82ad446d7888efa1483ea0bf58bb221727cb31e5"
+  },
+  {
+    "file": "024_agent_routing_rules.sql",
+    "sha256": "fa0142b96a1d584545b029723690be0c372566634cfbeb1cb48a327d618f718a"
+  },
+  {
+    "file": "025_handoff_lifecycle.sql",
+    "sha256": "d14649564e4d1b5d0c55ec27501f1bd5bbe93e8742857d7f797a4e04d6f30e88"
+  },
+  {
+    "file": "026_knowledge_documents.sql",
+    "sha256": "8e30aeece2b100e898c6010704dc80e1161a9e23e90136454cb33452c6512d80"
+  },
+  {
+    "file": "027_agent_studio.sql",
+    "sha256": "3e74fe7a3cff8ec0c022f46a448a886b1b6dba9bc19a9745db58fe3ac90a3862"
+  },
+  {
+    "file": "028_ai_observability.sql",
+    "sha256": "e92c04f732a2e28a001afc7e15b00b830d427f65237ea0f6e66ad091e76f1b1c"
+  },
+  {
+    "file": "029_audit_logs.sql",
+    "sha256": "6eae55d916651d6e3a3309e1c367d9f409a5ea1c80b6dafbc597d654fcd15bae"
+  },
+  {
+    "file": "030_device_runtime_leases.sql",
+    "sha256": "afb5c1f13a7f4c39aeb51d1087ced10125c3100d3bc3f15d46e729823603d3f8"
+  },
+  {
+    "file": "031_rls_integrity_hardening.sql",
+    "sha256": "b49e44f9205ecaeb95c278827436ad610c0cdd152ccb12fc7891a91e7e4e921b"
+  }
+]

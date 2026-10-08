@@ -1,0 +1,18 @@
+[
+  "backend/src/api/routes/settings.ts",
+  "backend/src/config/companyData.ts",
+  "backend/src/modules/ai/aiService.ts",
+  "backend/src/modules/ai/handlers/companyHandler.ts",
+  "backend/src/modules/ai/intentDetector.ts",
+  "backend/src/modules/ai/intentRouter.ts",
+  "backend/src/modules/ai/messageBuilder.ts",
+  "backend/src/modules/ai/promptBuilder.ts",
+  "backend/src/modules/ai/router.ts",
+  "backend/src/whatsapp/WhatsAppGateway.ts",
+  "frontend/src/app/api/chat/route.ts",
+  "frontend/src/components/layout/AppSidebar.tsx",
+  "frontend/src/components/layout/AppLayout.tsx",
+  "frontend/src/components/layout/KeyboardShortcuts.tsx",
+  "frontend/src/components/pages/SettingsPage.tsx",
+  "frontend/src/lib/prompts/iereSystemPrompt.ts"
+]

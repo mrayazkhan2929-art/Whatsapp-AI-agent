@@ -1,0 +1,7 @@
+{
+  "command": "node scripts/phase11-db.mjs tests/tenant-db/http-isolation.test.ts tests/tenant-db/final-hardening.test.ts",
+  "exitCode": 0,
+  "passed": 93,
+  "failed": 0,
+  "total": 93
+}

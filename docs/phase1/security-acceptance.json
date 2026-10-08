@@ -1,0 +1,76 @@
+{
+  "phase": 1,
+  "crossTenantReads": 0,
+  "crossTenantWrites": 0,
+  "arbitraryAuthenticationOrganizationFallback": 0,
+  "tenantExpectedFailures": 0,
+  "tenantUnitTests": 35,
+  "databaseHttpTests": 76,
+  "requests": 106,
+  "tenantBSnapshotChecks": 76,
+  "snapshotTables": [
+    "organizations",
+    "users",
+    "agents",
+    "devices",
+    "properties",
+    "contacts",
+    "conversations",
+    "messages",
+    "knowledge_bases",
+    "knowledge_chunks",
+    "team_members",
+    "flows",
+    "flow_steps",
+    "bookings",
+    "nudge_jobs",
+    "handoff_events",
+    "inventory_gaps",
+    "contact_flows",
+    "lead_assignments",
+    "lead_scores",
+    "baileys_sessions",
+    "notifications",
+    "notification_preferences",
+    "contact_memory",
+    "alerts",
+    "sentiment_history"
+  ],
+  "productionMigrationsAdded": 1,
+  "appliedToLiveProject": false,
+  "upgradeDataUnchanged": true,
+  "phase0EvidenceUnchanged": true,
+  "historicalSqlUnchanged": true,
+  "restAudit": {
+    "activeMigration": "017_tenant_data_api_guard.sql",
+    "appliedToLiveProject": false,
+    "authenticatedViewReadCount": 0,
+    "authenticatedViewError": null,
+    "anonymousViewReadCount": 0,
+    "anonymousViewError": null,
+    "anonymousMemoryReadCount": 0,
+    "anonymousMemoryError": "42501",
+    "viewAudit": {
+      "ai_agents": {
+        "rows": 0,
+        "error": null
+      },
+      "whatsapp_devices": {
+        "rows": 0,
+        "error": null
+      },
+      "conversation_flows": {
+        "rows": 0,
+        "error": null
+      },
+      "wa_session_keys": {
+        "rows": 0,
+        "error": null
+      }
+    }
+  },
+  "liveMigrationApplied": false,
+  "inheritedLintErrors": 4,
+  "inheritedLintWarnings": 1,
+  "inheritedLaterPhaseExpectedFailures": 10
+}

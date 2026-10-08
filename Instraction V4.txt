@@ -1,0 +1,2259 @@
+# ENTERPRISE WHATSAPP AI AGENT SAAS  
+## CURRENT REPOSITORY AUDIT, ROOT-CAUSE ANALYSIS & NEXT-GENERATION UPGRADE PLANNING MASTER PROMPT
+
+---
+
+# 1. ROLE
+
+Act as one coordinated, autonomous, world-class enterprise product and software engineering organization.
+
+You collectively possess the expertise of:
+
+- CTO / Principal SaaS Architect
+- Principal AI Systems Architect
+- Staff Software Engineer
+- Principal Full-Stack Engineer
+- WhatsApp Infrastructure Architect
+- `@whiskeysockets/baileys` Platform Engineer
+- Distributed Systems Architect
+- AI Agent / Tool-Calling Architect
+- LLM Orchestration Engineer
+- RAG / Knowledge Systems Architect
+- Real Estate SaaS Architect
+- Real Estate AI Product Architect
+- PostgreSQL Architect
+- Supabase Architect
+- Multi-Tenant SaaS Architect
+- Database Security / RLS Architect
+- Application Security Architect
+- DevOps / Cloud Infrastructure Architect
+- Site Reliability Engineer
+- Queue / BullMQ Infrastructure Architect
+- Observability Engineer
+- QA Automation Architect
+- AI Evaluation Engineer
+- Enterprise UX/UI Product Designer
+- Design System Architect
+- Accessibility Specialist
+- Product Manager
+- Technical Writer
+- Release Engineer
+- CTO-Level Product and Engineering Strategist
+
+Operate as **one engineering organization**, not as separate consultants.
+
+Do not merely provide generic recommendations.
+
+Your responsibility is to deeply understand the existing platform, identify its real implementation problems, design the correct future architecture, and prepare a safe implementation plan that another Codex/AI engineering agent can execute.
+
+---
+
+# 2. FILES I WILL PROVIDE
+
+Analyze all uploaded materials, including but not limited to:
+
+1. `Whatsapp_AI_Agent-main.zip`
+   - This is the CURRENT IMPLEMENTATION.
+   - It contains the actual frontend, backend, Supabase migrations, WhatsApp/Baileys infrastructure, AI pipeline, RAG system, property engine, UI, tests, documentation, screenshots, and deployment configuration.
+
+2. `WA_AI_CHATBOT_IERE_MASTER_PROMPT_v4.md`
+   - Product/architecture blueprint and intended behavior.
+
+3. `IERE_CURSOR_MASTER_PROMPT_v2.md`
+   - Previous implementation/upgrade instructions.
+
+4. `ARCHITECTURE_FIX_SUMMARY.md`
+   - Previous architecture fixes and known AI routing problems.
+
+5. `PRODUCTION_FIX_v5.0_SUMMARY.md`
+   - Previous production fixes and claimed implementation status.
+
+6. `For Whatsapp BluePrint ANalyze.txt`
+   - Additional audit and architecture requirements.
+
+7. All screenshots contained inside the repository ZIP.
+
+8. Any screenshots/images I upload separately in this conversation.
+
+9. Any additional blueprint, migration, audit, architecture, implementation, or QA files contained in the ZIP.
+
+You MUST inspect all relevant materials before reaching architectural conclusions.
+
+---
+
+# 3. SOURCE-OF-TRUTH POLICY
+
+Use the following hierarchy carefully.
+
+## Intended Product Requirements
+
+The uploaded blueprint documents define the intended product, workflows, capabilities, business rules, UX goals, and architectural requirements.
+
+## Actual Implementation
+
+The ZIP repository defines what is actually implemented.
+
+Never assume that something described in a blueprint, summary, README, implementation guide, or completion report actually exists or functions correctly.
+
+Verify it against the source code.
+
+## When Documentation and Code Conflict
+
+If the blueprint says a feature exists but the code does not implement it correctly:
+
+Report:
+
+**Blueprint Requirement → Current Implementation → Gap → Root Cause → Required Upgrade**
+
+Do not silently choose one.
+
+## Completion Reports Are Not Proof
+
+Statements such as:
+
+- "implemented"
+- "production ready"
+- "fixed"
+- "tested"
+- "compiled"
+- "working"
+
+must be independently verified from:
+
+- source code
+- migrations
+- actual execution paths
+- configuration
+- tests
+- build configuration
+- screenshots
+- database access patterns
+- APIs
+- runtime integrations
+
+Do not trust a completion summary merely because it claims success.
+
+---
+
+# 4. ABSOLUTE FIRST RULE — AUDIT BEFORE MODIFYING
+
+DO NOT immediately edit the repository.
+
+DO NOT immediately refactor code.
+
+DO NOT immediately add features.
+
+DO NOT delete existing functionality.
+
+DO NOT redesign the UI before understanding the existing product.
+
+Your first responsibility is:
+
+**UNDERSTAND → TRACE → VERIFY → DIAGNOSE → DESIGN → PLAN**
+
+Only after the audit and upgrade plan have been completed will implementation be authorized.
+
+---
+
+# 5. CURRENT BUSINESS PROBLEMS THAT MUST BE INVESTIGATED
+
+The system currently connects WhatsApp through a QR-code-based Baileys session.
+
+After WhatsApp is connected, the AI generally responds, but important problems remain.
+
+You must identify the exact technical root cause of each problem rather than applying superficial prompt fixes.
+
+---
+
+## PROBLEM A — INCORRECT AI RESPONSES
+
+The WhatsApp AI sometimes gives an incorrect answer or misunderstands the customer's intent.
+
+Investigate the complete path:
+
+```text
+WhatsApp inbound message
+→ Baileys
+→ message normalization
+→ duplicate protection
+→ conversation lookup
+→ tenant/org resolution
+→ contact memory
+→ language detection
+→ intent detection
+→ entity extraction
+→ routing
+→ property search
+→ RAG
+→ business/company information
+→ agent resolution
+→ tool execution
+→ system prompt
+→ LLM
+→ response validation
+→ outbound WhatsApp response
+→ persistence
+```
+
+Determine exactly where incorrect answers can originate.
+
+Do not assume the LLM itself is the only problem.
+
+---
+
+# 6. PROPERTY REQUEST PROBLEM
+
+Sometimes the customer asks for a specific property, project, location, unit type, reference number, budget, or other real-estate requirement, but the AI:
+
+- sends the wrong property;
+- fails to send a property;
+- performs an overly broad search;
+- misunderstands the requested property;
+- returns unrelated inventory;
+- invents property information;
+- fails to preserve previously supplied requirements;
+- sends text instead of the correct property information/media;
+- loses context between consecutive messages.
+
+Investigate this deeply.
+
+The upgraded architecture must prioritize deterministic property retrieval.
+
+For example:
+
+```text
+Customer asks for exact property reference
+        ↓
+Exact reference lookup FIRST
+        ↓
+Verified org-scoped property record
+        ↓
+Availability validation
+        ↓
+Send exact verified data/media
+```
+
+Only if an exact match does not exist should broader property matching be considered.
+
+The system should progressively understand:
+
+- reference number
+- project
+- building
+- community
+- area
+- sale/rent
+- property type
+- bedroom count
+- budget
+- minimum price
+- maximum price
+- size
+- ready/off-plan
+- developer
+- amenities
+- investment objective
+- ROI requirements
+- distress-deal intent
+- previous property already shown
+- rejected properties
+- customer preferences stored in conversation memory
+
+The LLM must never invent a property.
+
+---
+
+# 7. VERIFIED PROPERTY DATA RULE
+
+Property facts must come from verified tenant data.
+
+The AI may assist with:
+
+- natural-language understanding;
+- extracting requirements;
+- explaining verified results;
+- comparing properties;
+- formatting replies;
+- asking intelligent questions.
+
+The AI must NOT independently invent:
+
+- property price
+- availability
+- reference number
+- unit number
+- bedrooms
+- size
+- developer
+- payment plan
+- commission
+- ROI
+- permit information
+- property status
+- media
+- agent
+- discounts
+- legal facts represented as property facts
+
+When structured data exists, structured data is authoritative.
+
+---
+
+# 8. CORE COMMERCIAL PROBLEM — COMPANY INFORMATION IS HARDCODED
+
+The current platform was originally developed around one real-estate company.
+
+Company-specific information and AI behavior may exist in source code, prompt files, constants, handlers, configuration modules, default settings, fallback functions, frontend prompt files, or other hardcoded locations.
+
+This architecture is NOT acceptable for a commercial multi-tenant SaaS.
+
+If I sell the SaaS to:
+
+- Company A
+- Company B
+- Company C
+- Company D
+
+I must NOT:
+
+- edit source code for every customer;
+- change TypeScript files for every company;
+- modify a hardcoded system prompt;
+- create a separate code branch;
+- create a separate repository;
+- deploy a separate application unless deliberate enterprise isolation requires it;
+- manually insert company information into backend source code.
+
+The platform must become a genuine configurable multi-tenant SaaS.
+
+---
+
+# 9. REQUIRED FUTURE MODEL — ONE PLATFORM, MANY COMPANIES
+
+The target architecture should support:
+
+```text
+One SaaS codebase
+        +
+One scalable deployment architecture
+        +
+Multiple organizations/tenants
+        ↓
+Each tenant owns its own:
+        ↓
+WhatsApp connection
+AI Agent
+AI instructions
+company information
+knowledge bases
+property inventory
+team members
+handoff rules
+conversation memory
+contacts
+leads
+settings
+branding
+analytics
+usage
+billing
+```
+
+Adding a new customer should primarily be an onboarding/configuration operation.
+
+It should NOT require code modification or redeployment.
+
+---
+
+# 10. MAJOR REQUIRED UPGRADE — AI STUDIO
+
+Design a production-grade **AI Studio / Agent Studio** inside the SaaS UI.
+
+This is one of the most important objectives of this audit.
+
+A tenant administrator should be able to configure its AI agent from the dashboard without developer assistance.
+
+The AI Studio should be evaluated/designed to support, where appropriate:
+
+### Agent Identity
+
+- Agent name
+- Display name
+- Role
+- Persona
+- Company/brand identity
+- Avatar
+- Description
+- Default language
+- Supported languages
+- Greeting style
+- Tone
+- Formality
+- Response length
+- Emoji preferences
+- Sales style
+- Conversation style
+
+### Agent Instructions
+
+Provide a large editable instruction/system-prompt field comparable to an AI agent configuration interface.
+
+Tenant administrators should be able to define:
+
+- main system instructions;
+- business objectives;
+- conversation rules;
+- sales methodology;
+- prohibited statements;
+- escalation behavior;
+- company-specific policies;
+- lead qualification strategy;
+- property recommendation behavior;
+- objection handling;
+- follow-up rules;
+- appointment behavior;
+- human handoff rules.
+
+These instructions MUST live in tenant-scoped persisted configuration, NOT source code.
+
+### Company Profile
+
+Allow tenant administrators to configure:
+
+- company name
+- short name
+- company description
+- office address
+- map URL
+- website
+- email
+- phone
+- working hours
+- service areas
+- company facts
+- licensing details where applicable
+- social links
+- legal disclaimers
+- approved marketing statements
+
+### Knowledge
+
+Connect one or more tenant-scoped knowledge bases containing:
+
+- PDFs
+- Word documents
+- text
+- FAQs
+- company policies
+- area guides
+- developer information
+- project brochures
+- sales scripts
+- legal/operational knowledge
+- internal approved documentation
+
+### Real Estate Behavior
+
+Configure:
+
+- direct inventory usage
+- partner/indirect inventory
+- fuzzy matching behavior
+- number of properties per response
+- recommendation ranking
+- availability rules
+- distress deals
+- property fallback rules
+- when to ask follow-up questions
+- when to show exact versus alternative matches
+
+### Human Handoff
+
+Configure:
+
+- handoff triggers
+- assigned teams
+- routing priorities
+- area specialist rules
+- budget specialist rules
+- VIP routing
+- round robin
+- office hours
+- after-hours behavior
+- escalation timeout
+- AI pause after handoff
+- AI resume behavior
+
+### Model Configuration
+
+Where safe:
+
+- AI provider
+- AI model
+- temperature
+- token/output limits
+- fallback provider
+- latency preference
+- quality preference
+- cost preference
+
+Do NOT expose unsafe infrastructure secrets directly to ordinary tenant users.
+
+### Agent Tools
+
+Configure which tools the agent is allowed to use:
+
+- property search
+- property lookup
+- property comparison
+- knowledge search
+- contact creation/update
+- booking
+- agent lookup
+- handoff
+- calculator
+- ROI calculator
+- send property
+- send media
+- send brochure
+- map/location
+- lead qualification
+- CRM actions
+
+### AI Testing Playground
+
+Create a sandbox where the tenant can test the agent BEFORE publishing configuration.
+
+The test environment should expose useful debugging information such as:
+
+```text
+User Message
+↓
+Detected Language
+↓
+Detected Intent
+↓
+Extracted Entities
+↓
+Conversation State
+↓
+Tools Selected
+↓
+Property Query
+↓
+Retrieved Properties
+↓
+Knowledge Sources
+↓
+Agent Instructions Version
+↓
+Model Used
+↓
+Final Response
+```
+
+Tenant administrators should be able to understand why the AI responded the way it did.
+
+### Versioning
+
+AI configuration must support:
+
+- Draft
+- Published
+- Version history
+- Changed by
+- Changed at
+- Diff
+- Rollback
+- Test before publish
+- Audit logs
+
+A bad prompt update must be reversible.
+
+---
+
+# 11. CONFIGURATION HIERARCHY
+
+Determine the best future architecture for resolving AI configuration.
+
+Consider a hierarchy similar to:
+
+```text
+Platform Safety Policy
+        ↓
+Product-level agent framework
+        ↓
+Tenant configuration
+        ↓
+Specific AI Agent configuration
+        ↓
+WhatsApp device/channel configuration
+        ↓
+Conversation state
+        ↓
+Contact memory
+        ↓
+Verified property/RAG/tool context
+        ↓
+Current user message
+```
+
+Tenant instructions must not override platform security boundaries.
+
+Design the cleanest production-grade configuration hierarchy.
+
+---
+
+# 12. REMOVE COMPANY-SPECIFIC HARDCODING FROM RUNTIME LOGIC
+
+Search the entire repository for hardcoded company-specific data.
+
+Do not inspect only obvious prompt files.
+
+Search:
+
+```text
+backend/**
+frontend/**
+supabase/**
+scripts/**
+config/**
+migrations/**
+tests/**
+examples/**
+documentation/**
+environment defaults
+```
+
+Look for:
+
+- company names
+- employee names
+- phone numbers
+- email addresses
+- office addresses
+- websites
+- domain names
+- agent routing maps
+- area ownership
+- company descriptions
+- system prompts
+- greetings
+- handoff rules
+- special-case regular expressions
+- replacement strings
+- fallback text
+- hardcoded IDs
+- hardcoded property data
+- hardcoded business rules
+
+Classify each occurrence as:
+
+```text
+KEEP AS PLATFORM DEFAULT
+MOVE TO DATABASE
+MOVE TO TENANT SETTINGS
+MOVE TO AGENT SETTINGS
+MOVE TO TEAM CONFIGURATION
+MOVE TO PROPERTY DATA
+MOVE TO KNOWLEDGE BASE
+MOVE TO ENV/SECRET MANAGER
+DELETE
+```
+
+The goal is NOT blindly removing constants.
+
+The goal is correctly separating:
+
+**platform code** from **tenant business configuration**.
+
+---
+
+# 13. MULTI-TENANT ARCHITECTURE AUDIT
+
+Verify whether the current system is truly multi-tenant.
+
+Do not assume `org_id` automatically means the platform is secure.
+
+Trace organization scope through:
+
+- authentication
+- JWT/session
+- API routes
+- middleware
+- repositories
+- Supabase queries
+- service-role queries
+- RLS
+- background workers
+- BullMQ payloads
+- RAG retrieval
+- embeddings
+- knowledge bases
+- properties
+- contacts
+- conversations
+- messages
+- agents
+- devices
+- Baileys sessions
+- team members
+- bookings
+- analytics
+- nudges
+- handoffs
+- file uploads
+- frontend API routes
+- caching
+- logs
+
+Search specifically for queries missing `org_id`.
+
+Search for service-role operations capable of bypassing RLS.
+
+Identify every realistic cross-tenant leakage path.
+
+---
+
+# 14. WHATSAPP / BAILEYS ARCHITECTURE
+
+The system uses QR-code-based WhatsApp connectivity through `@whiskeysockets/baileys`.
+
+Do not replace it with Meta Cloud API unless explicitly requested.
+
+Audit:
+
+- QR generation
+- pairing flow
+- authentication state
+- DB-backed session state
+- session encryption
+- reconnect
+- logout
+- stale session cleanup
+- disconnect reasons
+- session repair
+- SelfHeal
+- retry strategy
+- message acknowledgement
+- duplicate delivery
+- duplicate processing
+- message ordering
+- outbound reliability
+- media sending
+- image sending
+- brochure/document sending
+- delivery state
+- connection ownership
+- multiple devices
+- multiple tenants
+- horizontal scaling
+- instance affinity
+- distributed locks
+- leader ownership
+- session migration between servers
+- Railway restart behavior
+- graceful shutdown
+
+Determine whether the current Baileys architecture can safely support many tenants on a shared SaaS deployment.
+
+---
+
+# 15. DISTRIBUTED MESSAGE DEDUPLICATION
+
+Inspect the current duplicate-message prevention mechanism.
+
+If any critical deduplication or locking mechanism is process-local/in-memory, determine how it behaves with:
+
+- two backend replicas;
+- server restart;
+- concurrent workers;
+- duplicate WhatsApp events;
+- network retries;
+- Railway horizontal scaling.
+
+Design a durable solution where necessary using appropriate mechanisms such as:
+
+- Redis atomic locks
+- database uniqueness constraints
+- idempotency keys
+- processed-message ledger
+- BullMQ job IDs
+
+Do not rely solely on process memory for distributed correctness.
+
+---
+
+# 16. AI AGENT ARCHITECTURE
+
+Audit whether the existing system should use:
+
+- one large agent;
+- specialized agents;
+- deterministic workflows;
+- tool calling;
+- state machine;
+- graph workflow;
+- intent router;
+- hybrid orchestration.
+
+Recommend the architecture that produces the most reliable commercial system.
+
+Reliability is more important than unnecessary agent complexity.
+
+A likely pattern to evaluate is:
+
+```text
+Deterministic orchestration
+        +
+LLM understanding
+        +
+typed tools
+        +
+verified business data
+        +
+state/memory
+        +
+strict response validation
+```
+
+Do not use an LLM where deterministic business logic is safer.
+
+---
+
+# 17. INTENT ROUTING
+
+Audit the actual current intent routing implementation.
+
+Evaluate intents including:
+
+- greeting
+- property search
+- exact property request
+- project search
+- company information
+- agent information
+- human handoff
+- buying
+- renting
+- investing
+- selling
+- landlord
+- booking/viewing
+- ROI
+- FAQ/knowledge
+- follow-up
+- property comparison
+- brochure/media request
+- location/map request
+- complaint/frustration
+- unsupported query
+
+Determine whether regex/keyword routing alone is sufficiently robust.
+
+Design a hybrid approach where needed using:
+
+```text
+deterministic high-confidence rules
++
+structured LLM classification
++
+typed schema validation
++
+confidence score
++
+safe fallback
+```
+
+---
+
+# 18. PROPERTY SEARCH ARCHITECTURE
+
+Design the safest property search hierarchy.
+
+Example:
+
+```text
+1. Exact property/reference request
+2. Exact project/building match
+3. Exact structured-filter match
+4. Ranked structured alternatives
+5. Approved fuzzy matching
+6. Ask clarification
+7. Honest "no match"
+```
+
+Never skip directly from a failed search to hallucinated inventory.
+
+Every returned property must retain a database identifier/reference so the final response can be traced back to its source record.
+
+---
+
+# 19. PROPERTY MEDIA DELIVERY
+
+Verify whether customers can actually receive:
+
+- cover image
+- gallery
+- video
+- brochure
+- floor plan
+- location/map
+- property URL
+
+when relevant.
+
+Trace storage from:
+
+```text
+property record
+→ media metadata
+→ storage
+→ backend retrieval
+→ WhatsApp media payload
+→ customer
+```
+
+Identify missing implementation versus UI-only representation.
+
+---
+
+# 20. CONVERSATION MEMORY
+
+Audit short-term and long-term conversation memory.
+
+The agent should remember relevant customer context such as:
+
+- buy/rent
+- budget
+- area
+- project
+- bedrooms
+- property type
+- timeline
+- investment purpose
+- nationality/language only when legitimately needed and permitted
+- preferred agent
+- previous properties shown
+- rejected properties
+- appointments
+- handoff state
+- qualification state
+
+Avoid repeating questions when the answer is already known.
+
+Determine:
+
+- memory schema
+- update logic
+- merge behavior
+- conflict resolution
+- expiry
+- summarization
+- token-efficient retrieval
+- tenant isolation
+- consent/privacy considerations
+
+---
+
+# 21. RAG / KNOWLEDGE SYSTEM
+
+Audit:
+
+- ingestion
+- extraction
+- chunking
+- embeddings
+- pgvector
+- BM25
+- hybrid search
+- reranking
+- metadata
+- citations
+- organization isolation
+- document versioning
+- reindexing
+- deletion
+- stale-document handling
+- access policies
+- prompt injection defenses
+- poisoned document defenses
+
+Company knowledge should be manageable from UI.
+
+A customer purchasing the SaaS should be able to train/configure its agent by uploading and managing knowledge without editing application code.
+
+---
+
+# 22. TEAM / AGENT ROUTING
+
+Audit current agent assignment logic.
+
+Remove company-specific routing logic from platform code where appropriate.
+
+Tenant administrators should be able to configure:
+
+- team member
+- role
+- department
+- WhatsApp/contact number
+- active/inactive
+- areas
+- project specialities
+- languages
+- minimum/maximum deal size
+- availability
+- routing priority
+- VIP eligibility
+- round-robin eligibility
+
+The routing engine should read configuration/data rather than employee names hardcoded into source code.
+
+---
+
+# 23. HUMAN HANDOFF
+
+Verify whether handoff is a real state transition or just text saying that a human will contact the customer.
+
+Design the lifecycle:
+
+```text
+AI conversation
+↓
+handoff condition
+↓
+select correct agent/team
+↓
+lock/assign conversation
+↓
+AI pauses
+↓
+human notified
+↓
+human accepts
+↓
+human communicates
+↓
+conversation resolved/released
+↓
+AI optionally resumes
+```
+
+Prevent simultaneous AI and human replies.
+
+Include:
+
+- assignment
+- locking
+- acceptance
+- SLA
+- reassign
+- escalation
+- internal note
+- summary
+- after-hours behavior
+- missed handoff recovery
+
+---
+
+# 24. DATABASE AUDIT
+
+Inspect every Supabase migration in chronological order.
+
+Create the effective current schema.
+
+Identify:
+
+- duplicate migration numbers
+- conflicting migrations
+- obsolete columns
+- missing foreign keys
+- missing indexes
+- invalid assumptions
+- incomplete RLS
+- missing uniqueness constraints
+- unsafe JSONB usage
+- missing audit/version tables
+- missing tenant AI configuration entities
+- migration drift
+
+Design the migrations necessary for the future architecture.
+
+Do NOT blindly rewrite the database.
+
+Preserve working production data.
+
+---
+
+# 25. AI STUDIO DATA MODEL
+
+Evaluate whether the existing `agents`, `organizations.settings`, knowledge-base tables, or other existing entities can be safely extended.
+
+Do not create duplicate entities when a clean extension is preferable.
+
+However, do not force unrelated configuration into one giant JSON field if normalized/versioned structures are required.
+
+Consider entities such as:
+
+```text
+organizations
+organization_profiles
+
+ai_agents
+ai_agent_versions
+ai_agent_configs
+ai_agent_tools
+ai_agent_model_configs
+ai_agent_knowledge_links
+ai_agent_channel_links
+
+knowledge_bases
+knowledge_documents
+knowledge_chunks
+
+team_members
+agent_routing_rules
+
+devices
+baileys_sessions
+
+properties
+property_media
+
+contacts
+contact_memory
+
+conversations
+messages
+
+handoff_events
+
+ai_execution_traces
+ai_evaluations
+audit_logs
+```
+
+Choose the architecture based on the existing schema rather than automatically implementing this exact list.
+
+---
+
+# 26. AI OBSERVABILITY
+
+Add an architecture for understanding AI behavior.
+
+For appropriate privileged users, capture structured execution metadata such as:
+
+- trace ID
+- tenant
+- agent version
+- incoming message
+- classified intent
+- extracted entities
+- memory state
+- selected tool
+- tool parameters
+- tool result
+- property IDs
+- retrieved KB sources
+- AI provider
+- AI model
+- latency
+- token usage
+- estimated cost
+- validation gates
+- retry/fallback
+- final result type
+- handoff decision
+- failure reason
+
+Protect PII and secrets.
+
+This should allow developers and tenant administrators to answer:
+
+**"Why did the AI give this reply?"**
+
+---
+
+# 27. AI QUALITY EVALUATION SYSTEM
+
+Design automated regression tests for conversations.
+
+Create a representative evaluation dataset covering at least:
+
+- greetings
+- property exact lookup
+- area lookup
+- budget lookup
+- bedrooms
+- multiple constraints
+- zero matches
+- fuzzy alternatives
+- company information
+- agent request
+- human handoff
+- returning customer
+- remembered preferences
+- Arabic
+- English
+- mixed Arabic/English
+- malformed requests
+- angry customer
+- prompt injection
+- knowledge query
+- legal/financial uncertainty
+- unavailable property
+- media request
+- booking request
+- duplicate inbound message
+
+Measure:
+
+- intent accuracy
+- property precision
+- hallucination rate
+- wrong-property rate
+- memory accuracy
+- handoff accuracy
+- language consistency
+- response latency
+- tool success
+- duplicate response rate
+
+---
+
+# 28. UX/UI AUDIT
+
+Analyze every relevant screenshot included in the ZIP and every separately provided screenshot.
+
+Do not judge UX only from React files.
+
+Compare:
+
+```text
+Implemented UI
+vs.
+Screenshot
+vs.
+Blueprint
+vs.
+Target commercial SaaS experience
+```
+
+Review:
+
+- information architecture
+- navigation
+- dashboard
+- inbox
+- conversations
+- contacts
+- pipeline
+- properties
+- devices
+- WhatsApp QR connection
+- agents
+- AI Studio
+- knowledge base
+- flows
+- bookings
+- nudges
+- analytics
+- team
+- settings
+- API
+- billing
+- notifications
+- activity logs
+- mobile responsiveness
+- empty states
+- loading states
+- errors
+- accessibility
+- Arabic RTL
+- consistency
+- premium SaaS polish
+
+Do NOT redesign working UI simply for visual novelty.
+
+First identify what should be:
+
+```text
+KEEP
+IMPROVE
+REDESIGN
+MERGE
+REMOVE
+ADD
+```
+
+---
+
+# 29. TENANT ONBOARDING EXPERIENCE
+
+Design the future onboarding flow so a new company can onboard itself without developer intervention.
+
+Evaluate a workflow similar to:
+
+```text
+Create Account
+↓
+Create Organization
+↓
+Company Profile
+↓
+Create AI Agent
+↓
+Configure Instructions
+↓
+Upload Knowledge
+↓
+Import/Add Properties
+↓
+Add Team
+↓
+Configure Routing/Handoff
+↓
+Connect WhatsApp via QR
+↓
+Run AI Test Conversations
+↓
+Resolve Validation Errors
+↓
+Publish Agent
+↓
+Go Live
+```
+
+The system should provide readiness checks before activation.
+
+---
+
+# 30. NO SEPARATE DEPLOYMENT PER CUSTOMER
+
+Architect the default commercial SaaS model around a shared multi-tenant platform.
+
+New tenants should NOT require:
+
+- source-code changes;
+- frontend rebuild;
+- backend rebuild;
+- environment-variable modification;
+- new repository;
+- new hardcoded prompt;
+- separate Railway service;
+- separate Vercel project.
+
+Enterprise dedicated deployments can remain a future optional architecture if business or compliance requirements justify them.
+
+They must not be necessary for normal customers.
+
+---
+
+# 31. SECURITY
+
+Perform a threat-model review.
+
+At minimum evaluate:
+
+- authentication
+- authorization
+- organization scope
+- RLS
+- service-role usage
+- IDOR/BOLA
+- API validation
+- API keys
+- encryption
+- Baileys session credentials
+- secrets
+- file uploads
+- malware
+- prompt injection
+- indirect prompt injection
+- RAG poisoning
+- cross-tenant retrieval
+- SQL injection
+- SSRF
+- rate-limit abuse
+- queue abuse
+- denial of service
+- PII logs
+- conversation privacy
+- audit trails
+- administrative impersonation
+- data deletion
+- data export
+- backup security
+- disaster recovery
+
+Clearly distinguish:
+
+```text
+CRITICAL
+HIGH
+MEDIUM
+LOW
+```
+
+---
+
+# 32. QUEUES / BULLMQ
+
+Audit current BullMQ usage and determine which operations should execute synchronously versus asynchronously.
+
+Evaluate possible queues for:
+
+- inbound processing
+- outbound messages
+- media
+- embeddings
+- document ingestion
+- follow-ups
+- nudges
+- notifications
+- analytics
+- sync jobs
+- cleanup
+- retries
+- dead letters
+
+Audit:
+
+- idempotency
+- job IDs
+- retry policies
+- backoff
+- poison messages
+- per-tenant fairness
+- concurrency
+- graceful shutdown
+- Redis recovery
+- delayed jobs
+- observability
+
+---
+
+# 33. PRODUCTION SCALABILITY
+
+Assess the architecture at:
+
+```text
+10 tenants
+100 tenants
+1,000 tenants
+10,000 concurrent conversations
+multiple WhatsApp numbers per tenant
+millions of historical messages
+large property inventories
+large knowledge bases
+multiple backend replicas
+multiple workers
+```
+
+Identify scaling limits in:
+
+- Baileys
+- PostgreSQL
+- Supabase
+- Redis
+- BullMQ
+- WebSockets
+- realtime subscriptions
+- API
+- RAG
+- embeddings
+- LLM providers
+- frontend
+- storage
+
+Do not prematurely introduce microservices unless justified.
+
+---
+
+# 34. DEPLOYMENT
+
+Audit the existing deployment strategy, including Vercel/Railway/Supabase/Redis configuration where applicable.
+
+Determine whether the platform can use:
+
+```text
+Frontend → shared deployment
+Backend → horizontally scalable service
+Workers → scalable independent worker process
+PostgreSQL/Supabase → tenant-scoped data
+Redis → queues/locks/cache
+Object Storage → tenant-scoped media/documents
+```
+
+Evaluate environment configuration and eliminate customer-specific information from deployment variables where it belongs in tenant configuration instead.
+
+---
+
+# 35. COST ARCHITECTURE
+
+Recommend a cost-efficient architecture for early commercial operation while preserving a clean scaling path.
+
+Analyze:
+
+- AI usage
+- embeddings
+- Redis
+- database
+- storage
+- workers
+- frontend
+- backend
+- logs
+- analytics
+
+Recommend which capabilities can start cheaply and which require production-grade paid infrastructure immediately.
+
+Do not sacrifice tenant security or message correctness simply to save cost.
+
+---
+
+# 36. BUILD AND TEST VERIFICATION
+
+During the AUDIT stage, you may run safe read-only verification commands and builds when appropriate.
+
+Verify:
+
+- package scripts
+- TypeScript compilation
+- frontend build
+- backend build
+- lint
+- existing tests
+- migration ordering
+- imports
+- dead modules
+- duplicate implementations
+- API compatibility
+
+Do not interpret successful compilation as proof of correct architecture.
+
+---
+
+# 37. PHASE 1 — REPOSITORY DISCOVERY
+
+Before providing recommendations:
+
+1. Extract and map the repository.
+2. Identify frontend entry points.
+3. Identify backend entry points.
+4. Identify API routes.
+5. Identify WhatsApp processing pipeline.
+6. Identify AI processing pipeline.
+7. Identify property pipeline.
+8. Identify RAG pipeline.
+9. Identify memory pipeline.
+10. Identify handoff pipeline.
+11. Identify queue architecture.
+12. Identify Supabase schema/migrations.
+13. Identify tenant scoping.
+14. Identify settings/configuration.
+15. Identify hardcoded business logic.
+16. Identify tests.
+17. Identify screenshots.
+18. Identify deployment configuration.
+
+Produce an architecture map.
+
+---
+
+# 38. PHASE 2 — TRACE REAL RUNTIME PATHS
+
+Trace actual runtime behavior from source code.
+
+At minimum trace:
+
+### Scenario A
+Customer: `Hi`
+
+### Scenario B
+Customer: `Show me 2 bedroom apartments in Dubai Marina under AED 2 million`
+
+### Scenario C
+Customer: `Send me property REF-123`
+
+### Scenario D
+Customer: `Do you have another option?`
+
+### Scenario E
+Customer: `What is your office address?`
+
+### Scenario F
+Customer: `Connect me with an agent`
+
+### Scenario G
+Customer sends Arabic property request
+
+### Scenario H
+Returning customer continues previous requirement
+
+For each scenario explain:
+
+```text
+entry point
+→ functions/modules invoked
+→ queries
+→ memory
+→ routing
+→ tools
+→ AI call
+→ validation
+→ WhatsApp send
+→ persistence
+```
+
+Reference concrete file paths and line numbers.
+
+---
+
+# 39. PHASE 3 — ROOT-CAUSE ANALYSIS
+
+For every major issue, provide:
+
+| Field | Required |
+|---|---|
+| Issue | Exact problem |
+| Evidence | File + line |
+| Current Behavior | What happens now |
+| Root Cause | Why |
+| Production Failure | What can go wrong |
+| User Impact | Customer impact |
+| Business Impact | SaaS impact |
+| Security Impact | If relevant |
+| Recommended Fix | Correct solution |
+| Priority | P0/P1/P2/P3 |
+| Dependencies | Required preceding work |
+| Regression Risk | What may break |
+| Verification | How to prove fixed |
+
+Do not provide vague statements such as "improve AI".
+
+---
+
+# 40. PHASE 4 — CURRENT-STATE SCORECARD
+
+Provide evidence-based scores out of 100 for:
+
+- Architecture
+- Multi-tenancy
+- AI agent correctness
+- Property matching
+- Conversation memory
+- RAG
+- WhatsApp reliability
+- Human handoff
+- Database design
+- Security
+- Scalability
+- Observability
+- Testing
+- UX/UI
+- Tenant self-service
+- Production readiness
+
+Explain every score.
+
+---
+
+# 41. PHASE 5 — TARGET ARCHITECTURE
+
+Design the recommended future architecture.
+
+Include:
+
+### Platform Layer
+Authentication, organizations, billing, RBAC, audit.
+
+### Channel Layer
+Baileys devices and message transport.
+
+### Conversation Runtime
+Inbound processing, dedupe, state, routing.
+
+### AI Orchestration
+Intent, extraction, tools, prompts, models, validation.
+
+### Business Tools
+Properties, RAG, agents, booking, CRM/handoff.
+
+### Tenant Configuration
+AI Studio, company profile, rules, versions.
+
+### Data Layer
+PostgreSQL/Supabase, Redis, Storage.
+
+### Worker Layer
+Queues and scheduled operations.
+
+### Observability
+Tracing, metrics, logs, AI evaluations.
+
+Explain data flow end to end.
+
+---
+
+# 42. PHASE 6 — AI STUDIO PRODUCT SPECIFICATION
+
+Provide a complete product specification for the AI Studio.
+
+Include:
+
+- navigation
+- pages
+- tabs
+- components
+- forms
+- validation
+- permissions
+- APIs
+- database tables
+- versioning
+- publish workflow
+- rollback
+- test playground
+- execution debugger
+- knowledge selection
+- tool permissions
+- model configuration
+- human handoff configuration
+- audit history
+- empty/loading/error states
+- mobile behavior
+- Arabic/RTL behavior
+
+Do not provide only a wireframe description.
+
+Connect UX decisions to backend architecture.
+
+---
+
+# 43. PHASE 7 — DATABASE MIGRATION PLAN
+
+Provide a dependency-ordered database migration plan.
+
+For each migration include:
+
+- purpose
+- tables affected
+- columns
+- constraints
+- indexes
+- foreign keys
+- RLS
+- backfill
+- data migration
+- rollback
+- verification
+
+Preserve existing production data.
+
+---
+
+# 44. PHASE 8 — BACKEND IMPLEMENTATION PLAN
+
+Provide the exact backend components requiring:
+
+```text
+KEEP
+MODIFY
+REFACTOR
+REPLACE
+CREATE
+DELETE
+```
+
+For each, explain why.
+
+Include likely areas such as:
+
+- organization settings
+- AI agent service
+- prompt builder
+- company handler
+- agent handler
+- property handler
+- intent detector/router
+- agent resolver
+- property matcher
+- memory
+- handoff
+- knowledge
+- Baileys manager
+- WhatsApp gateway
+- message router
+- queues
+- API routes
+
+Do not assume these paths are correct until verified.
+
+---
+
+# 45. PHASE 9 — FRONTEND IMPLEMENTATION PLAN
+
+Perform the same analysis for the frontend.
+
+Include:
+
+- Settings
+- AI Studio
+- Agents
+- Knowledge Base
+- Devices
+- Properties
+- Inbox
+- Contacts
+- Pipeline
+- Team
+- Analytics
+- Onboarding
+- Test playground
+- AI execution trace UI
+- version history
+- publish workflow
+
+Preserve strong existing components.
+
+Upgrade weak UX/UI rather than indiscriminately rebuilding everything.
+
+---
+
+# 46. PHASE 10 — TEST STRATEGY
+
+Create:
+
+### Unit Tests
+Business logic and deterministic services.
+
+### Integration Tests
+Database, API, queues, RAG, WhatsApp abstractions.
+
+### Tenant Isolation Tests
+Attempt cross-tenant access intentionally.
+
+### Conversation Regression Tests
+Realistic WhatsApp exchanges.
+
+### Property Accuracy Tests
+Ensure only verified inventory is returned.
+
+### AI Evaluation Tests
+Intent, extraction, tool selection, response quality.
+
+### Baileys Reliability Tests
+Disconnect/reconnect/duplicate/session recovery.
+
+### E2E Tests
+Onboarding through live agent operation.
+
+### UI Tests
+Desktop/mobile/RTL/accessibility.
+
+Define pass/fail gates.
+
+---
+
+# 47. PHASE 11 — IMPLEMENTATION ROADMAP
+
+Create dependency-ordered phases.
+
+Example structure only:
+
+```text
+PHASE 0 — Baseline + safety tests
+PHASE 1 — Tenant configuration foundation
+PHASE 2 — AI Agent configuration/versioning
+PHASE 3 — Runtime prompt/config resolver
+PHASE 4 — Property/tool correctness
+PHASE 5 — AI Studio frontend
+PHASE 6 — Knowledge integration
+PHASE 7 — Human handoff
+PHASE 8 — Baileys distributed reliability
+PHASE 9 — Observability + evaluation
+PHASE 10 — UX/UI refinement
+PHASE 11 — Production validation
+```
+
+Determine the actual phases after inspecting the repository.
+
+Each phase must contain:
+
+- objective
+- files
+- migrations
+- APIs
+- UI
+- tests
+- dependencies
+- acceptance criteria
+- rollback plan
+
+---
+
+# 48. REQUIRED PRIORITY SYSTEM
+
+Use:
+
+### P0 — Critical Blocker
+Security breach, data leakage, incorrect property data, message corruption, broken tenant isolation, severe WhatsApp reliability issue.
+
+### P1 — Production Required
+Necessary for commercial SaaS operation.
+
+### P2 — Important
+Improves reliability, usability, performance, operations.
+
+### P3 — Enhancement
+Useful but not required before commercial launch.
+
+---
+
+# 49. DO NOT DESTROY WORKING FUNCTIONALITY
+
+The objective is to evolve the current system.
+
+Do NOT unnecessarily remove existing useful features such as:
+
+- dashboard
+- shared inbox
+- contacts
+- pipeline
+- properties
+- direct/indirect inventory
+- agents
+- bookings
+- RAG
+- analytics
+- nudges
+- WhatsApp QR connection
+- flows
+- knowledge base
+- handoff
+- lead scoring
+- existing UI components
+
+If something should be replaced, prove why.
+
+---
+
+# 50. ARCHITECTURAL PRINCIPLE
+
+Prefer:
+
+```text
+configuration over hardcoding
+verified tools over hallucination
+deterministic workflows over uncontrolled AI
+shared multi-tenant infrastructure over per-customer deployments
+typed contracts over free-form data
+versioned configuration over invisible prompt edits
+observable execution over black-box AI
+incremental migration over unnecessary rewrites
+```
+
+---
+
+# 51. CRITICAL ACCEPTANCE CRITERIA
+
+The future architecture must satisfy all of the following:
+
+1. A new company can register/onboard without developer code changes.
+
+2. Each company can configure its own AI agent from the UI.
+
+3. Each company can enter its own company information from the UI.
+
+4. Each company can create/edit agent instructions from the UI.
+
+5. Each company can upload its own knowledge.
+
+6. Each company can manage its own properties.
+
+7. Each company can manage its own team.
+
+8. Each company can connect its own WhatsApp account through QR.
+
+9. Each company can configure handoff rules.
+
+10. AI configuration is tenant isolated.
+
+11. Knowledge retrieval is tenant isolated.
+
+12. Property retrieval is tenant isolated.
+
+13. WhatsApp sessions are tenant isolated.
+
+14. Conversations and contacts are tenant isolated.
+
+15. No normal tenant requires a separate deployment.
+
+16. AI never invents properties.
+
+17. Exact property requests prioritize exact verified matches.
+
+18. AI remembers relevant conversation requirements.
+
+19. AI and humans cannot reply simultaneously after handoff.
+
+20. Agent configuration supports versioning and rollback.
+
+21. Tenant administrators can test AI changes before publication.
+
+22. Developers can trace why an AI response happened.
+
+23. Existing useful functionality is preserved.
+
+24. The final system can scale beyond one real-estate company.
+
+---
+
+# 52. FIRST RESPONSE — DO NOT IMPLEMENT CODE
+
+Your FIRST response after completing the analysis must contain ONLY the audit, architecture recommendations, and upgrade plan.
+
+Do NOT change files yet.
+
+Do NOT implement migrations yet.
+
+Do NOT rewrite the UI yet.
+
+Do NOT create production code yet.
+
+Provide the following sections:
+
+## A. Executive Summary
+
+What the platform currently is and the biggest architectural conclusions.
+
+## B. Current Repository Architecture
+
+Actual frontend/backend/database/WhatsApp/AI/RAG architecture discovered from code.
+
+## C. Blueprint vs Implementation Matrix
+
+What the documents require versus what is actually implemented.
+
+## D. Runtime Message Flow
+
+Exact inbound → AI → outbound execution path.
+
+## E. Root Causes of Incorrect AI Responses
+
+Evidence-based.
+
+## F. Root Causes of Incorrect/Missing Property Replies
+
+Evidence-based.
+
+## G. Hardcoded Company / Agent / Prompt Audit
+
+Every important hardcoded business dependency.
+
+## H. Multi-Tenant SaaS Audit
+
+Whether one deployment can actually serve many companies safely.
+
+## I. AI Studio Gap Analysis
+
+What exists today versus what is required.
+
+## J. WhatsApp/Baileys Reliability Audit
+
+QR/session/reconnect/scaling/dedupe/media.
+
+## K. Database + RLS Audit
+
+Including tenant-isolation risks.
+
+## L. RAG / Knowledge Audit
+
+Including tenant isolation and hallucination control.
+
+## M. Human Handoff Audit
+
+Actual implementation versus claimed behavior.
+
+## N. Security Audit
+
+Critical/high/medium/low.
+
+## O. UX/UI + Screenshot Audit
+
+Keep/improve/redesign/add/remove.
+
+## P. Production Readiness Scorecard
+
+Evidence-based scores.
+
+## Q. Target Architecture
+
+Complete next-generation design.
+
+## R. AI Studio Specification
+
+Frontend + APIs + DB + runtime configuration.
+
+## S. Database Migration Plan
+
+Dependency ordered.
+
+## T. Backend Upgrade Plan
+
+File/module-level.
+
+## U. Frontend UX/UI Upgrade Plan
+
+File/component/page-level.
+
+## V. Testing and AI Evaluation Plan
+
+Including tenant isolation and property accuracy.
+
+## W. Deployment and Scaling Plan
+
+One SaaS deployment, many companies.
+
+## X. Prioritized Implementation Roadmap
+
+P0 → P3 and dependency ordered.
+
+## Y. Risk and Rollback Plan
+
+Prevent production regression.
+
+## Z. MASTER CODEX IMPLEMENTATION PROMPT
+
+After the complete audit, create a second, self-contained **Master Codex Implementation Prompt** based on what you actually discovered.
+
+That implementation prompt must be sufficiently detailed that I can give it to Codex together with the repository and have Codex perform the approved upgrade phase-by-phase.
+
+---
+
+# 53. REQUIREMENTS FOR THE MASTER CODEX IMPLEMENTATION PROMPT
+
+The generated implementation prompt must:
+
+- use the actual discovered file paths;
+- use the actual current schema;
+- reference actual runtime services;
+- avoid imaginary modules;
+- specify migration order;
+- specify implementation order;
+- specify exact responsibilities;
+- define acceptance tests;
+- define build/test commands;
+- define tenant-isolation tests;
+- define AI regression tests;
+- define rollback points;
+- protect existing features;
+- prohibit fake/mock production data;
+- prohibit hardcoded tenant information;
+- prohibit unverified property generation;
+- require production-grade UX/UI;
+- require documentation updates;
+- require final deployment verification.
+
+Do not generate a generic implementation prompt.
+
+It must be based on this exact repository.
+
+---
+
+# 54. EVIDENCE STANDARD
+
+Every significant finding must reference evidence wherever possible.
+
+Use:
+
+```text
+File:
+Function/Class:
+Approximate line(s):
+Observed behavior:
+Why it matters:
+```
+
+If you cannot verify something, label it:
+
+**UNVERIFIED**
+
+Do not convert assumptions into facts.
+
+---
+
+# 55. NO FALSE CLAIMS
+
+Never say:
+
+- "production ready"
+- "fully secure"
+- "fully scalable"
+- "fixed"
+- "implemented successfully"
+- "works correctly"
+
+unless the evidence and tests justify it.
+
+Successful TypeScript compilation alone does not prove production readiness.
+
+---
+
+# 56. DECISION QUALITY
+
+For every major recommendation, answer:
+
+1. What is wrong today?
+2. Why does it happen?
+3. What is the correct design?
+4. Why is that design better?
+5. What existing functionality can be reused?
+6. What must change?
+7. What migration is required?
+8. What can fail during the upgrade?
+9. How will we test it?
+10. How will we roll it back?
+
+---
+
+# 57. FINAL OBJECTIVE
+
+Transform the existing platform from a company-specific WhatsApp AI implementation into a:
+
+**secure, configurable, multi-tenant, production-grade WhatsApp AI Agent SaaS platform for real-estate businesses**
+
+where:
+
+- one shared platform can serve many companies;
+- each company creates and manages its own AI agent;
+- each company controls its instructions through the UI;
+- each company controls its company profile through the UI;
+- each company manages its own knowledge;
+- each company manages its own properties;
+- each company manages its own agents/team;
+- each company connects its own WhatsApp session;
+- the AI retrieves verified data instead of inventing facts;
+- property recommendations are accurate and traceable;
+- conversation memory works reliably;
+- human handoff is real and controlled;
+- every organization is strongly isolated;
+- AI behavior is testable, versioned, auditable, and reversible;
+- adding a customer does not require editing source code;
+- adding a customer does not require creating a separate deployment;
+- UX/UI is polished enough for a serious commercial SaaS product.
+
+---
+
+# 58. STOP CONDITION
+
+Complete the full audit and planning work first.
+
+At the end, clearly state:
+
+**AUDIT AND UPGRADE PLAN COMPLETE — NO PRODUCTION CODE MODIFIED**
+
+Then provide the generated **Master Codex Implementation Prompt**.
+
+Do not begin modifying the repository until I explicitly authorize implementation.

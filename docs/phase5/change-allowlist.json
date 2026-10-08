@@ -1,0 +1,16 @@
+[
+  "backend/src/whatsapp/MessageRouter.ts",
+  "backend/src/whatsapp/WhatsAppGateway.ts",
+  "backend/src/whatsapp/BaileysManager.ts",
+  "backend/src/lib/messageDedup.ts",
+  "tests/integration/message-router.test.ts",
+  "tests/tenant-db/agent-versions.test.ts",
+  "tests/tenant-db/property-memory.test.ts",
+  "tests/unit/source-safety.test.ts",
+  "package.json",
+  "frontend/next-env.d.ts",
+  "frontend/src/components/inbox/MessageThread.tsx",
+  "frontend/src/app/api/v1/messages/[id]/route.ts",
+  "frontend/src/components/inbox/ConversationList.tsx",
+  "frontend/src/app/api/conversations/route.ts"
+]

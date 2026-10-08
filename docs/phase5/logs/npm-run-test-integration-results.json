@@ -1,0 +1,73 @@
+{
+  "passed": 15,
+  "expectedFailures": 1,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "real MessageRouter persists text, invokes AI and sends through its gateway abstraction",
+      "outcome": "PASS"
+    },
+    {
+      "name": "image inbound is persisted without generating a text reply",
+      "outcome": "PASS"
+    },
+    {
+      "name": "history and conversation writes stay scoped when malformed foreign children exist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 inbound persistence carries original WhatsApp ID and tenant/device context",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate twice executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate 10 concurrently executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate after new router instance executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate two replicas executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "same text with distinct IDs executes twice",
+      "outcome": "PASS"
+    },
+    {
+      "name": "missing ID and own echoes never execute or persist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "transport failure saves one uncertain response and does not send a second fallback",
+      "outcome": "PASS"
+    },
+    {
+      "name": "persistence failures fail closed before business execution",
+      "outcome": "PASS"
+    },
+    {
+      "name": "[XFAIL] P6 handoff flag must persist a real handoff lifecycle event",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected [] to have a length of 1 but got +0"
+    },
+    {
+      "name": "property handler preserves tenant scope, bedrooms and budget at the matcher boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 apartment criterion excludes same-area same-budget villas",
+      "outcome": "PASS"
+    },
+    {
+      "name": "empty verified inventory produces no fabricated properties",
+      "outcome": "PASS"
+    }
+  ]
+}

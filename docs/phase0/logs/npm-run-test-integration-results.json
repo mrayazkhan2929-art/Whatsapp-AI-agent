@@ -1,0 +1,54 @@
+{
+  "passed": 4,
+  "expectedFailures": 6,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "property handler preserves tenant scope, bedrooms and budget at the matcher boundary",
+      "outcome": "PASS"
+    },
+    {
+      "name": "[XFAIL] P4 apartment criterion must exclude same-area same-budget villas",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected [ 'REF-A', 'REF-D' ] to deeply equal [ 'REF-A' ]"
+    },
+    {
+      "name": "empty verified inventory produces no fabricated properties",
+      "outcome": "PASS"
+    },
+    {
+      "name": "real MessageRouter persists text, invokes AI and sends through its gateway abstraction",
+      "outcome": "PASS"
+    },
+    {
+      "name": "image inbound is persisted without generating a text reply",
+      "outcome": "PASS"
+    },
+    {
+      "name": "[XFAIL] P5 inbound persistence must carry the original WhatsApp ID",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected undefined to be 'fixture-wa-123' // Object.is equality"
+    },
+    {
+      "name": "[XFAIL] P5 duplicate inbound twice must execute and send once",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { executions: 2, sends: 2 } to deeply equal { executions: 1, sends: 1 }"
+    },
+    {
+      "name": "[XFAIL] P5 duplicate inbound 10 concurrently must execute and send once",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { executions: 10, sends: 10 } to deeply equal { executions: 1, sends: 1 }"
+    },
+    {
+      "name": "[XFAIL] P5 duplicate inbound after new router instance must execute and send once",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected { executions: 2, sends: 2 } to deeply equal { executions: 1, sends: 1 }"
+    },
+    {
+      "name": "[XFAIL] P6 handoff flag must persist a real handoff lifecycle event",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected [] to have a length of 1 but got +0"
+    }
+  ]
+}

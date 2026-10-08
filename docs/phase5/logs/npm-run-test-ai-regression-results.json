@@ -1,0 +1,93 @@
+{
+  "passed": 20,
+  "expectedFailures": 1,
+  "failed": 0,
+  "moduleErrors": [],
+  "cases": [
+    {
+      "name": "real MessageRouter persists text, invokes AI and sends through its gateway abstraction",
+      "outcome": "PASS"
+    },
+    {
+      "name": "image inbound is persisted without generating a text reply",
+      "outcome": "PASS"
+    },
+    {
+      "name": "history and conversation writes stay scoped when malformed foreign children exist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 inbound persistence carries original WhatsApp ID and tenant/device context",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate twice executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate 10 concurrently executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate after new router instance executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P5 duplicate two replicas executes and sends once",
+      "outcome": "PASS"
+    },
+    {
+      "name": "same text with distinct IDs executes twice",
+      "outcome": "PASS"
+    },
+    {
+      "name": "missing ID and own echoes never execute or persist",
+      "outcome": "PASS"
+    },
+    {
+      "name": "transport failure saves one uncertain response and does not send a second fallback",
+      "outcome": "PASS"
+    },
+    {
+      "name": "persistence failures fail closed before business execution",
+      "outcome": "PASS"
+    },
+    {
+      "name": "[XFAIL] P6 handoff flag must persist a real handoff lifecycle event",
+      "outcome": "XFAIL",
+      "expectedFailure": "expected [] to have a length of 1 but got +0"
+    },
+    {
+      "name": "Hi enters the existing general AI path",
+      "outcome": "PASS"
+    },
+    {
+      "name": "office address uses the real company handler without property search",
+      "outcome": "PASS"
+    },
+    {
+      "name": "2BR Dubai Marina under AED 2M forwards current structured criteria",
+      "outcome": "PASS"
+    },
+    {
+      "name": "Connect me with an agent returns the existing handoff flag",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 exact REF-123 request reaches an exact lookup before area clarification",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 another option stays in the property lane with existing criteria",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P4 Arabic property request extracts area, bedrooms, budget and transaction",
+      "outcome": "PASS"
+    },
+    {
+      "name": "P2 company facts differ between independently configured tenants",
+      "outcome": "PASS"
+    }
+  ]
+}

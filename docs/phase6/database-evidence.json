@@ -1,0 +1,910 @@
+{
+  "localStackDirectory": "F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\test-results\\phase6-db-1791375634076",
+  "appliedToLiveProject": false,
+  "distribution": {
+    "distribution": "self-hosted/v0.8.2",
+    "bootstrapBase": "https://raw.githubusercontent.com/supabase/supabase/self-hosted/v0.8.2/docker/volumes/db/",
+    "images": {
+      "db": "supabase/postgres:17.6.1.136@sha256:f371b5f3f2ac0a05703f33d6e6134515fb2498cab708fb948a0aeb7481467c00",
+      "auth": "supabase/gotrue:v2.196.0@sha256:c0c25187a6b835e65a6f6e6c6b39d090e832d40e6de5186f2c038e0411944232",
+      "rest": "postgrest/postgrest:v14.17@sha256:c9dc201e555f5d8e37e7f39cdd4df0229774996e213bfd7de8d10ac609030f2c"
+    },
+    "loopbackOnly": true
+  },
+  "migrations": {
+    "applied": [
+      "001_initial_schema.sql",
+      "002_pgvector.sql",
+      "003_properties_seed.sql",
+      "004_team_members_seed.sql",
+      "005_rls_policies.sql",
+      "006_vector_functions.sql",
+      "007_nudge_functions.sql",
+      "008_sentiment_functions.sql",
+      "009_alert_functions.sql",
+      "010_indirect_properties_inventory_gaps.sql",
+      "011_message_deduplication.sql",
+      "011_properties_distress_deal.sql",
+      "012_agent_assignment.sql",
+      "013_contact_memory_and_cleanup.sql",
+      "014_ai_pipeline_cleanup.sql",
+      "015_runtime_routing_and_data_cleanup.sql",
+      "016_fix_conversations_unique_constraint.sql",
+      "017_tenant_data_api_guard.sql",
+      "018_organization_profiles.sql",
+      "019_agent_versions.sql",
+      "020_agent_runtime_links.sql",
+      "021_conversation_state.sql",
+      "022_property_identity_and_media.sql",
+      "023_message_idempotency.sql",
+      "024_agent_routing_rules.sql",
+      "025_handoff_lifecycle.sql"
+    ],
+    "productionMigrationsAdded": 2,
+    "appliedToLiveProject": false
+  },
+  "previousSecurityUpgrade": {
+    "migration": "017_tenant_data_api_guard.sql",
+    "populatedTables": [
+      "agents",
+      "alert_templates",
+      "alerts",
+      "baileys_sessions",
+      "bookings",
+      "contact_flows",
+      "contact_memory",
+      "contacts",
+      "conversations",
+      "devices",
+      "flow_steps",
+      "flows",
+      "handoff_events",
+      "inventory_gaps",
+      "knowledge_bases",
+      "knowledge_chunks",
+      "lead_assignments",
+      "lead_scores",
+      "message_locks",
+      "message_replies",
+      "messages",
+      "notification_preferences",
+      "notification_rules",
+      "notifications",
+      "nudge_jobs",
+      "organizations",
+      "properties",
+      "sentiment_history",
+      "team_members",
+      "users"
+    ],
+    "dataUnchanged": true,
+    "before": {
+      "agents": {
+        "count": 1,
+        "sha256": "6c0f29317ee9fe8e73e9d8c43c5f2e83d45f9af9993c38c1fef6ac98a50d5563"
+      },
+      "alert_templates": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "alerts": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "baileys_sessions": {
+        "count": 1,
+        "sha256": "fda0cd688f55a1f3f40e6698b982f576abcc8f8091b361708a58b2c94c81b890"
+      },
+      "bookings": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "contact_flows": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "contact_memory": {
+        "count": 1,
+        "sha256": "a90f8ee149e4adb5df57d75068a91ff94db7a894e4941baec584da235fcd0886"
+      },
+      "contacts": {
+        "count": 1,
+        "sha256": "fb2cdd2c3364f065d6cb4ebce1e1537f1c81bb677dbf25480ab0d769bbee7d99"
+      },
+      "conversations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "devices": {
+        "count": 1,
+        "sha256": "e32148c530f2da5daac6b208a343d599de52ebde8480fa557353412b47692190"
+      },
+      "flow_steps": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "flows": {
+        "count": 1,
+        "sha256": "e811860fa2068531605e18a321adb918eaf168fc1ec5d3659ae7bf5a1a969295"
+      },
+      "handoff_events": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "inventory_gaps": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_bases": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_chunks": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "lead_assignments": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "lead_scores": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "message_locks": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "message_replies": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "messages": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notification_preferences": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notification_rules": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notifications": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "nudge_jobs": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "organizations": {
+        "count": 1,
+        "sha256": "cd202cab8b121a9be2fb6cedab7189acc753b679f1a85e8b72d6c90391b429db"
+      },
+      "properties": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "sentiment_history": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "team_members": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "users": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "after": {
+      "agents": {
+        "count": 1,
+        "sha256": "6c0f29317ee9fe8e73e9d8c43c5f2e83d45f9af9993c38c1fef6ac98a50d5563"
+      },
+      "alert_templates": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "alerts": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "baileys_sessions": {
+        "count": 1,
+        "sha256": "fda0cd688f55a1f3f40e6698b982f576abcc8f8091b361708a58b2c94c81b890"
+      },
+      "bookings": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "contact_flows": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "contact_memory": {
+        "count": 1,
+        "sha256": "a90f8ee149e4adb5df57d75068a91ff94db7a894e4941baec584da235fcd0886"
+      },
+      "contacts": {
+        "count": 1,
+        "sha256": "fb2cdd2c3364f065d6cb4ebce1e1537f1c81bb677dbf25480ab0d769bbee7d99"
+      },
+      "conversations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "devices": {
+        "count": 1,
+        "sha256": "e32148c530f2da5daac6b208a343d599de52ebde8480fa557353412b47692190"
+      },
+      "flow_steps": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "flows": {
+        "count": 1,
+        "sha256": "e811860fa2068531605e18a321adb918eaf168fc1ec5d3659ae7bf5a1a969295"
+      },
+      "handoff_events": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "inventory_gaps": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_bases": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_chunks": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "lead_assignments": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "lead_scores": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "message_locks": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "message_replies": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "messages": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notification_preferences": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notification_rules": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notifications": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "nudge_jobs": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "organizations": {
+        "count": 1,
+        "sha256": "cd202cab8b121a9be2fb6cedab7189acc753b679f1a85e8b72d6c90391b429db"
+      },
+      "properties": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "sentiment_history": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "team_members": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "users": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    }
+  },
+  "previousProfileUpgrade": {
+    "migration": "018_organization_profiles.sql",
+    "existingDataUnchanged": true,
+    "noUnverifiedBackfill": true,
+    "before": {
+      "agents": {
+        "count": 1,
+        "sha256": "6c0f29317ee9fe8e73e9d8c43c5f2e83d45f9af9993c38c1fef6ac98a50d5563"
+      },
+      "alert_templates": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "alerts": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "baileys_sessions": {
+        "count": 1,
+        "sha256": "fda0cd688f55a1f3f40e6698b982f576abcc8f8091b361708a58b2c94c81b890"
+      },
+      "bookings": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "contact_flows": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "contact_memory": {
+        "count": 1,
+        "sha256": "a90f8ee149e4adb5df57d75068a91ff94db7a894e4941baec584da235fcd0886"
+      },
+      "contacts": {
+        "count": 1,
+        "sha256": "fb2cdd2c3364f065d6cb4ebce1e1537f1c81bb677dbf25480ab0d769bbee7d99"
+      },
+      "conversations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "devices": {
+        "count": 1,
+        "sha256": "e32148c530f2da5daac6b208a343d599de52ebde8480fa557353412b47692190"
+      },
+      "flow_steps": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "flows": {
+        "count": 1,
+        "sha256": "e811860fa2068531605e18a321adb918eaf168fc1ec5d3659ae7bf5a1a969295"
+      },
+      "handoff_events": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "inventory_gaps": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_bases": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_chunks": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "lead_assignments": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "lead_scores": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "message_locks": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "message_replies": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "messages": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notification_preferences": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notification_rules": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notifications": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "nudge_jobs": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "organizations": {
+        "count": 1,
+        "sha256": "cd202cab8b121a9be2fb6cedab7189acc753b679f1a85e8b72d6c90391b429db"
+      },
+      "properties": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "sentiment_history": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "team_members": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "users": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "after": {
+      "agents": {
+        "count": 1,
+        "sha256": "6c0f29317ee9fe8e73e9d8c43c5f2e83d45f9af9993c38c1fef6ac98a50d5563"
+      },
+      "alert_templates": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "alerts": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "baileys_sessions": {
+        "count": 1,
+        "sha256": "fda0cd688f55a1f3f40e6698b982f576abcc8f8091b361708a58b2c94c81b890"
+      },
+      "bookings": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "contact_flows": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "contact_memory": {
+        "count": 1,
+        "sha256": "a90f8ee149e4adb5df57d75068a91ff94db7a894e4941baec584da235fcd0886"
+      },
+      "contacts": {
+        "count": 1,
+        "sha256": "fb2cdd2c3364f065d6cb4ebce1e1537f1c81bb677dbf25480ab0d769bbee7d99"
+      },
+      "conversations": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "devices": {
+        "count": 1,
+        "sha256": "e32148c530f2da5daac6b208a343d599de52ebde8480fa557353412b47692190"
+      },
+      "flow_steps": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "flows": {
+        "count": 1,
+        "sha256": "e811860fa2068531605e18a321adb918eaf168fc1ec5d3659ae7bf5a1a969295"
+      },
+      "handoff_events": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "inventory_gaps": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_bases": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "knowledge_chunks": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "lead_assignments": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "lead_scores": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "message_locks": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "message_replies": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "messages": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notification_preferences": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notification_rules": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notifications": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "nudge_jobs": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "organization_profiles": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "organizations": {
+        "count": 1,
+        "sha256": "cd202cab8b121a9be2fb6cedab7189acc753b679f1a85e8b72d6c90391b429db"
+      },
+      "properties": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "sentiment_history": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "team_members": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "users": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    }
+  },
+  "previousAgentUpgrade": {
+    "legacyColumnsPreserved": true,
+    "everyExistingAgentBackfilled": true,
+    "existingAgents": 3,
+    "appliedToLiveProject": false
+  },
+  "previousChannelUpgrade": {
+    "ambiguousOrganizationLinks": 0,
+    "singleAgentOrganizationLinks": 1,
+    "arbitraryFallback": false
+  },
+  "stateUpgrade": {
+    "legacyMemoryPreserved": true,
+    "statesBeforeLazyBackfill": 0,
+    "appliedToLiveProject": false
+  },
+  "propertyUpgrade": {
+    "legacyPropertiesPreserved": true,
+    "ambiguousAliasesRetained": true,
+    "audit": "Property identity audit: 1 ambiguous aliases; retained for manual reconciliation",
+    "backfilledMedia": [
+      {
+        "media_type": "image",
+        "url": "https://cdn.example.invalid/legacy.jpg"
+      }
+    ],
+    "appliedToLiveProject": false
+  },
+  "messageUpgrade": {
+    "existingMessagesPreserved": true,
+    "historicalDuplicateIDsRetained": true,
+    "noHistoricalIDsInvented": true,
+    "receipts": 1,
+    "audit": "Message identity audit: 1 ambiguous historical identities retained without device inference",
+    "appliedToLiveProject": false
+  },
+  "handoffUpgrade": {
+    "businessColumnsPreserved": true,
+    "teamPreserved": true,
+    "legacyHumanState": "HUMAN_ACTIVE",
+    "legacyCompatibilityHandledBy": "human",
+    "cutoverEvents": 1,
+    "updatedAtMayReflectCutover": true,
+    "appliedToLiveProject": false
+  },
+  "tenantHttp": {
+    "requests": 106,
+    "tenantBSnapshotChecks": 76,
+    "snapshotTables": [
+      "organizations",
+      "users",
+      "agents",
+      "devices",
+      "properties",
+      "contacts",
+      "conversations",
+      "messages",
+      "knowledge_bases",
+      "knowledge_chunks",
+      "team_members",
+      "flows",
+      "flow_steps",
+      "bookings",
+      "nudge_jobs",
+      "handoff_events",
+      "inventory_gaps",
+      "contact_flows",
+      "lead_assignments",
+      "lead_scores",
+      "baileys_sessions",
+      "notifications",
+      "notification_preferences",
+      "contact_memory",
+      "alerts",
+      "sentiment_history"
+    ],
+    "productionMigrationsAdded": 1,
+    "appliedToLiveProject": false
+  },
+  "companyHttp": {
+    "requests": 69,
+    "tenantBSnapshotChecks": 41,
+    "snapshotTables": [
+      "organization_profiles",
+      "users",
+      "organizations",
+      "contacts",
+      "conversations",
+      "messages"
+    ],
+    "browserErrors": [],
+    "providerCalls": 0,
+    "whatsAppCalls": 0,
+    "externalBackendRequests": 0,
+    "frontendProviderCredentials": "removed by harness",
+    "appliedToLiveProject": false
+  },
+  "agentHttp": {
+    "requests": 180,
+    "tenantBSnapshotChecks": 44,
+    "snapshotTables": [
+      "organizations",
+      "users",
+      "agents",
+      "agent_versions",
+      "agent_drafts",
+      "agent_config_events",
+      "agent_version_tools",
+      "agent_version_knowledge_bases",
+      "agent_channel_links",
+      "devices",
+      "knowledge_bases",
+      "flows",
+      "contacts",
+      "conversations",
+      "messages"
+    ],
+    "externalRequests": 0,
+    "browserErrors": [],
+    "providerAndGateway": "stubbed in backend; frontend provider credentials removed",
+    "appliedToLiveProject": false
+  },
+  "propertyHttp": {
+    "requests": 140,
+    "tenantBSnapshotChecks": 52,
+    "snapshotTables": [
+      "organizations",
+      "users",
+      "properties",
+      "property_media",
+      "contacts",
+      "contact_memory",
+      "conversations",
+      "conversation_states",
+      "messages",
+      "inventory_gaps",
+      "agents",
+      "agent_versions",
+      "agent_drafts",
+      "agent_config_events",
+      "agent_channel_links"
+    ],
+    "exactReferenceAssertions": 53,
+    "externalRequests": 0,
+    "browserErrors": [],
+    "providerAndWhatsApp": "stubbed; provider configured with a local dummy key and no calls expected",
+    "appliedToLiveProject": false
+  },
+  "messageHttp": {
+    "tenantBSnapshotChecks": 28,
+    "snapshotTables": [
+      "organizations",
+      "users",
+      "devices",
+      "contacts",
+      "contact_memory",
+      "conversations",
+      "conversation_states",
+      "messages",
+      "message_receipts",
+      "handoff_events"
+    ],
+    "requests": 6,
+    "nonlocalRequests": 0,
+    "browserErrors": [],
+    "scenarios": [
+      {
+        "mode": "twice",
+        "inbound": 1,
+        "executions": 1,
+        "outbound": 1,
+        "sends": 1
+      },
+      {
+        "mode": "10 concurrently",
+        "inbound": 1,
+        "executions": 1,
+        "outbound": 1,
+        "sends": 1
+      },
+      {
+        "mode": "two independent router replicas",
+        "inbound": 1,
+        "executions": 1,
+        "outbound": 1,
+        "sends": 1
+      },
+      {
+        "mode": "actual process restart",
+        "inbound": 1,
+        "executions": 1,
+        "outbound": 1,
+        "sends": 1
+      },
+      {
+        "mode": "two actual processes, 10 concurrent",
+        "inbound": 1,
+        "executions": 1,
+        "outbound": 1,
+        "sends": 1
+      }
+    ],
+    "providerAndWhatsApp": "stubbed at the existing orchestration/transport boundaries; real database/Auth/REST and child processes",
+    "appliedToLiveProject": false
+  },
+  "handoffHttp": {
+    "tenantBSnapshotChecks": 43,
+    "snapshotTables": [
+      "organizations",
+      "users",
+      "team_members",
+      "agent_routing_rules",
+      "contacts",
+      "conversations",
+      "messages",
+      "handoff_events",
+      "handoff_notifications",
+      "devices"
+    ],
+    "requests": 48,
+    "externalRequests": 0,
+    "browserErrors": [],
+    "scenarios": [
+      {
+        "text": "Connect me with an agent",
+        "detected": true,
+        "providerCalls": 0
+      },
+      {
+        "text": "أريد التحدث مع موظف",
+        "detected": true,
+        "providerCalls": 0
+      },
+      {
+        "case": "human active",
+        "AIExecutions": 0,
+        "AISends": 0,
+        "AIInserts": 0
+      },
+      {
+        "case": "two actual restarted processes",
+        "AIExecutions": 0,
+        "AISends": 0
+      }
+    ],
+    "explicitDetection": "English and Arabic fixture corpus plus real WhatsApp router",
+    "AIOutboundWhileHumanActive": 0,
+    "WhatsAppAndProviders": "stubbed",
+    "appliedToLiveProject": false
+  },
+  "finalHandoffFollowup": {
+    "localStackDirectory": "F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\test-results\\phase6-db-1791376324432",
+    "command": "node scripts/phase6-db.mjs tests/tenant-db/handoff-lifecycle.test.ts",
+    "tests": {
+      "passed": 43,
+      "failed": 0,
+      "total": 43
+    },
+    "handoffHttp": {
+      "tenantBSnapshotChecks": 43,
+      "snapshotTables": [
+        "organizations",
+        "users",
+        "team_members",
+        "agent_routing_rules",
+        "contacts",
+        "conversations",
+        "conversation_states",
+        "messages",
+        "handoff_events",
+        "handoff_notifications",
+        "devices"
+      ],
+      "requests": 50,
+      "externalRequests": 0,
+      "browserErrors": [],
+      "scenarios": [
+        {
+          "text": "Connect me with an agent",
+          "detected": true,
+          "providerCalls": 0
+        },
+        {
+          "text": "أريد التحدث مع موظف",
+          "detected": true,
+          "providerCalls": 0
+        },
+        {
+          "case": "human active",
+          "AIExecutions": 0,
+          "AISends": 0,
+          "AIInserts": 0
+        },
+        {
+          "case": "two actual restarted processes",
+          "AIExecutions": 0,
+          "AISends": 0
+        }
+      ],
+      "explicitDetection": "English and Arabic fixture corpus plus real WhatsApp router",
+      "AIOutboundWhileHumanActive": 0,
+      "WhatsAppAndProviders": "stubbed",
+      "appliedToLiveProject": false
+    },
+    "handoffUpgrade": {
+      "businessColumnsPreserved": true,
+      "teamPreserved": true,
+      "legacyHumanState": "HUMAN_ACTIVE",
+      "legacyCompatibilityHandledBy": "human",
+      "cutoverEvents": 1,
+      "updatedAtMayReflectCutover": true,
+      "appliedToLiveProject": false
+    },
+    "layouts": {
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "overflow": []
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "overflow": []
+      },
+      "rtl": {
+        "width": 1100,
+        "scrollWidth": 1100,
+        "overflow": []
+      }
+    }
+  }
+}

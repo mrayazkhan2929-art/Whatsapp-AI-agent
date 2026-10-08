@@ -1,0 +1,18 @@
+{
+  "requests": 69,
+  "tenantBSnapshotChecks": 41,
+  "snapshotTables": [
+    "organization_profiles",
+    "users",
+    "organizations",
+    "contacts",
+    "conversations",
+    "messages"
+  ],
+  "browserErrors": [],
+  "providerCalls": 0,
+  "whatsAppCalls": 0,
+  "externalBackendRequests": 0,
+  "frontendProviderCredentials": "removed by harness",
+  "appliedToLiveProject": false
+}

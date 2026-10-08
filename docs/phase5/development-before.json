@@ -1,0 +1,27 @@
+[
+  {
+    "ProcessId": 29016,
+    "ParentProcessId": 6864,
+    "CommandLine": "\"C:\\nvm4w\\nodejs\\node.exe\" \"F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\node_modules\\tsx\\dist\\cli.mjs\" watch src/index.ts"
+  },
+  {
+    "ProcessId": 30276,
+    "ParentProcessId": 6864,
+    "CommandLine": "\"C:\\nvm4w\\nodejs\\node.exe\" \"F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\node_modules\\next\\dist\\bin\\next\" dev -p 3000"
+  },
+  {
+    "ProcessId": 25364,
+    "ParentProcessId": 30276,
+    "CommandLine": "C:\\nvm4w\\nodejs\\node.exe \"F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\node_modules\\next\\dist\\server\\lib\\start-server.js\""
+  },
+  {
+    "ProcessId": 25368,
+    "ParentProcessId": 29016,
+    "CommandLine": "C:\\nvm4w\\nodejs\\node.exe --require \"F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\node_modules\\tsx\\dist\\preflight.cjs\" --import file:///F:/Whatsapp%20AI%20Conversation%20Agent/WA-bot-upgrade-v4/Whatsapp_AI_Agent-main/node_modules/tsx/dist/loader.mjs src/index.ts"
+  },
+  {
+    "ProcessId": 5836,
+    "ParentProcessId": 25364,
+    "CommandLine": "\"node\" \"F:\\Whatsapp AI Conversation Agent\\WA-bot-upgrade-v4\\Whatsapp_AI_Agent-main\\frontend\\.next\\dev\\build\\postcss.js\" 55908"
+  }
+]
