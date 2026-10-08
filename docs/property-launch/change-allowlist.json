@@ -1,0 +1,5 @@
+[
+  "backend/src/modules/ai/StructuredIntentClassifier.ts",
+  "backend/src/properties/PropertySearchCriteria.ts",
+  "tests/unit/source-safety.test.ts"
+]

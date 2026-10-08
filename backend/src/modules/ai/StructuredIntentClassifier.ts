@@ -30,10 +30,13 @@ export interface StructuredPropertyIntent {
 export class StructuredIntentClassifier {
   classify(message: string, existing: PropertySearchCriteria = { excludeRefs: [] }): StructuredPropertyIntent {
     const raw = normalizeStructuredText(message)
-    const patch: Partial<PropertySearchCriteria> = { ...extractBudgetBounds(message) }
     // An identity token is never interpolated into a REST filter expression.
     const explicit = message.match(/(?:\b(?:ref(?:erence)?(?:\s*(?:number|no\.?))?|property\s+ref)\b|المرجع|مرجع|رقم العقار)\s*(?:[:#]\s*|\s+)(?:"([^"]+)"|'([^']+)'|([^\s,;!?]+))/i)
-    const token = message.match(/(?:^|[\s(])([A-Za-z][A-Za-z0-9_/-]*[-_]\d[A-Za-z0-9_/-]*)(?=$|[\s),.!?])/)
+    const token = message.match(/(?:^|[\s(])((?=[A-Za-z0-9_/-]*[A-Za-z])(?=[A-Za-z0-9_/-]*\d)[A-Za-z0-9]+(?:[-_/][A-Za-z0-9]+)+)(?=$|[\s),.!?])/)
+    // Numeric reference segments are identifiers, never price ranges. Keep
+    // extracting any genuine budget stated elsewhere in the message.
+    const budgetText = explicit ? message.replace(explicit[0], '') : token ? message.replace(token[1], '') : message
+    const patch: Partial<PropertySearchCriteria> = { ...extractBudgetBounds(budgetText) }
     if (explicit || token) patch.referenceNumber = explicit ? explicit[1] ?? explicit[2] ?? explicit[3] : token![1]
     const area = Object.keys(AREA_ALIASES).sort((a, b) => b.length - a.length).find(alias => {
       const offset = raw.indexOf(alias)

@@ -32,7 +32,14 @@ export const AREA_ALIASES: Record<string, string> = {
   'discovery gardens': 'Discovery Gardens', 'dubai islands': 'Dubai Islands', meydan: 'Meydan', majan: 'Majan',
   'dubai land residence complex': 'Dubai Land Residence Complex', dlrc: 'Dubai Land Residence Complex',
 }
-export const normalizeArea = (value: string) => AREA_ALIASES[normalizeIdentity(value)] ?? value.trim()
+export const normalizeArea = (value: string) => {
+  const direct = AREA_ALIASES[normalizeIdentity(value)]
+  if (direct) return direct
+  // Portal exports may append the familiar district abbreviation in brackets.
+  // Only use a recognized alias; unknown parenthetical text remains exact.
+  const suffix = value.trim().match(/^(.*?)\s*\(([^()]+)\)$/)
+  return (suffix && AREA_ALIASES[normalizeIdentity(suffix[2])]) ?? value.trim()
+}
 
 // Legacy stores remain available for rollback. Translate their keys at one boundary.
 export function criteriaFromLegacy(memory: Record<string, unknown>): PropertySearchCriteria {
