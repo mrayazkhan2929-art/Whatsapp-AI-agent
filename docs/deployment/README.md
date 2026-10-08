@@ -1,6 +1,6 @@
 # Online validation deployment
 
-Deploy the repository as two Railway services from `main`, keeping the repository root as the build context. Set each service's Railway config file to `/deploy/backend.railway.json` or `/deploy/frontend.railway.json`. Both images use Node 22, the committed npm lockfile, non-root processes and Railway's runtime PORT. Only public Supabase configuration enters the frontend build.
+Deploy the repository as two Railway services from `main`, keeping the repository root as the build context. Apply the service settings in `deploy/backend.settings.json` and `deploy/frontend.settings.json` through Railway's dashboard or authenticated CLI API with `deploy/update-service.graphql`. Railway's current API rejects deprecated `railway.json` configuration files. The configured Dockerfile path takes precedence over Railpack. Both images use Node 22, the committed npm lockfile, non-root processes and Railway's runtime PORT. Only public Supabase configuration enters the frontend build.
 
 Backend runtime variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `GROQ_API_KEY`, `WA_SESSION_ENCRYPTION_KEY` (64 random hex characters), `REDIS_HOST`, `REDIS_PORT`, `REDIS_PASSWORD`, `NEXT_PUBLIC_APP_URL`. Keep the encryption key stable across every deployment. Deploy one backend replica with sleeping disabled. Configure Redis with authentication and persistent storage, reachable through private networking only.
 

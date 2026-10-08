@@ -1,0 +1,9 @@
+{
+  "dockerfilePath": "deploy/Dockerfile.frontend",
+  "builder": "RAILPACK",
+  "healthcheckPath": "/login",
+  "healthcheckTimeout": 300,
+  "restartPolicyType": "ALWAYS",
+  "numReplicas": 1,
+  "sleepApplication": false
+}
